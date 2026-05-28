@@ -1,0 +1,350 @@
+{
+  "common": {
+    "search": "Search",
+    "login": "Login",
+    "logout": "Sign Out",
+    "dashboard": "Dashboard",
+    "admin": "Admin Panel",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "success": "Success",
+    "home": "Explore",
+    "about": "About",
+    "trips": "Trips",
+    "support": "Support",
+    "guests": "Guests",
+    "destination": "Destination",
+    "dates": "Travel Dates",
+    "select_room": "Select Room",
+    "book_now": "Book Now",
+    "email": "Email Address",
+    "subscribe": "Subscribe",
+    "enter_email": "Enter your email",
+    "currency": "৳"
+  },
+  "navbar": {
+    "explore": "Explore",
+    "about": "About",
+    "trips": "Trips",
+    "support": "Support",
+    "login": "Login",
+    "admin_control": "Admin Control",
+    "traveler_dashboard": "Traveler Dashboard"
+  },
+  "footer": {
+    "desc": "Connecting explorers with the heart of Bangladesh. Secure bookings, premium service.",
+    "quick_links": "Quick Links",
+    "about_us": "About Us",
+    "support_concierge": "Support Concierge",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "destinations": "Destinations",
+    "newsletter_support": "Newsletter & Support",
+    "built_for_explorers": "© 2026 CholoBuddy. Built for explorers."
+  },
+  "explore": {
+    "hero_title": "Explore Bangladesh Like Never Before",
+    "tabs": {
+      "tours": "Tours",
+      "hotels": "Hotels"
+    },
+    "placeholders": {
+      "destination": "Select Destination",
+      "dates": "Oct 24 - Oct 28, 2026"
+    },
+    "destinations": {
+      "coxs_bazar": "Cox's Bazar, Bangladesh",
+      "sajek": "Sajek Valley, Rangamati",
+      "sylhet": "Sylhet Tea Gardens",
+      "sundarbans": "Sundarbans Mangroves"
+    },
+    "recommended": {
+      "badge": "Recommended",
+      "title": "Featured Tours",
+      "view_all": "View All Tours"
+    },
+    "tours": {
+      "sundarbans_title": "Sundarbans Deep Forest Expedition",
+      "sundarbans_desc": "Explore the world's largest mangrove forest with expert guides and premium houseboat stays.",
+      "sylhet_title": "Sylhet Tea Trail & Ratargul",
+      "coxs_bazar_title": "Cox's Bazar Beach Luxury Escape",
+      "popular_badge": "POPULAR",
+      "reviews": "reviews",
+      "duration_nights": "4 Days / 3 Nights"
+    },
+    "hotels_section": {
+      "badge": "Stay in Luxury",
+      "title": "Top Rated Hotels"
+    },
+    "newsletter": {
+      "title": "Get Exclusive Deals Sent Directly to You",
+      "desc": "Join 50,000+ explorers and get the best prices on flight, hotel and tour packages in Bangladesh."
+    }
+  },
+  "about": {
+    "manifesto_badge": "OUR MANIFESTO",
+    "manifesto_title": "REDEFINING EXPLORATION THROUGH STRUCTURAL PRECISION.",
+    "manifesto_desc": "At CholoBuddy, we believe travel shouldn't be a gamble. We build the architecture of adventure, ensuring every journey is backed by high-contrast clarity and unwavering reliability. Our mission is to bridge the gap between curiosity and discovery.",
+    "stats": {
+      "global_impact": "GLOBAL IMPACT",
+      "destinations": "DESTINATIONS SECURED",
+      "explorers": "ACTIVE EXPLORERS",
+      "safety": "SAFETY VERIFIED"
+    },
+    "team": {
+      "title": "MEET THE ARCHITECTS",
+      "desc": "The collective mind behind CholoBuddy's premium experience. A team of engineers, designers, and explorers.",
+      "established": "EST. 2026",
+      "roles": {
+        "ceo": "FOUNDER & CEO",
+        "design": "DESIGN ARCHITECT",
+        "tech": "TECH ARCHITECT"
+      }
+    },
+    "philosophy": {
+      "title": "BRUTALIST RELIABILITY",
+      "desc": "We don't hide behind fluffy marketing. We show you the raw data, the exact costs, and the verified reviews. Our platform is built on 2px solid truth.",
+      "principle1_num": "01",
+      "principle1_title": "NO SOFT EDGES",
+      "principle1_desc": "Decisions are made with precision. Every partner we onboard undergoes rigorous structural vetting.",
+      "principle2_num": "02",
+      "principle2_title": "RAW TRANSPARENCY",
+      "principle2_desc": "Price breakdowns that actually make sense. No hidden fees, no rounded corners."
+    },
+    "cta": {
+      "title": "READY TO EXPLORE?",
+      "email_label": "EMAIL ADDRESS",
+      "button": "JOIN US"
+    }
+  },
+  "support": {
+    "title": "Get In Touch",
+    "address_label": "Office Address",
+    "address_val": "Level 4, Modernist Plaza\nMotijheel, Dhaka 1000",
+    "phone_label": "Phone & Connectivity",
+    "phone_val": "+880 1234 567 890",
+    "email_label": "Digital Correspondence",
+    "map_badge": "HQ Location",
+    "send_msg_title": "Send a Message",
+    "send_msg_desc": "Expect a response from our concierge team within 2 business hours. We value precision and speed.",
+    "form": {
+      "name_label": "Full Name",
+      "name_placeholder": "JOHN DOE",
+      "email_label": "Email Address",
+      "email_placeholder": "NAME@COMPANY.COM",
+      "subject_label": "Subject",
+      "message_label": "Message",
+      "message_placeholder": "TYPE YOUR INQUIRY HERE...",
+      "subjects": {
+        "general": "GENERAL INQUIRY",
+        "booking": "BOOKING SUPPORT",
+        "partnership": "PARTNERSHIP OPPORTUNITY",
+        "technical": "TECHNICAL FEEDBACK"
+      },
+      "submit_idle": "Send Message",
+      "submit_sending": "Sending...",
+      "submit_sent": "Message Sent!"
+    },
+    "live_chat": "Live Chat",
+    "live_chat_desc": "Available 24/7",
+    "response_time": "Response Time",
+    "response_time_desc": "< 120 Minutes"
+  },
+  "trip_detail": {
+    "badge": "Limited Edition",
+    "title": "Sundarbans Eco Adventure",
+    "desc": "A raw, immersive journey into the world's largest mangrove forest. Witness majesty, silence, and the rhythm of the wild.",
+    "itinerary_title": "The Itinerary",
+    "itinerary_desc": "Mathematically planned, emotionally resonant. Every hour is designed for optimal wilderness exposure.",
+    "days": {
+      "day1_num": "Day 01",
+      "day1_title": "Into the Deep Emerald",
+      "day1_desc": "Arrival at Khulna and immediate boarding of the M.V. Eco-Spirit. We navigate the Rupsha river towards the forest gateway.",
+      "day1_act1": "Welcome feast with local organic produce",
+      "day1_act2": "Sunset cruise through Harbaria channel",
+      "day2_num": "Day 02",
+      "day2_title": "The Tiger's Realm",
+      "day2_desc": "Dawn trek through the Katka wildlife sanctuary. Silent observation from watchtowers and beach exploration.",
+      "day2_act1": "6:00 AM Jungle Walk with Expert Naturalist",
+      "day2_act2": "Relaxation at Jamtola secluded beach",
+      "day3_num": "Day 03",
+      "day3_title": "Rhythm of the Tides",
+      "day3_desc": "Karamjal crocodile breeding center visit and reflection session before returning to the mainland."
+    },
+    "widget": {
+      "title": "Secure Your Journey",
+      "per_traveler": "/ traveler",
+      "select_date": "Select Launch Date",
+      "num_guests": "Number of Guests",
+      "dates": {
+        "oct_24": "October 24, 2026",
+        "nov_08": "November 08, 2026",
+        "dec_15": "December 15, 2026"
+      },
+      "breakdown": {
+        "tour_price": "Tour Price",
+        "eco_tax": "Eco-Tax",
+        "total": "Total"
+      },
+      "btn_idle": "Confirm Booking",
+      "btn_booking": "Reserving Slots...",
+      "btn_booked": "Booking Secured!",
+      "remaining_slots": "Only 4 slots remaining for this date"
+    }
+  },
+  "login": {
+    "left_title": "Explore the Uncharted.",
+    "left_desc": "Join a community of elite travelers redefining the art of exploration with CholoBuddy's premium concierge services.",
+    "stats": {
+      "active_explorers": "Active Explorers",
+      "destinations": "Destinations"
+    },
+    "welcome": "Welcome Back.",
+    "desc": "Please enter your credentials to access your dashboard.",
+    "google": "Continue with Google",
+    "otp": "Login via OTP",
+    "divider": "or use email",
+    "email_label": "Email Address",
+    "email_placeholder": "explorer@cholobuddy.com",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "forgot": "Forgot?",
+    "remember": "Remember for 30 days",
+    "submit_idle": "Sign In to Dashboard",
+    "submit_loading": "Authenticating...",
+    "new_here": "New to CholoBuddy?",
+    "create_account": "Create an Account",
+    "toast_admin": "Admin Panel Authorized",
+    "toast_traveler": "Traveler Dashboard Authorized",
+    "toast_oauth": "OAuth Login Initiated",
+    "toast_otp": "One-Time Password requested",
+    "redirect_msg": "Redirecting to dashboard..."
+  },
+  "register": {
+    "welcome": "Join the Elite.",
+    "desc": "Create your credentials to join CholoBuddy's premium concierge network.",
+    "google": "Register with Google",
+    "otp": "Register via OTP",
+    "divider": "or use email",
+    "fullname_label": "Full Name",
+    "fullname_placeholder": "Adnan Rahman",
+    "email_label": "Email Address",
+    "email_placeholder": "explorer@cholobuddy.com",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "confirm_password_label": "Confirm Password",
+    "confirm_password_placeholder": "••••••••",
+    "submit_idle": "Create Account",
+    "submit_loading": "Registering...",
+    "have_account": "Already have an account?",
+    "sign_in": "Sign In",
+    "toast_success": "Account Created Successfully",
+    "toast_mismatch": "Passwords do not match"
+  },
+  "dashboard": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "my_trips": "My Trips",
+      "wishlist": "Wishlist",
+      "help_desk": "Help Desk",
+      "sign_out": "Sign Out"
+    },
+    "header_title": "Traveler Hub",
+    "level": "Level",
+    "welcome_title": "Welcome back, {{name}}!",
+    "welcome_desc": "Your next eco-adventure starts in October. Check the coordinates and details of your booking below.",
+    "stats": {
+      "active_trips": "Active Trips",
+      "active_trips_val": "1 Booking",
+      "completed": "Adventures Completed",
+      "completed_val": "2 Destinations",
+      "level": "Exploration Level",
+      "level_val": "Level 3 explorer"
+    },
+    "upcoming": {
+      "title": "Upcoming Booking Detail",
+      "status_badge": "Confirmed & Paid",
+      "launch_date": "Launch Date",
+      "guests": "Guests",
+      "travelers": "Traveler(s)",
+      "itinerary": "View Itinerary",
+      "invoice": "Download Invoice"
+    },
+    "past": {
+      "title": "Past Trips History",
+      "cols": {
+        "id": "Booking ID",
+        "destination": "Destination",
+        "date": "Date",
+        "paid": "Paid",
+        "status": "Status"
+      }
+    },
+    "my_bookings": "My Bookings",
+    "details": "Details",
+    "rebook": "Rebook Tour",
+    "saved_trips": "My Saved Trips"
+  },
+  "admin": {
+    "sidebar": {
+      "title": "Admin Control",
+      "dashboard": "Dashboard",
+      "bookings": "Bookings",
+      "payments": "Payments",
+      "users": "Users",
+      "settings": "Settings"
+    },
+    "header_title": "Overview",
+    "search_placeholder": "Search bookings...",
+    "new_transaction": "New Transaction",
+    "stats": {
+      "revenue": "Total Revenue",
+      "revenue_meta": "+12.5% vs last month",
+      "active": "Active Trips",
+      "active_meta": "32 completed today",
+      "new_explorers": "New Explorers",
+      "new_explorers_meta": "+8% growth rate",
+      "conversion": "Conversion Rate",
+      "conversion_meta": "Optimized this week"
+    },
+    "revenue_trends": {
+      "title": "Revenue Trends",
+      "desc": "Monitoring cash flow across tourism sectors",
+      "options": {
+        "30_days": "Last 30 Days",
+        "quarter": "Last Quarter"
+      }
+    },
+    "booking_flow": {
+      "title": "Booking Flow",
+      "categories": {
+        "adventure": "Adventure Tours",
+        "beach": "Beach Resorts",
+        "urban": "Urban Hotels"
+      },
+      "button": "View Full Reports"
+    },
+    "recent_transactions": {
+      "title": "Recent Transactions",
+      "filter_status": "All Statuses",
+      "export": "Export CSV",
+      "cols": {
+        "id": "Booking ID",
+        "customer": "Customer",
+        "package": "Package",
+        "date": "Date",
+        "amount": "Amount",
+        "status": "Status",
+        "action": "Action"
+      },
+      "no_match": "No transactions match your search filter.",
+      "showing_entries": "Showing {{count}} of {{total}} entries"
+    },
+    "footer": {
+      "desc": "Designed for internal operational excellence. Access restricted to authorized personnel only. Monitoring system active.",
+      "management": "Management",
+      "support": "Support"
+    }
+  }
+}

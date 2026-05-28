@@ -1,0 +1,132 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/hooks/useLanguage";
+import { heroThumbnails } from "@/lib/data";
+import {
+  HeroHeader,
+  HeroBg,
+  GradientFade,
+  HeroContent,
+  LabelSpan,
+  Headline,
+  HeroBtn,
+  ThumbnailsWrapper,
+  ThumbnailCard,
+  LabelsRow,
+  LabelItem
+} from "./Hero.styles";
+
+export default function Hero() {
+  const { currentLanguage } = useLanguage();
+  const isEn = currentLanguage === "en";
+
+  const handlePlanTrip = () => {
+    window.location.href = "/trips/sundarbans";
+  };
+
+  return (
+    <HeroHeader>
+      {/* Background */}
+      <HeroBg>
+        <img
+          alt="Misty Sajek Valley, Bangladesh"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5PZhzrRLO_dBRY3zR3gEtEa3xx8T6NitI_Mc7GcG66aKAI4Kkpzm0I9UzhQf5PF86f-p09ktNR1Bm8wkJXYh_sQDUZnDppCT-qVnNNLsnyeCWi4OXk8DR4J0K_v4KsDbMyzqwIXvdiL6eDJCAfF9zFRtW1EjeqD55CVm_0SmDhKgBt3Tow0Rt33LUYFf8ZZk9DAI7-sXCyZfjNFL5Ve0k1FrP1HOMkFo24FGGUH4Dj9iczQclgQixUiJqD5Ab0fzHpvK4m5Zjhs"
+        />
+        <GradientFade />
+      </HeroBg>
+
+      {/* Content */}
+      <HeroContent>
+        <LabelSpan
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {isEn ? "Bangladesh" : "বাংলাদেশ"} &nbsp;·&nbsp; {isEn ? "Discover" : "আবিষ্কার করুন"}
+        </LabelSpan>
+
+        <Headline
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {isEn
+            ? "Discover the Wild Beauty of Bangladesh"
+            : "বাংলাদেশের বন্য সৌন্দর্য আবিষ্কার করুন"}
+        </Headline>
+
+        <HeroBtn
+          onClick={handlePlanTrip}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25 }}
+        >
+          {isEn ? "Plan My Trip" : "আমার ভ্রমণ পরিকল্পনা করুন"}
+        </HeroBtn>
+
+        {/* Squircle Thumbnails */}
+        <ThumbnailsWrapper
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.4,
+              }
+            }
+          }}
+        >
+          {heroThumbnails.map((thumb, i) => (
+            <ThumbnailCard
+              key={thumb.alt}
+              $zIndex={i === 0 ? 30 : i === 1 ? 20 : 10}
+              variants={{
+                hidden: { 
+                  opacity: 0, 
+                  y: 40, 
+                  scale: 0.8, 
+                  rotate: i === 0 ? -15 : i === 2 ? 15 : 0 
+                },
+                show: { 
+                  opacity: 1, 
+                  y: i === 1 ? -16 : 0, 
+                  scale: 1, 
+                  rotate: 0,
+                  transition: { type: "spring", stiffness: 200, damping: 20 }
+                }
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                rotate: i === 0 ? -5 : i === 2 ? 5 : 0, 
+                zIndex: 40,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <img
+                alt={thumb.alt}
+                src={thumb.src}
+              />
+            </ThumbnailCard>
+          ))}
+        </ThumbnailsWrapper>
+
+        {/* Thumbnail Labels */}
+        <LabelsRow
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          {heroThumbnails.map((thumb) => (
+            <LabelItem key={thumb.label}>
+              {thumb.label}
+            </LabelItem>
+          ))}
+        </LabelsRow>
+      </HeroContent>
+    </HeroHeader>
+  );
+}

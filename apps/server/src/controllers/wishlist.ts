@@ -1,0 +1,24 @@
+import { Response } from "express";
+import { wishlistService } from "../services/wishlist.js";
+import { AuthenticatedRequest } from "../middleware/auth.js";
+import { asyncHandler } from "../utils/errors.js";
+
+export const getWishlist = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
+  const session = req.session;
+  const tourIds = await wishlistService.getWishlist(session.user.id);
+  return res.json({ tourIds });
+});
+
+export const addToWishlist = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
+  const session = req.session;
+  const { tourId } = req.body;
+  await wishlistService.addToWishlist(session.user.id, tourId);
+  return res.json({ success: true });
+});
+
+export const removeFromWishlist = asyncHandler(async (req: AuthenticatedRequest, res: Response) => {
+  const session = req.session;
+  const { tourId } = req.body;
+  await wishlistService.removeFromWishlist(session.user.id, tourId);
+  return res.json({ success: true });
+});

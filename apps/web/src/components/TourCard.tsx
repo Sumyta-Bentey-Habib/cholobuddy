@@ -1,0 +1,117 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { type Variants } from "framer-motion";
+import { useLanguage } from "@/hooks/useLanguage";
+import { useWishlist } from "@/hooks/useWishlist";
+import type { Tour } from "@/lib/data";
+import {
+  CardContainer,
+  ImageWrapper,
+  TourImage,
+  PopularBadge,
+  SaveBadge,
+  HeartIcon,
+  CardBody,
+  CardTitle,
+  LocationRow,
+  InfoText,
+  CardFooter,
+  RatingRow,
+  RatingBadgeGroup,
+  RatingBadge,
+  RatingLabel,
+  PriceWrapper,
+  StrikethroughPrice,
+  PriceText,
+  BookCta
+} from "./TourCard.styles";
+
+interface TourCardProps {
+  tour: Tour;
+  variants: Variants;
+}
+
+export default function TourCard({ tour, variants }: TourCardProps) {
+  const { currentLanguage } = useLanguage();
+  const { savedTourIds, toggleWishlist } = useWishlist();
+  const isEn = currentLanguage === "en";
+
+  const tourId = (tour as any)._id || tour.id;
+  const isSaved = savedTourIds.includes(tourId);
+
+  const originalPrice = parseInt(tour.price?.toString().replace(/,/g, "") || "0") || 0;
+  const strikethroughPrice = Math.round(originalPrice * 1.25).toLocaleString();
+
+  const ratingLabel = parseFloat(tour.rating) >= 9.2 ? "Superb" : "Excellent";
+
+  return (
+    <CardContainer variants={variants}>
+      <Link href={tour.href || `/trips/${tourId}`} style={{ display: "flex", flexDirection: "column", height: "100%", textDecoration: "none" }}>
+        {/* Image */}
+        <ImageWrapper>
+          <TourImage
+            alt={isEn ? tour.title : tour.titleBn}
+            src={tour.imgUrl}
+          />
+          {tour.popular && (
+            <PopularBadge>
+              {isEn ? "Popular" : "জনপ্রিয়"}
+            </PopularBadge>
+          )}
+          <SaveBadge
+            onClick={(e) => {
+              e.preventDefault();
+              toggleWishlist(tourId);
+            }}
+            aria-label="Save to Wishlist"
+          >
+            <HeartIcon className="material-symbols-rounded" $saved={isSaved}>
+              favorite
+            </HeartIcon>
+          </SaveBadge>
+        </ImageWrapper>
+
+        {/* Body */}
+        <CardBody>
+          <div>
+            <CardTitle>
+              {isEn ? tour.title : tour.titleBn}
+            </CardTitle>
+
+            <LocationRow>
+              {isEn ? tour.location : tour.locationBn} · {tour.distanceNote}
+            </LocationRow>
+
+            <InfoText>
+              {tour.duration} · {isEn ? tour.description : tour.descriptionBn}
+            </InfoText>
+          </div>
+
+          {/* Footer */}
+          <CardFooter>
+            <RatingRow>
+              {/* Rating */}
+              <RatingBadgeGroup>
+                <RatingBadge>{tour.rating}</RatingBadge>
+                <RatingLabel>{ratingLabel}</RatingLabel>
+              </RatingBadgeGroup>
+
+              {/* Price */}
+              <PriceWrapper>
+                <StrikethroughPrice>৳{strikethroughPrice}</StrikethroughPrice>
+                <PriceText>৳{tour.price}</PriceText>
+              </PriceWrapper>
+            </RatingRow>
+
+            {/* Book CTA */}
+            <BookCta>
+              {isEn ? "Book Now" : "এখনই বুক করুন"}
+            </BookCta>
+          </CardFooter>
+        </CardBody>
+      </Link>
+    </CardContainer>
+  );
+}
