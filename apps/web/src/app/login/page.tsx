@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -16,10 +16,12 @@ interface ToastState {
 
 const destinations = ["Cox's Bazar", "Sundarbans", "Bandarban", "Sylhet", "Saint Martin"];
 
-export default function LoginPage() {
+function LoginContent() {
   const { t } = useLanguage();
   const { signIn } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -42,10 +44,10 @@ export default function LoginPage() {
       const userRole = (res.data?.user as any)?.role || "user";
       if (userRole === "admin") {
         showToast(t("login.toast_admin"), "success");
-        setTimeout(() => router.push("/admin"), 1000);
+        setTimeout(() => router.push(callbackUrl || "/admin"), 1000);
       } else {
         showToast(t("login.toast_traveler"), "success");
-        setTimeout(() => router.push("/dashboard"), 1000);
+        setTimeout(() => router.push(callbackUrl || "/dashboard"), 1000);
       }
     }
   };
@@ -246,7 +248,7 @@ export default function LoginPage() {
 
               <p style={{ textAlign: "center", fontFamily: "monospace", fontSize: "11px", color: "#475569", textTransform: "uppercase", letterSpacing: "0.12em", paddingTop: "4px" }}>
                 {t("login.new_here")}{" "}
-                <Link href="/register" style={{ color: "#c9a900", fontWeight: 700, textDecoration: "none" }}>
+                <Link href={callbackUrl ? `/register?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/register"} style={{ color: "#c9a900", fontWeight: 700, textDecoration: "none" }}>
                   {t("login.create_account")}
                 </Link>
               </p>
@@ -274,5 +276,17 @@ export default function LoginPage() {
         )}
       </AnimatePresence>
     </S.AuthPage>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <main style={{ minHeight: "100vh", backgroundColor: "#0b0c10", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: "32px", height: "32px", border: "4px solid #ffffff", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+      </main>
+    }>
+      <LoginContent />
+    </Suspense>
   );
 }

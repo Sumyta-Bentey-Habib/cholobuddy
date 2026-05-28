@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -21,10 +21,12 @@ const features = [
   { icon: "verified",       label: "Verified & trusted" },
 ];
 
-export default function RegisterPage() {
+function RegisterContent() {
   const { t } = useLanguage();
   const { signUp } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [fullname,        setFullname]        = useState("");
   const [email,           setEmail]           = useState("");
   const [password,        setPassword]        = useState("");
@@ -52,7 +54,7 @@ export default function RegisterPage() {
       showToast(res.error.message || "Registration failed", "error");
     } else {
       showToast(t("register.toast_success"), "success");
-      setTimeout(() => router.push("/dashboard"), 1000);
+      setTimeout(() => router.push(callbackUrl || "/dashboard"), 1000);
     }
   };
 
@@ -287,7 +289,7 @@ export default function RegisterPage() {
 
               <p style={{ textAlign: "center", fontFamily: "monospace", fontSize: "11px", color: "#475569", textTransform: "uppercase", letterSpacing: "0.12em" }}>
                 {t("register.have_account")}{" "}
-                <Link href="/login" style={{ color: "#c9a900", fontWeight: 700, textDecoration: "none" }}>
+                <Link href={callbackUrl ? `/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/login"} style={{ color: "#c9a900", fontWeight: 700, textDecoration: "none" }}>
                   {t("register.sign_in")}
                 </Link>
               </p>
@@ -315,5 +317,17 @@ export default function RegisterPage() {
         )}
       </AnimatePresence>
     </S.AuthPage>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={
+      <main style={{ minHeight: "100vh", backgroundColor: "#0b0c10", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: "32px", height: "32px", border: "4px solid #ffffff", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+      </main>
+    }>
+      <RegisterContent />
+    </Suspense>
   );
 }
