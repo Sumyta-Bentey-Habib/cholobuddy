@@ -118,8 +118,8 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               style={{ display: "inline-block", width: "100%" }}
             >
-              <BannerTitle>
-                <>Curating the<br />Untamed.</>
+              <BannerTitle style={{ whiteSpace: "pre-line" }}>
+                {t("Curating the Untamed")}
               </BannerTitle>
             </motion.h1>
           </HeroBannerContent>

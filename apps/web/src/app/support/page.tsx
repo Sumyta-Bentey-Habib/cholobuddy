@@ -43,28 +43,28 @@ export default function SupportPage() {
               
               {/* FAQ Categories Selection */}
               <S.Card>
-                <S.SidebarTitle>FAQ Categories</S.SidebarTitle>
+                <S.SidebarTitle>{t("FAQ Categories")}</S.SidebarTitle>
                 <S.CategoryNav>
                   <S.CategoryBtn
                     onClick={() => setActiveCategory("cancellations")}
                     $active={activeCategory === "cancellations"}
                   >
                     <span className="material-symbols-outlined">cancel</span>
-                    <span>Cancellations</span>
+                    <span>{t("Cancellations")}</span>
                   </S.CategoryBtn>
                   <S.CategoryBtn
                     onClick={() => setActiveCategory("refunds")}
                     $active={activeCategory === "refunds"}
                   >
                     <span className="material-symbols-outlined">assignment_return</span>
-                    <span>Refunds</span>
+                    <span>{t("Refunds")}</span>
                   </S.CategoryBtn>
                   <S.CategoryBtn
                     onClick={() => setActiveCategory("payments")}
                     $active={activeCategory === "payments"}
                   >
                     <span className="material-symbols-outlined">payments</span>
-                    <span>Payments & Billing</span>
+                    <span>{t("Payments & Billing")}</span>
                   </S.CategoryBtn>
                 </S.CategoryNav>
               </S.Card>
@@ -112,41 +112,13 @@ export default function SupportPage() {
               
               {/* FAQ Active List Panel */}
               <S.Card style={{ padding: "32px" }}>
-                <S.FaqTitle>Frequently Asked Questions</S.FaqTitle>
+                <S.FaqTitle>{t("Frequently Asked Questions")}</S.FaqTitle>
                 <S.FaqList>
                   {faqsData[activeCategory].items.map((faq, idx) => (
                     <FaqItem
                       key={idx}
-                      question={
-                        i18n.language === "en"
-                          ? faq.question
-                          : activeCategory === "cancellations" && idx === 0
-                          ? "আমি কি সুন্দরবন বা সাজেক ট্যুর বাতিল করতে পারি?"
-                          : activeCategory === "cancellations" && idx === 1
-                          ? "হোটেল বুকিং কীভাবে বাতিল করব?"
-                          : activeCategory === "refunds" && idx === 0
-                          ? "রিফান্ড প্রসেস হতে কত দিন সময় লাগে?"
-                          : activeCategory === "refunds" && idx === 1
-                          ? "কোনো বাতিলকরণ ফি আছে কি?"
-                          : activeCategory === "payments" && idx === 0
-                          ? "কোন কোন পেমেন্ট মেথড গ্রহণ করা হয়?"
-                          : "কিস্তি (ইএমআই) সুবিধা আছে কি?"
-                      }
-                      answer={
-                        i18n.language === "en"
-                          ? faq.answer
-                          : activeCategory === "cancellations" && idx === 0
-                          ? "যাত্রার ৭ দিন আগে পর্যন্ত ট্যুর বাতিল করলে সম্পূর্ণ রিফান্ড পাওয়া যাবে। ৭ দিনের মধ্যে বাতিল করলে পলিসি প্রযোজ্য হবে।"
-                          : activeCategory === "cancellations" && idx === 1
-                          ? "আপনার ট্রাভেলার ড্যাশবোর্ডে যান, 'মাই বুকিংস' থেকে নির্দিষ্ট বুকিংটি সিলেক্ট করুন এবং 'ক্যান্সেল বুকিং' এ ক্লিক করুন।"
-                          : activeCategory === "refunds" && idx === 0
-                          ? "রিফান্ড আপনার আদি পেমেন্ট মেথডে (বিকাশ/নগদ/কার্ড) ৩ থেকে ৫ কার্যদিবসের মধ্যে প্রসেস করা হবে।"
-                          : activeCategory === "refunds" && idx === 1
-                          ? "যাত্রার ৭ দিনের মধ্যে বাতিল করলে ৫০% ফি প্রযোজ্য হবে। ৪৮ ঘণ্টার মধ্যে বাতিল করলে কোনো রিফান্ড পাওয়া যাবে না।"
-                          : activeCategory === "payments" && idx === 0
-                          ? "আমরা বিকাশ, নগদ, ভিসা, মাস্টারকার্ড এবং আমেরিকান এক্সপ্রেস গ্রহণ করি।"
-                          : "৳২০,০০০-এর বেশি ট্যুরের জন্য নির্বাচিত ব্যাংকের সাথে ৬ মাস পর্যন্ত সুদমুক্ত ইএমআই সুবিধা পাওয়া যাবে।"
-                      }
+                      question={t(faq.question)}
+                      answer={t(faq.answer)}
                       idx={idx}
                     />
                   ))}

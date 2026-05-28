@@ -87,7 +87,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
             </LocationRow>
 
             <InfoText>
-              {tour.duration} · {t(tour.description)}
+              {t(tour.duration)} · {t(tour.description)}
             </InfoText>
           </div>
 

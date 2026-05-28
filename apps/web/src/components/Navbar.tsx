@@ -60,7 +60,7 @@ export default function Navbar() {
             <span>{t("BN")}</span>
           </LanguageButton>
 
-          <LoginButton href="/login">Login</LoginButton>
+          <LoginButton href="/login">{t("Login")}</LoginButton>
 
           <MobileMenuToggle onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             <span className="material-symbols-outlined">

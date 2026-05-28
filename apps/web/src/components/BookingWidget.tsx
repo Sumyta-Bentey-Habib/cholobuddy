@@ -72,7 +72,7 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
       {/* Crimson Urgency Alert Badge */}
       <AlertBadge>
         <span className="material-symbols-outlined">local_fire_department</span>
-        <span className="label">Only 2 slots remaining!</span>
+        <span className="label">{t("Only 2 slots remaining!")}</span>
       </AlertBadge>
 
       <PricingHeader>

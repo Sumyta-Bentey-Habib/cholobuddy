@@ -48,15 +48,15 @@ export default function HotelCard({ hotel, variants }: HotelCardProps) {
           src={hotel.imgUrl}
         />
         <CategoryTag>
-          {hotel.category}
+          {t(hotel.category)}
         </CategoryTag>
       </ImageWrapper>
       {/* Body */}
       <CardBody>
         <div>
-          <CardTitle>{hotel.name}</CardTitle>
+          <CardTitle>{t(hotel.name)}</CardTitle>
           <LocationRow>
-            {t(hotel.location)} · {hotel.distanceNote}
+            {t(hotel.location)} · {t(hotel.distanceNote)}
           </LocationRow>
         </div>
 

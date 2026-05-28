@@ -31,7 +31,7 @@ export default function RecentSearches() {
               <SearchTitle>{search.destination}</SearchTitle>
               <SearchDesc>
                 {search.guests} {t("guest")}
-                {search.guests > 1 ? (t("s")) : ""} · {search.type} ·{" "}
+                {search.guests > 1 ? (t("s")) : ""} · {t(search.type)} ·{" "}
                 {search.dates}
               </SearchDesc>
             </div>

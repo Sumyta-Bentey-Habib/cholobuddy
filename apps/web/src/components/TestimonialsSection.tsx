@@ -54,12 +54,12 @@ export default function TestimonialsSection() {
               </StarsWrapper>
 
               <TestimonialQuote>
-                “{review.quote}”
+                “{t(review.quote)}”
               </TestimonialQuote>
 
               <div>
-                <AuthorName>— {review.author}</AuthorName>
-                <AuthorLocation>{review.location}</AuthorLocation>
+                <AuthorName>— {t(review.author)}</AuthorName>
+                <AuthorLocation>{t(review.location)}</AuthorLocation>
               </div>
             </TestimonialCard>
           </ColumnWrapper>

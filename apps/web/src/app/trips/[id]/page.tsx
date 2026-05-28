@@ -149,8 +149,8 @@ export default function TripDetailPage() {
             {/* Top Review Badge */}
             <ReviewsBadge>
               <ReviewsTextCol>
-                <p>Superb</p>
-                <p>120 Verified Reviews</p>
+                <p>{t("Superb")}</p>
+                <p>{t("120 Verified Reviews")}</p>
               </ReviewsTextCol>
               <RatingBox>
                 9.4
@@ -176,23 +176,23 @@ export default function TripDetailPage() {
           <LeftContentCol>
             {/* Top Facilities Indicators */}
             <InclusionsBox>
-              <InclusionTitle>Key Facilities & Inclusions</InclusionTitle>
+              <InclusionTitle>{t("Key Facilities & Inclusions")}</InclusionTitle>
               <InclusionGrid>
                 <InclusionCard>
                   <span className="material-symbols-outlined">directions_boat</span>
-                  <span className="label">AC Cruiser</span>
+                  <span className="label">{t("AC Cruiser")}</span>
                 </InclusionCard>
                 <InclusionCard>
                   <span className="material-symbols-outlined">tour</span>
-                  <span className="label">Expert Guide</span>
+                  <span className="label">{t("Expert Guide")}</span>
                 </InclusionCard>
                 <InclusionCard>
                   <span className="material-symbols-outlined">restaurant</span>
-                  <span className="label">All Meals</span>
+                  <span className="label">{t("All Meals")}</span>
                 </InclusionCard>
                 <InclusionCard>
                   <span className="material-symbols-outlined">medical_services</span>
-                  <span className="label">First Aid</span>
+                  <span className="label">{t("First Aid")}</span>
                 </InclusionCard>
               </InclusionGrid>
             </InclusionsBox>
@@ -263,11 +263,11 @@ export default function TripDetailPage() {
 
             {/* Review Categories Progress Bars */}
             <ReviewsBreakdown>
-              <ReviewHeaderTitle>Review Breakdown</ReviewHeaderTitle>
+              <ReviewHeaderTitle>{t("Review Breakdown")}</ReviewHeaderTitle>
               <ReviewsGrid>
                 <ReviewProgressBarCol>
                   <ReviewProgressBarLabel>
-                    <span>Location</span>
+                    <span>{t("Location")}</span>
                     <span>9.8</span>
                   </ReviewProgressBarLabel>
                   <ProgressBarTrack>
@@ -276,7 +276,7 @@ export default function TripDetailPage() {
                 </ReviewProgressBarCol>
                 <ReviewProgressBarCol>
                   <ReviewProgressBarLabel>
-                    <span>Cleanliness</span>
+                    <span>{t("Cleanliness")}</span>
                     <span>9.4</span>
                   </ReviewProgressBarLabel>
                   <ProgressBarTrack>
@@ -285,7 +285,7 @@ export default function TripDetailPage() {
                 </ReviewProgressBarCol>
                 <ReviewProgressBarCol>
                   <ReviewProgressBarLabel>
-                    <span>Service & Staff</span>
+                    <span>{t("Service & Staff")}</span>
                     <span>9.2</span>
                   </ReviewProgressBarLabel>
                   <ProgressBarTrack>
@@ -294,7 +294,7 @@ export default function TripDetailPage() {
                 </ReviewProgressBarCol>
                 <ReviewProgressBarCol>
                   <ReviewProgressBarLabel>
-                    <span>Value for Money</span>
+                    <span>{t("Value for Money")}</span>
                     <span>9.0</span>
                   </ReviewProgressBarLabel>
                   <ProgressBarTrack>

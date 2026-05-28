@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 import {
   FooterContainer,
   FooterGrid,
@@ -31,14 +32,15 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <FooterContainer>
       <FooterGrid>
         <FooterBrandColumn>
           <FooterLogo href="/">CholoBuddy</FooterLogo>
           <FooterText>
-            Curating moments of discovery and quiet luxury across the wild beauty
-            of Bangladesh.
+            {t("Curating moments of discovery and quiet luxury across the wild beauty of Bangladesh.")}
           </FooterText>
           <BengaliTag>
             ঢাকা · সিলেট · সুন্দরবন · কক্সবাজার
@@ -46,12 +48,12 @@ export default function Footer() {
         </FooterBrandColumn>
         
         <div>
-          <FooterHeading>Explore</FooterHeading>
+          <FooterHeading>{t("Explore")}</FooterHeading>
           <FooterLinksList>
             {footerLinks.explore.map((link) => (
               <li key={link.label}>
                 <FooterLink href={link.href}>
-                  {link.label}
+                  {t(link.label)}
                 </FooterLink>
               </li>
             ))}
@@ -59,12 +61,12 @@ export default function Footer() {
         </div>
         
         <div>
-          <FooterHeading>Legal</FooterHeading>
+          <FooterHeading>{t("Legal")}</FooterHeading>
           <FooterLinksList>
             {footerLinks.legal.map((link) => (
               <li key={link.label}>
                 <FooterLink href={link.href}>
-                  {link.label}
+                  {t(link.label)}
                 </FooterLink>
               </li>
             ))}
@@ -74,7 +76,7 @@ export default function Footer() {
       
       <FooterBottom>
         <FooterCopyright>
-          © 2026 CholoBuddy Luxury Travel Bangladesh — All rights reserved.
+          {t("© 2026 CholoBuddy Luxury Travel Bangladesh — All rights reserved.")}
         </FooterCopyright>
       </FooterBottom>
     </FooterContainer>
