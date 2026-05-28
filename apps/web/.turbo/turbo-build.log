@@ -1,0 +1,40 @@
+
+> web@0.1.0 build /Users/sumytabenteyhabib/Documents/projects/cholobuddy2.0/apps/web
+> next build
+
+   ▲ Next.js 15.5.18
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1329ms
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/11) ...
+   Generating static pages (2/11) 
+   Generating static pages (5/11) 
+   Generating static pages (8/11) 
+ ✓ Generating static pages (11/11)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    6.43 kB         203 kB
+├ ○ /_not-found                            995 B         103 kB
+├ ○ /about                               6.53 kB         198 kB
+├ ○ /admin                               6.22 kB         189 kB
+├ ○ /contact                             3.61 kB         192 kB
+├ ○ /dashboard                           11.5 kB         194 kB
+├ ○ /login                               6.73 kB         186 kB
+├ ○ /payment                             8.09 kB         196 kB
+├ ○ /register                            6.91 kB         187 kB
+├ ○ /support                             3.44 kB         192 kB
+├ ƒ /trips                               2.42 kB         195 kB
+└ ƒ /trips/[id]                          5.87 kB         194 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/1403cfaa-6db8521358bcd91a.js  54.2 kB
+  ├ chunks/159-2398f495578bc26c.js       45.7 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

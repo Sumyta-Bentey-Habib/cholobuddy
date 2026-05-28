@@ -6,13 +6,8 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/context/Toast";
 import * as S from "./login.styles";
-
-interface ToastState {
-  show: boolean;
-  message: string;
-  type: "success" | "info" | "error";
-}
 
 const destinations = ["Cox's Bazar", "Sundarbans", "Bandarban", "Sylhet", "Saint Martin"];
 
@@ -26,12 +21,7 @@ function LoginContent() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [toast, setToast] = useState<ToastState>({ show: false, message: "", type: "info" });
-
-  const showToast = (message: string, type: "success" | "info" | "error" = "info") => {
-    setToast({ show: true, message, type });
-    setTimeout(() => setToast(p => ({ ...p, show: false })), 3000);
-  };
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,21 +29,21 @@ function LoginContent() {
     const res = await signIn({ email, password });
     setIsSubmitting(false);
     if (res?.error) {
-      showToast(res.error.message || "Login failed", "error");
+      toast.error(res.error.message || "Login failed");
     } else {
       const userRole = (res.data?.user as any)?.role || "user";
       if (userRole === "admin") {
-        showToast(t("login.toast_admin"), "success");
+        toast.success(t("login.toast_admin"));
         setTimeout(() => router.push(callbackUrl || "/admin"), 1000);
       } else {
-        showToast(t("login.toast_traveler"), "success");
+        toast.success(t("login.toast_traveler"));
         setTimeout(() => router.push(callbackUrl || "/dashboard"), 1000);
       }
     }
   };
 
-  const handleOAuth = (provider: string) => showToast(`${t("login.toast_oauth")} (${provider})`, "info");
-  const handleOTP   = () => showToast(t("login.toast_otp"), "info");
+  const handleOAuth = (provider: string) => toast.info(`${t("login.toast_oauth")} (${provider})`);
+  const handleOTP   = () => toast.info(t("login.toast_otp"));
 
   return (
     <S.AuthPage>
@@ -227,25 +217,6 @@ function LoginContent() {
           </S.AuthGlassCard>
         </motion.div>
       </S.AuthRight>
-
-      {/* Toast Notification */}
-      <AnimatePresence>
-        {toast.show && (
-          <S.ToastNotification
-            $type={toast.type}
-            initial={{ opacity: 0, y: 16, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
-              {toast.type === "success" ? "check_circle" : toast.type === "error" ? "error" : "info"}
-            </span>
-            <span style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              {toast.message}
-            </span>
-          </S.ToastNotification>
-        )}
-      </AnimatePresence>
     </S.AuthPage>
   );
 }

@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/hooks/useLanguage";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useToast } from "@/context/Toast";
 import * as S from "./payment.styles";
 
 function PaymentContent() {
@@ -14,6 +15,7 @@ function PaymentContent() {
   const router = useRouter();
   const { user, role } = useAuth();
   const { t } = useLanguage();
+  const toast = useToast();
 
   const tourId = searchParams.get("tourId") || "";
   const tourTitle = searchParams.get("tourTitle") || "";
@@ -136,12 +138,13 @@ function PaymentContent() {
               const simulatedTxn = "TXN-" + Math.random().toString(36).substring(2, 10).toUpperCase();
               setTxnId(simulatedTxn);
               setPaymentSuccess(true);
+              toast.success("Payment completed successfully!");
             } else {
-              alert("Payment failed on backend: Booking could not be created.");
+              toast.error("Payment failed on backend: Booking could not be created.");
             }
           } catch (e) {
             console.error(e);
-            alert("Network error: Could not complete booking.");
+            toast.error("Network error: Could not complete booking.");
           } finally {
             setProcessing(false);
           }

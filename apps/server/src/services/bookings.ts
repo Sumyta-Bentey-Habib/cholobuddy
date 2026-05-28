@@ -25,7 +25,7 @@ export const bookingsService = {
     const newBooking = {
       ...data,
       userId,
-      status: "Pending",
+      status: "Completed",
       createdAt: new Date(),
     };
     const result = await db.collection("bookings").insertOne(newBooking);

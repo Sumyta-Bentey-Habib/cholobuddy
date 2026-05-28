@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useToast } from "@/context/Toast";
 
 export function useTours() {
   const [tours, setTours] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -28,9 +30,13 @@ export function useTours() {
       if (res.ok) {
         const result = await res.json();
         setTours(prev => [...prev, { _id: result.tourId, ...data }]);
+        toast.success("Tour created successfully!");
+      } else {
+        toast.error("Failed to create tour.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to create tour.");
     }
   };
 
@@ -43,9 +49,13 @@ export function useTours() {
       });
       if (res.ok) {
         setTours(prev => prev.map(t => t._id === id ? { ...t, ...data } : t));
+        toast.success("Tour updated successfully!");
+      } else {
+        toast.error("Failed to update tour.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to update tour.");
     }
   };
 
@@ -54,9 +64,13 @@ export function useTours() {
       const res = await fetch(`/api/tours/${id}`, { method: "DELETE" });
       if (res.ok) {
         setTours(prev => prev.filter(t => t._id !== id));
+        toast.success("Tour deleted successfully!");
+      } else {
+        toast.error("Failed to delete tour.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to delete tour.");
     }
   };
 

@@ -9,6 +9,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
 import { useBookings } from "@/hooks/useBookings";
 import { useTours } from "@/hooks/useTours";
+import { useToast } from "@/context/Toast";
 import * as S from "./dashboard.styles";
 
 type ActiveTab = "dashboard" | "all-tours" | "my-trips" | "wishlist" | "help-desk";
@@ -27,6 +28,7 @@ export default function DashboardPage() {
   const { user, role, signOut } = useAuth();
   const { bookings, deleteBooking } = useBookings();
   const { tours } = useTours();
+  const toast = useToast();
 
   const isAdmin = role === "admin";
   const visibleNavItems = NAV_ITEMS.filter(item => {
@@ -63,7 +65,7 @@ export default function DashboardPage() {
     setTimeout(() => {
       setTicketMsg("");
       setTicketSent(false);
-      alert("Priority concierge ticket successfully dispatched.");
+      toast.success("Priority concierge ticket successfully dispatched.");
     }, 1500);
   };
 

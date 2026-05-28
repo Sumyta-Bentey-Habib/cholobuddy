@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useToast } from "@/context/Toast";
 
 export function useUsers() {
   const [users, setUsers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,9 +29,13 @@ export function useUsers() {
       });
       if (res.ok) {
         setUsers(prev => prev.map(u => u._id === userId || u.id === userId ? { ...u, role } : u));
+        toast.success(`User role updated to ${role}!`);
+      } else {
+        toast.error("Failed to update user role.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to update user role.");
     }
   };
 

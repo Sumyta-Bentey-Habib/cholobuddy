@@ -6,13 +6,8 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/context/Toast";
 import * as S from "./register.styles";
-
-interface ToastState {
-  show: boolean;
-  message: string;
-  type: "success" | "info" | "error";
-}
 
 const features = [
   { icon: "travel_explore", label: "120+ destinations" },
@@ -34,32 +29,27 @@ function RegisterContent() {
   const [showPassword,    setShowPassword]    = useState(false);
   const [showConfirm,     setShowConfirm]     = useState(false);
   const [isSubmitting,    setIsSubmitting]    = useState(false);
-  const [toast, setToast] = useState<ToastState>({ show: false, message: "", type: "info" });
-
-  const showToast = (message: string, type: "success" | "info" | "error" = "info") => {
-    setToast({ show: true, message, type });
-    setTimeout(() => setToast(p => ({ ...p, show: false })), 3000);
-  };
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      showToast(t("register.toast_mismatch"), "error");
+      toast.error(t("register.toast_mismatch"));
       return;
     }
     setIsSubmitting(true);
     const res = await signUp({ email, password, name: fullname });
     setIsSubmitting(false);
     if (res?.error) {
-      showToast(res.error.message || "Registration failed", "error");
+      toast.error(res.error.message || "Registration failed");
     } else {
-      showToast(t("register.toast_success"), "success");
+      toast.success(t("register.toast_success"));
       setTimeout(() => router.push(callbackUrl || "/dashboard"), 1000);
     }
   };
 
-  const handleOAuth = (provider: string) => showToast(`${t("login.toast_oauth")} (${provider})`, "info");
-  const handleOTP   = () => showToast(t("login.toast_otp"), "info");
+  const handleOAuth = (provider: string) => toast.info(`${t("login.toast_oauth")} (${provider})`);
+  const handleOTP   = () => toast.info(t("login.toast_otp"));
 
   const filled = [fullname, email, password, confirmPassword].filter(Boolean).length;
   const progress = (filled / 4) * 100;
@@ -273,25 +263,6 @@ function RegisterContent() {
           </S.AuthGlassCard>
         </motion.div>
       </S.AuthRight>
-
-      {/* Toast Notification */}
-      <AnimatePresence>
-        {toast.show && (
-          <S.ToastNotification
-            $type={toast.type}
-            initial={{ opacity: 0, y: 16, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-          >
-            <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>
-              {toast.type === "success" ? "check_circle" : toast.type === "error" ? "error" : "info"}
-            </span>
-            <span style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              {toast.message}
-            </span>
-          </S.ToastNotification>
-        )}
-      </AnimatePresence>
     </S.AuthPage>
   );
 }

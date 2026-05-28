@@ -3,6 +3,7 @@ import { Inter, Playfair_Display, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from "@/lib/registry";
 import I18nProvider from "@/components/I18nProvider";
+import { ToastProvider } from "@/context/Toast";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,7 +44,9 @@ export default function RootLayout({
       <body className="overflow-x-hidden min-h-screen flex flex-col">
         <StyledComponentsRegistry>
           <I18nProvider>
-            {children}
+            <ToastProvider>
+              {children}
+            </ToastProvider>
           </I18nProvider>
         </StyledComponentsRegistry>
       </body>

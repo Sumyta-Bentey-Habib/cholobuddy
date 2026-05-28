@@ -10,6 +10,7 @@ import { useAdminBookings } from "@/hooks/useAdminBookings";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useTours } from "@/hooks/useTours";
 import { useUsers } from "@/hooks/useUsers";
+import { useToast } from "@/context/Toast";
 import * as S from "./admin.styles";
 
 type AdminTab = "dashboard" | "bookings" | "tours" | "users";
@@ -30,6 +31,7 @@ export default function AdminPage() {
   const { bookings, updateBookingStatus, deleteBooking } = useAdminBookings();
   const { tours, createTour, updateTour, deleteTour } = useTours();
   const { users, updateUserRole } = useUsers();
+  const toast = useToast();
 
   const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -77,7 +79,7 @@ export default function AdminPage() {
         uploadedUrl = data.url;
       } else {
         const errData = await res.json().catch(() => ({}));
-        alert(`Image upload failed: ${errData.details || errData.error || "Unknown error"}`);
+        toast.error(`Image upload failed: ${errData.details || errData.error || "Unknown error"}`);
         return;
       }
     }

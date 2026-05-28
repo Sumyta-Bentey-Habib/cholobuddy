@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
+import { useToast } from "@/context/Toast";
 
 export function useWishlist() {
   const { data: session } = authClient.useSession();
   const [savedTourIds, setSavedTourIds] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     if (!session) {
@@ -32,8 +34,7 @@ export function useWishlist() {
 
   const toggleWishlist = async (tourId: string) => {
     if (!session) {
-      // You could trigger a login modal here
-      alert("Please login to save tours to your wishlist.");
+      toast.warning("Please login to save tours to your wishlist.");
       return;
     }
 
@@ -56,6 +57,9 @@ export function useWishlist() {
         setSavedTourIds((prev) => 
           isSaved ? [...prev, tourId] : prev.filter((id) => id !== tourId)
         );
+        toast.error("Failed to update wishlist.");
+      } else {
+        toast.success(isSaved ? "Removed from Wishlist!" : "Added to Wishlist!");
       }
     } catch (error) {
       console.error("Error updating wishlist", error);
@@ -63,6 +67,7 @@ export function useWishlist() {
       setSavedTourIds((prev) => 
         isSaved ? [...prev, tourId] : prev.filter((id) => id !== tourId)
       );
+      toast.error("Failed to update wishlist.");
     }
   };
 
