@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -59,8 +60,11 @@ export default function ExplorePage() {
                 </SectionHeading>
               </div>
               <ViewAllBtn
+                as={Link}
+                href="/trips"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center" }}
               >
                 {t("View All")}
               </ViewAllBtn>
@@ -77,7 +81,7 @@ export default function ExplorePage() {
                 variants={containerVariants}
               >
                 {tours.length > 0 ? (
-                  tours.map((tour) => (
+                  tours.slice(0, 3).map((tour) => (
                     <TourCard key={tour._id || tour.id} tour={tour} variants={itemVariants} />
                   ))
                 ) : (

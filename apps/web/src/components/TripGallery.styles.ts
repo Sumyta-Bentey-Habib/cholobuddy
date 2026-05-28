@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 
-export const GalleryContainer = styled.div`
+export const GalleryContainer = styled.div<{ $hasThumbnails?: boolean }>`
   display: grid;
   grid-template-cols: 1fr;
   gap: 8px;
@@ -13,7 +13,7 @@ export const GalleryContainer = styled.div`
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 
   @media (min-width: 768px) {
-    grid-template-cols: 1fr 1fr;
+    grid-template-cols: ${props => props.$hasThumbnails ? "1fr 1fr" : "1fr"};
   }
 `;
 

@@ -30,7 +30,7 @@ export default function Hero() {
   const contentOpacity = useTransform(scrollY, [0, 600], [1, 0]);
 
   const handlePlanTrip = () => {
-    window.location.href = "/trips/sundarbans";
+    window.location.href = "/trips";
   };
 
   return (

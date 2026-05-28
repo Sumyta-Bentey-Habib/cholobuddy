@@ -101,7 +101,7 @@ export default function Navbar() {
         {[
           { href: "/", icon: "explore", label: t("Explore") },
           { href: "/dashboard?tab=wishlist", icon: "favorite", label: t("Saved") },
-          { href: "/trips/sundarbans", icon: "luggage", label: t("Trips") },
+          { href: "/trips", icon: "luggage", label: t("Trips") },
           { href: "/dashboard", icon: "person", label: t("Profile") },
         ].map(({ href, icon, label }) => {
           const isActive = pathname === href;

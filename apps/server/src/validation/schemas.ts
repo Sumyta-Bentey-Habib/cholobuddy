@@ -4,10 +4,17 @@ import { z } from "zod";
 export const createTourSchema = z.object({
   body: z.object({
     title: z.string().min(1, "Title is required"),
+    titleBn: z.string().optional(),
     description: z.string().min(1, "Description is required"),
+    descriptionBn: z.string().optional(),
     price: z.coerce.number().min(0, "Price must be a positive number"),
     duration: z.string().min(1, "Duration is required"),
+    durationBn: z.string().optional(),
     location: z.string().optional(),
+    locationBn: z.string().optional(),
+    distanceNote: z.string().optional(),
+    imgUrl: z.string().optional(),
+    popular: z.boolean().optional(),
     maxGroupSize: z.coerce.number().optional(),
     difficulty: z.string().optional(),
     image: z.string().url("Image must be a valid URL").optional().or(z.literal("")),

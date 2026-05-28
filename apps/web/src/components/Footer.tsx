@@ -19,7 +19,7 @@ import {
 const footerLinks = {
   explore: [
     { label: "Destinations", href: "/" },
-    { label: "Experiences", href: "/trips/sundarbans" },
+    { label: "Experiences", href: "/trips" },
     { label: "Stays", href: "/" },
     { label: "About Us", href: "/about" },
   ],

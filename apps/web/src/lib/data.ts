@@ -3,19 +3,20 @@
 export interface Tour {
   id: string;
   title: string;
-  titleBn: string;
+  titleBn?: string;
   price: string;
   duration: string;
+  durationBn?: string;
   description: string;
-  descriptionBn: string;
-  rating: string;
-  reviews: string;
-  location: string;
-  locationBn: string;
-  distanceNote: string;
-  imgUrl: string;
-  popular: boolean;
-  href: string;
+  descriptionBn?: string;
+  rating?: string;
+  reviews?: string;
+  location?: string;
+  locationBn?: string;
+  distanceNote?: string;
+  imgUrl?: string;
+  popular?: boolean;
+  href?: string;
 }
 
 export interface Hotel {
@@ -107,7 +108,7 @@ export interface RecentSearch {
 export const navLinks: NavLink[] = [
   { name: "Explore", nameBn: "অন্বেষণ", href: "/" },
   { name: "About", nameBn: "সম্পর্কে", href: "/about" },
-  { name: "Trips", nameBn: "ভ্রমণ", href: "/trips/sundarbans" },
+  { name: "Trips", nameBn: "ভ্রমণ", href: "/trips" },
   { name: "Contact", nameBn: "যোগাযোগ", href: "/contact" },
 ];
 

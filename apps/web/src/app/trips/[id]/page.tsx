@@ -139,21 +139,21 @@ export default function TripDetailPage() {
                 </span>
               </CategoryBadge>
               <MainTitle>
-                {t("trip_detail.title")}
+                {currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
               </MainTitle>
               <MetaLocation>
-                📍 Khulna division, Bangladesh • 2.5 km from forest base
+                📍 {currentLanguage === "bn" ? (tour.locationBn || tour.location) : tour.location} {tour.distanceNote ? `• ${tour.distanceNote}` : ""}
               </MetaLocation>
             </div>
 
             {/* Top Review Badge */}
             <ReviewsBadge>
               <ReviewsTextCol>
-                <p>{t("Superb")}</p>
-                <p>{t("120 Verified Reviews")}</p>
+                <p>{t(parseFloat(tour.rating || "9.0") >= 9.2 ? "Superb" : "Excellent")}</p>
+                <p>{tour.reviews || "120"} {t("Verified Reviews")}</p>
               </ReviewsTextCol>
               <RatingBox>
-                9.4
+                {tour.rating || "9.0"}
               </RatingBox>
             </ReviewsBadge>
           </TitleRow>
@@ -163,7 +163,7 @@ export default function TripDetailPage() {
         <GallerySection>
           <TripGallery
             primaryImg={tour.imgUrl}
-            galleryImages={tour.galleryImages || galleryImages}
+            galleryImages={tour.galleryImages || []}
           />
         </GallerySection>
 
@@ -174,135 +174,111 @@ export default function TripDetailPage() {
         <ColumnsLayout>
           {/* Left Column: Facilities, Timeline Itinerary & Review Bars */}
           <LeftContentCol>
+            {/* Always show dynamic Description */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px", backgroundColor: "#ffffff", border: "1px solid rgba(196, 199, 199, 0.3)", padding: "24px", borderRadius: "24px", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.02)" }}>
+              <SectionHeading style={{ borderLeft: "2px solid #526069", paddingLeft: "16px" }}>
+                {currentLanguage === "bn" ? "ভ্রমণের বিবরণ" : "Tour Description"}
+              </SectionHeading>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "rgba(0, 0, 0, 0.8)", lineHeight: "1.7", whiteSpace: "pre-line" }}>
+                {currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description}
+              </p>
+            </div>
+
             {/* Top Facilities Indicators */}
-            <InclusionsBox>
-              <InclusionTitle>{t("Key Facilities & Inclusions")}</InclusionTitle>
-              <InclusionGrid>
-                <InclusionCard>
-                  <span className="material-symbols-outlined">directions_boat</span>
-                  <span className="label">{t("AC Cruiser")}</span>
-                </InclusionCard>
-                <InclusionCard>
-                  <span className="material-symbols-outlined">tour</span>
-                  <span className="label">{t("Expert Guide")}</span>
-                </InclusionCard>
-                <InclusionCard>
-                  <span className="material-symbols-outlined">restaurant</span>
-                  <span className="label">{t("All Meals")}</span>
-                </InclusionCard>
-                <InclusionCard>
-                  <span className="material-symbols-outlined">medical_services</span>
-                  <span className="label">{t("First Aid")}</span>
-                </InclusionCard>
-              </InclusionGrid>
-            </InclusionsBox>
+            {tour.inclusions && tour.inclusions.length > 0 && (
+              <InclusionsBox>
+                <InclusionTitle>{t("Key Facilities & Inclusions")}</InclusionTitle>
+                <InclusionGrid>
+                  {tour.inclusions.map((inc: any, index: number) => (
+                    <InclusionCard key={index}>
+                      <span className="material-symbols-outlined">{inc.icon || "check_circle"}</span>
+                      <span className="label">{currentLanguage === "bn" ? (inc.nameBn || inc.name) : inc.name}</span>
+                    </InclusionCard>
+                  ))}
+                </InclusionGrid>
+              </InclusionsBox>
+            )}
 
             {/* Timeline Itinerary */}
-            <ItineraryWrapper>
-              <SectionHeaderRow>
-                <SectionHeading>
-                  {t("trip_detail.itinerary_title")}
-                </SectionHeading>
-                <SectionSubText>
-                  {t("trip_detail.itinerary_desc")}
-                </SectionSubText>
-              </SectionHeaderRow>
+            {tour.itinerary && tour.itinerary.length > 0 && (
+              <ItineraryWrapper>
+                <SectionHeaderRow>
+                  <SectionHeading>
+                    {t("trip_detail.itinerary_title")}
+                  </SectionHeading>
+                </SectionHeaderRow>
 
-              {/* Itinerary Timeline List */}
-              <Timeline
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={containerVariants}
-              >
-                {itinerary.map((dayItem, idx) => (
-                  <TimelineItem key={idx} variants={itemVariants}>
-                    {/* Timeline Node */}
-                    <TimelineNode />
+                {/* Itinerary Timeline List */}
+                <Timeline
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-100px" }}
+                  variants={containerVariants}
+                >
+                  {tour.itinerary.map((dayItem: any, idx: number) => (
+                    <TimelineItem key={idx} variants={itemVariants}>
+                      <TimelineNode />
+                      <TimelineCard>
+                        <TimelineHeader>
+                          <span>
+                            {currentLanguage === "bn" ? (dayItem.dayBn || dayItem.day) : dayItem.day}
+                          </span>
+                          <h3>
+                            {currentLanguage === "bn" ? (dayItem.titleBn || dayItem.title) : dayItem.title}
+                          </h3>
+                        </TimelineHeader>
 
-                    <TimelineCard>
-                      <TimelineHeader>
-                        <span>
-                          {t(`trip_detail.days.day${idx + 1}_num`)}
-                        </span>
-                        <h3>
-                          {t(`trip_detail.days.day${idx + 1}_title`)}
-                        </h3>
-                      </TimelineHeader>
+                        <DayDetailsBox>
+                          <p className="desc">
+                            {currentLanguage === "bn" ? (dayItem.descriptionBn || dayItem.description) : dayItem.description}
+                          </p>
 
-                      <DayDetailsBox>
-                        <p className="desc">
-                          {t(`trip_detail.days.day${idx + 1}_desc`)}
-                        </p>
+                          {dayItem.activities && dayItem.activities.length > 0 && (
+                            <DayActivitiesList>
+                              {dayItem.activities.map((act: any, actIdx: number) => (
+                                <ActivityItem key={actIdx}>
+                                  <span className="material-symbols-outlined">{act.icon || "explore"}</span>
+                                  <span>{currentLanguage === "bn" ? (act.nameBn || act.name) : act.name}</span>
+                                </ActivityItem>
+                              ))}
+                            </DayActivitiesList>
+                          )}
 
-                        {dayItem.activities.length > 0 && (
-                          <DayActivitiesList>
-                            {dayItem.activities.map((act, actIdx) => (
-                              <ActivityItem key={actIdx}>
-                                <span className="material-symbols-outlined">{act.icon}</span>
-                                <span>{t(`trip_detail.days.day${idx + 1}_act${actIdx + 1}`)}</span>
-                              </ActivityItem>
-                            ))}
-                          </DayActivitiesList>
-                        )}
-
-                        {dayItem.imgUrl && (
-                          <DayImageContainer>
-                            <img
-                              alt={dayItem.title}
-                              src={dayItem.imgUrl}
-                            />
-                          </DayImageContainer>
-                        )}
-                      </DayDetailsBox>
-                    </TimelineCard>
-                  </TimelineItem>
-                ))}
-              </Timeline>
-            </ItineraryWrapper>
+                          {dayItem.imgUrl && (
+                            <DayImageContainer>
+                              <img
+                                alt={dayItem.title}
+                                src={dayItem.imgUrl}
+                              />
+                            </DayImageContainer>
+                          )}
+                        </DayDetailsBox>
+                      </TimelineCard>
+                    </TimelineItem>
+                  ))}
+                </Timeline>
+              </ItineraryWrapper>
+            )}
 
             {/* Review Categories Progress Bars */}
-            <ReviewsBreakdown>
-              <ReviewHeaderTitle>{t("Review Breakdown")}</ReviewHeaderTitle>
-              <ReviewsGrid>
-                <ReviewProgressBarCol>
-                  <ReviewProgressBarLabel>
-                    <span>{t("Location")}</span>
-                    <span>9.8</span>
-                  </ReviewProgressBarLabel>
-                  <ProgressBarTrack>
-                    <ProgressBarFill $width="98%" />
-                  </ProgressBarTrack>
-                </ReviewProgressBarCol>
-                <ReviewProgressBarCol>
-                  <ReviewProgressBarLabel>
-                    <span>{t("Cleanliness")}</span>
-                    <span>9.4</span>
-                  </ReviewProgressBarLabel>
-                  <ProgressBarTrack>
-                    <ProgressBarFill $width="94%" />
-                  </ProgressBarTrack>
-                </ReviewProgressBarCol>
-                <ReviewProgressBarCol>
-                  <ReviewProgressBarLabel>
-                    <span>{t("Service & Staff")}</span>
-                    <span>9.2</span>
-                  </ReviewProgressBarLabel>
-                  <ProgressBarTrack>
-                    <ProgressBarFill $width="92%" />
-                  </ProgressBarTrack>
-                </ReviewProgressBarCol>
-                <ReviewProgressBarCol>
-                  <ReviewProgressBarLabel>
-                    <span>{t("Value for Money")}</span>
-                    <span>9.0</span>
-                  </ReviewProgressBarLabel>
-                  <ProgressBarTrack>
-                    <ProgressBarFill $width="90%" />
-                  </ProgressBarTrack>
-                </ReviewProgressBarCol>
-              </ReviewsGrid>
-            </ReviewsBreakdown>
+            {tour.reviewsBreakdown && (
+              <ReviewsBreakdown>
+                <ReviewHeaderTitle>{t("Review Breakdown")}</ReviewHeaderTitle>
+                <ReviewsGrid>
+                  {Object.entries(tour.reviewsBreakdown).map(([key, val]: any) => (
+                    <ReviewProgressBarCol key={key}>
+                      <ReviewProgressBarLabel>
+                        <span>{t(key)}</span>
+                        <span>{val}</span>
+                      </ReviewProgressBarLabel>
+                      <ProgressBarTrack>
+                        <ProgressBarFill $width={`${(val / 10) * 100}%`} />
+                      </ProgressBarTrack>
+                    </ReviewProgressBarCol>
+                  ))}
+                </ReviewsGrid>
+              </ReviewsBreakdown>
+            )}
           </LeftContentCol>
 
           {/* Right Column: Sticky Booking Widget */}

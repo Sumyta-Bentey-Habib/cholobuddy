@@ -46,15 +46,15 @@ export default function TourCard({ tour, variants }: TourCardProps) {
   const originalPrice = parseInt(tour.price?.toString().replace(/,/g, "") || "0") || 0;
   const strikethroughPrice = Math.round(originalPrice * 1.25).toLocaleString();
 
-  const ratingLabel = parseFloat(tour.rating) >= 9.2 ? "Superb" : "Excellent";
+  const ratingLabel = parseFloat(tour.rating || "9.0") >= 9.2 ? "Superb" : "Excellent";
 
   return (
     <CardContainer variants={variants}>
-      <Link href={tour.href || `/trips/${tourId}`} style={{ display: "flex", flexDirection: "column", height: "100%", textDecoration: "none" }}>
+      <Link href={`/trips/${tourId}`} style={{ display: "flex", flexDirection: "column", height: "100%", textDecoration: "none" }}>
         {/* Image */}
         <ImageWrapper>
           <TourImage
-            alt={t(tour.title)}
+            alt={currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
             src={tour.imgUrl}
           />
           {tour.popular && (
@@ -79,15 +79,15 @@ export default function TourCard({ tour, variants }: TourCardProps) {
         <CardBody>
           <div>
             <CardTitle>
-              {t(tour.title)}
+              {currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
             </CardTitle>
 
             <LocationRow>
-              {t(tour.location)} · {tour.distanceNote}
+              {currentLanguage === "bn" ? (tour.locationBn || tour.location) : tour.location} {tour.distanceNote ? `· ${tour.distanceNote}` : ""}
             </LocationRow>
 
             <InfoText>
-              {t(tour.duration)} · {t(tour.description)}
+              {currentLanguage === "bn" ? (tour.durationBn || tour.duration) : tour.duration} · {currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description}
             </InfoText>
           </div>
 
@@ -96,8 +96,8 @@ export default function TourCard({ tour, variants }: TourCardProps) {
             <RatingRow>
               {/* Rating */}
               <RatingBadgeGroup>
-                <RatingBadge>{tour.rating}</RatingBadge>
-                <RatingLabel>{ratingLabel}</RatingLabel>
+                <RatingBadge>{tour.rating || "9.0"}</RatingBadge>
+                <RatingLabel>{t(ratingLabel)}</RatingLabel>
               </RatingBadgeGroup>
 
               {/* Price */}

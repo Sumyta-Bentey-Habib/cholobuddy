@@ -36,7 +36,20 @@ export default function AdminPage() {
 
   // Tour Form Modal State
   const [showTourModal, setShowTourModal] = useState(false);
-  const [tourForm, setTourForm] = useState({ title: "", price: "", imgUrl: "" });
+  const [tourForm, setTourForm] = useState({
+    title: "",
+    titleBn: "",
+    price: "",
+    duration: "",
+    durationBn: "",
+    description: "",
+    descriptionBn: "",
+    location: "",
+    locationBn: "",
+    distanceNote: "",
+    imgUrl: "",
+    popular: false
+  });
   const [tourFile, setTourFile] = useState<File | null>(null);
   const [editingTourId, setEditingTourId] = useState<string | null>(null);
 
@@ -69,8 +82,18 @@ export default function AdminPage() {
 
     const payload = {
       title: tourForm.title,
+      titleBn: tourForm.titleBn,
       price: Number(tourForm.price),
-      imgUrl: uploadedUrl
+      duration: tourForm.duration,
+      durationBn: tourForm.durationBn,
+      description: tourForm.description,
+      descriptionBn: tourForm.descriptionBn,
+      location: tourForm.location,
+      locationBn: tourForm.locationBn,
+      distanceNote: tourForm.distanceNote,
+      imgUrl: uploadedUrl,
+      image: uploadedUrl, // fallback for backend validations
+      popular: tourForm.popular
     };
 
     if (editingTourId) {
@@ -80,7 +103,20 @@ export default function AdminPage() {
     }
 
     setShowTourModal(false);
-    setTourForm({ title: "", price: "", imgUrl: "" });
+    setTourForm({
+      title: "",
+      titleBn: "",
+      price: "",
+      duration: "",
+      durationBn: "",
+      description: "",
+      descriptionBn: "",
+      location: "",
+      locationBn: "",
+      distanceNote: "",
+      imgUrl: "",
+      popular: false
+    });
     setTourFile(null);
     setEditingTourId(null);
   };
@@ -366,7 +402,20 @@ export default function AdminPage() {
                   <S.BlueButton
                     onClick={() => {
                       setEditingTourId(null);
-                      setTourForm({ title: "", price: "", imgUrl: "" });
+                      setTourForm({
+                        title: "",
+                        titleBn: "",
+                        price: "",
+                        duration: "",
+                        durationBn: "",
+                        description: "",
+                        descriptionBn: "",
+                        location: "",
+                        locationBn: "",
+                        distanceNote: "",
+                        imgUrl: "",
+                        popular: false
+                      });
                       setTourFile(null);
                       setShowTourModal(true);
                     }}
@@ -381,41 +430,142 @@ export default function AdminPage() {
                       <h4 style={{ fontFamily: "monospace", fontSize: "12px", fontWeight: 700, color: "#000000", textTransform: "uppercase" }}>
                         {editingTourId ? "Edit Tour" : "Create New Tour"}
                       </h4>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Tour Title (EN)</S.FieldLabel>
+                          <S.FieldInput
+                            required
+                            placeholder="e.g. Sundarbans Safari"
+                            value={tourForm.title}
+                            onChange={e => setTourForm({...tourForm, title: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Tour Title (BN)</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="e.g. সুন্দরবন সাফারি"
+                            value={tourForm.titleBn}
+                            onChange={e => setTourForm({...tourForm, titleBn: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Price (৳)</S.FieldLabel>
+                          <S.FieldInput
+                            required
+                            placeholder="Price"
+                            type="number"
+                            value={tourForm.price}
+                            onChange={e => setTourForm({...tourForm, price: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Distance Note</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="e.g. 2.5 km from forest base"
+                            value={tourForm.distanceNote}
+                            onChange={e => setTourForm({...tourForm, distanceNote: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Duration (EN)</S.FieldLabel>
+                          <S.FieldInput
+                            required
+                            placeholder="e.g. 3 Days / 2 Nights"
+                            value={tourForm.duration}
+                            onChange={e => setTourForm({...tourForm, duration: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Duration (BN)</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="e.g. ৩ দিন / ২ রাত"
+                            value={tourForm.durationBn}
+                            onChange={e => setTourForm({...tourForm, durationBn: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Location (EN)</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="e.g. Sundarbans, Bangladesh"
+                            value={tourForm.location}
+                            onChange={e => setTourForm({...tourForm, location: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Location (BN)</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="e.g. সুন্দরবন, বাংলাদেশ"
+                            value={tourForm.locationBn}
+                            onChange={e => setTourForm({...tourForm, locationBn: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
                       <S.FieldWrapper>
-                        <S.FieldLabel>Tour Title</S.FieldLabel>
+                        <S.FieldLabel>Description (EN)</S.FieldLabel>
                         <S.FieldInput
+                          as="textarea"
+                          rows={3}
                           required
-                          placeholder="Tour Title"
-                          value={tourForm.title}
-                          onChange={e => setTourForm({...tourForm, title: e.target.value})}
+                          placeholder="English Tour Description"
+                          value={tourForm.description}
+                          onChange={e => setTourForm({...tourForm, description: e.target.value})}
+                          style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
                         />
                       </S.FieldWrapper>
+
                       <S.FieldWrapper>
-                        <S.FieldLabel>Price (৳)</S.FieldLabel>
+                        <S.FieldLabel>Description (BN)</S.FieldLabel>
                         <S.FieldInput
-                          required
-                          placeholder="Price"
-                          type="number"
-                          value={tourForm.price}
-                          onChange={e => setTourForm({...tourForm, price: e.target.value})}
+                          as="textarea"
+                          rows={3}
+                          placeholder="Bangla Tour Description"
+                          value={tourForm.descriptionBn}
+                          onChange={e => setTourForm({...tourForm, descriptionBn: e.target.value})}
+                          style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
                         />
                       </S.FieldWrapper>
-                      <S.FieldWrapper>
-                        <S.FieldLabel>Image File</S.FieldLabel>
-                        <S.FieldInput
-                          type="file"
-                          accept="image/*"
-                          onChange={e => setTourFile(e.target.files?.[0] || null)}
+
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "center" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Image File</S.FieldLabel>
+                          <S.FieldInput
+                            type="file"
+                            accept="image/*"
+                            onChange={e => setTourFile(e.target.files?.[0] || null)}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Or Image URL</S.FieldLabel>
+                          <S.FieldInput
+                            placeholder="Image URL (if not uploading)"
+                            value={tourForm.imgUrl}
+                            onChange={e => setTourForm({...tourForm, imgUrl: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", margin: "8px 0" }}>
+                        <input
+                          id="popular"
+                          type="checkbox"
+                          checked={tourForm.popular}
+                          onChange={e => setTourForm({...tourForm, popular: e.target.checked})}
+                          style={{ width: "16px", height: "16px", cursor: "pointer" }}
                         />
-                      </S.FieldWrapper>
-                      <S.FieldWrapper>
-                        <S.FieldLabel>Or Image URL</S.FieldLabel>
-                        <S.FieldInput
-                          placeholder="Image URL (if not uploading)"
-                          value={tourForm.imgUrl}
-                          onChange={e => setTourForm({...tourForm, imgUrl: e.target.value})}
-                        />
-                      </S.FieldWrapper>
+                        <label htmlFor="popular" style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 700, color: "#000000", cursor: "pointer", textTransform: "uppercase" }}>
+                          Mark as Popular / Featured Tour
+                        </label>
+                      </div>
                       <div style={{ display: "flex", gap: "12px" }}>
                         <S.BlueButton type="submit">Save</S.BlueButton>
                         <S.GhostButton
@@ -459,7 +609,20 @@ export default function AdminPage() {
                             <button
                               onClick={() => {
                                 setEditingTourId(t._id);
-                                setTourForm({ title: t.title, price: t.price?.toString() || "", imgUrl: t.imgUrl || "" });
+                                setTourForm({
+                                  title: t.title || "",
+                                  titleBn: t.titleBn || "",
+                                  price: t.price?.toString() || "",
+                                  duration: t.duration || "",
+                                  durationBn: t.durationBn || "",
+                                  description: t.description || "",
+                                  descriptionBn: t.descriptionBn || "",
+                                  location: t.location || "",
+                                  locationBn: t.locationBn || "",
+                                  distanceNote: t.distanceNote || "",
+                                  imgUrl: t.imgUrl || "",
+                                  popular: !!t.popular
+                                });
                                 setTourFile(null);
                                 setShowTourModal(true);
                               }}
