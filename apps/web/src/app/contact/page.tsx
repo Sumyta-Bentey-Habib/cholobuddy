@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ChatBubble from "@/components/ChatBubble";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAnimationVariants } from "@/hooks/useAnimationVariants";
 import {
@@ -230,7 +229,6 @@ export default function ContactPage() {
       </main>
 
       <Footer />
-      <ChatBubble />
     </ContactContainer>
   );
 }

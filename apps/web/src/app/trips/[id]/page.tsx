@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ChatBubble from "@/components/ChatBubble";
 import TripGallery from "@/components/TripGallery";
 import BookingWidget from "@/components/BookingWidget";
 import { itineraryData } from "@/lib/data";
@@ -147,7 +145,7 @@ export default function TripDetailPage() {
                 📍 Khulna division, Bangladesh • 2.5 km from forest base
               </MetaLocation>
             </div>
-            
+
             {/* Top Review Badge */}
             <ReviewsBadge>
               <ReviewsTextCol>
@@ -221,7 +219,7 @@ export default function TripDetailPage() {
                   <TimelineItem key={idx} variants={itemVariants}>
                     {/* Timeline Node */}
                     <TimelineNode />
-                    
+
                     <TimelineCard>
                       <TimelineHeader>
                         <span>
@@ -231,12 +229,12 @@ export default function TripDetailPage() {
                           {isEn ? dayItem.title : dayItem.titleBn}
                         </h3>
                       </TimelineHeader>
-                      
+
                       <DayDetailsBox>
                         <p className="desc">
                           {isEn ? dayItem.description : dayItem.descriptionBn}
                         </p>
-                        
+
                         {dayItem.activities.length > 0 && (
                           <DayActivitiesList>
                             {dayItem.activities.map((act, actIdx) => (
@@ -247,7 +245,7 @@ export default function TripDetailPage() {
                             ))}
                           </DayActivitiesList>
                         )}
-                        
+
                         {dayItem.imgUrl && (
                           <DayImageContainer>
                             <img
@@ -324,7 +322,6 @@ export default function TripDetailPage() {
       </PageContainer>
 
       <Footer />
-      <ChatBubble />
     </>
   );
 }

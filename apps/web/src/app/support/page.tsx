@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ChatBubble from "@/components/ChatBubble";
 import SupportForm from "@/components/SupportForm";
 import FaqItem from "@/components/FaqItem";
 import { faqsData } from "@/lib/data";
@@ -164,7 +163,6 @@ export default function SupportPage() {
       </S.SupportContainer>
 
       <Footer />
-      <ChatBubble />
     </>
   );
 }

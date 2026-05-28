@@ -13,15 +13,15 @@ export const AboutContainer = styled.div`
 export const HeroBanner = styled.section`
   position: relative;
   width: 100%;
-  height: 80vh;
-  min-height: 600px;
+  height: 100vh;
+  min-height: 700px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
 `;
 
-export const HeroBannerBg = styled.div`
+export const HeroBannerBg = styled(motion.div)`
   position: absolute;
   inset: 0;
   background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANy2V4hSBNCOTiyPi8RdbELSJxMNneVFN2UtqdGD83091csfqli6ROLdkG5vpOWpErqGac2DCfarapDwpVUp1NTnkcNRWqxBB_6erdShAqWFpe-FtQAhRfLfvLAwnxbbw8GQfWIiozy26LNzZdSaRDuWJND0m21yvmELS6_3tZgzKrQPRrXKJ1_IYo4UgINZE0QGCXkkSKKmek5AJ8qvXu_JCh6IpzQYYs9NbNH3gKzsIYgd1NyBWB58Wjcr8UmbapakBpF3h0U0Y');
@@ -75,36 +75,48 @@ export const BannerTitle = styled.h1`
 `;
 
 // Story Section
+// Story Section
 export const StorySection = styled.section`
-  max-width: 768px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 96px 24px;
-  text-align: center;
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 120px;
+    align-items: flex-start;
+  }
 `;
 
 export const StoryTitle = styled.h2`
   font-family: 'Playfair Display', serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 500;
   color: #000000;
-  margin-bottom: 48px;
   text-transform: uppercase;
   letter-spacing: -0.01em;
+  flex: 1;
+  position: sticky;
+  top: 120px;
 
   @media (min-width: 768px) {
-    font-size: 32px;
-    line-height: 1.3;
+    font-size: 48px;
+    line-height: 1.2;
   }
 `;
 
 export const StoryBody = styled.div`
+  flex: 1.5;
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: #444748;
-  line-height: 1.65;
+  font-size: 16px;
+  color: rgba(25, 28, 29, 0.8);
+  line-height: 1.8;
   
   p {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
   
   p:last-child {
@@ -123,35 +135,53 @@ export const MotifSeparator = styled.div`
 
 // Trust Compliance Section
 export const TrustSection = styled.section`
-  padding: 96px 24px;
-  background-color: #ffffff;
-  border-bottom: 1px solid rgba(196, 199, 199, 0.1);
+  padding: 120px 24px;
+  background-color: #f4f1ea; /* warm luxury beige */
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+  }
 `;
 
 export const TrustGrid = styled.div`
   max-width: 1280px;
   width: 100%;
   display: grid;
-  grid-template-cols: 1fr;
+  grid-template-columns: 1fr;
   gap: 32px;
+  position: relative;
+  z-index: 10;
 
   @media (min-width: 768px) {
-    grid-template-cols: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     padding: 0 64px;
   }
 `;
 
 export const TrustCard = styled.div`
-  border: 1px solid rgba(196, 199, 199, 0.2);
-  border-radius: 24px;
-  padding: 32px;
-  background-color: #f3f4f5; /* surface-container-low */
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 32px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
 
   &:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.7);
   }
 `;
 
@@ -215,19 +245,31 @@ export const AlponaCenterMotif = styled.div`
 
 // Philosophy Section (Dark panel)
 export const PhilosophySection = styled.section`
-  padding: 96px 24px;
-  background-color: #000000; /* primary */
+  padding: 120px 24px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
   color: #ffffff;
-  border-radius: 24px;
-  margin: 0 24px 96px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  margin: 0 24px 120px;
+  border: 1px solid rgba(255, 225, 109, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(112, 93, 0, 0.15);
+  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(112, 93, 0, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
   @media (min-width: 768px) {
-    margin: 0 64px 96px;
+    margin: 0 64px 120px;
   }
 `;
 
@@ -235,23 +277,26 @@ export const PhilosophyGrid = styled.div`
   max-width: 1280px;
   width: 100%;
   display: grid;
-  grid-template-cols: 1fr;
+  grid-template-columns: 1fr;
   gap: 64px;
   align-items: center;
+  position: relative;
+  z-index: 10;
 
   @media (min-width: 768px) {
-    grid-template-cols: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     padding: 0 32px;
   }
 `;
 
 export const PhilosophyLeftPanel = styled(motion.div)`
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 48px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 56px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 32px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
 `;
 
 export const PhilosophyTitle = styled.h2`
@@ -328,24 +373,40 @@ export const PhilosophyItemDesc = styled.p`
 
 // Begin Journey Section
 export const BeginJourneySection = styled.section`
-  padding: 96px 24px;
+  padding: 120px 24px;
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-color: #1a1a1a; /* Overlaps with footer */
+    z-index: 0;
+  }
 `;
 
 export const BeginJourneyCard = styled(motion.div)`
-  max-width: 1280px;
+  max-width: 1024px;
   width: 100%;
-  background-color: #ffffff;
-  border: 1px solid rgba(196, 199, 199, 0.3);
-  border-radius: 24px;
-  padding: 48px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 40px;
+  padding: 64px 32px;
   text-align: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 
   @media (min-width: 768px) {
-    padding: 96px;
+    padding: 120px 64px;
     margin: 0 64px;
   }
 `;
@@ -394,7 +455,7 @@ export const BeginJourneyInput = styled.input`
   }
 `;
 
-export const BeginJourneyBtn = styled.button`
+export const BeginJourneyBtn = styled(motion.button)`
   background-color: #000000;
   color: #ffffff;
   border: 1px solid #000000;
@@ -406,13 +467,13 @@ export const BeginJourneyBtn = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.15em;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
-    background-color: #526069;
-    border-color: #526069;
+    background-color: #705d00;
+    border-color: #705d00;
   }
 `;

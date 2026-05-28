@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ChatBubble from "@/components/ChatBubble";
 import StatsSection from "@/components/StatsSection";
 import TeamSection from "@/components/TeamSection";
 import { useLanguage } from "@/hooks/useLanguage";
@@ -96,6 +95,9 @@ export default function AboutPage() {
   const { containerVariants, itemVariants, slideInLeftVariants } = useAnimationVariants();
   const isEn = currentLanguage === "en";
 
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], [0, 300]);
+
   return (
     <>
       <Navbar />
@@ -103,7 +105,7 @@ export default function AboutPage() {
       <AboutContainer>
         {/* Hero Banner (Misty Dawn Hills) */}
         <HeroBanner>
-          <HeroBannerBg />
+          <HeroBannerBg style={{ y: yBg }} />
           <FadeToWhite />
           <HeroBannerContent>
             <CategoryTag>
@@ -244,7 +246,10 @@ export default function AboutPage() {
                 placeholder="YOUR@EMAIL.COM"
                 type="email"
               />
-              <BeginJourneyBtn>
+              <BeginJourneyBtn
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 {isEn ? "Get in Touch" : "যোগাযোগ করুন"}
               </BeginJourneyBtn>
             </BeginJourneyForm>
@@ -253,7 +258,7 @@ export default function AboutPage() {
       </AboutContainer>
 
       <Footer />
-      <ChatBubble />
+
     </>
   );
 }

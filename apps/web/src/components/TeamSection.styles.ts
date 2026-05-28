@@ -88,41 +88,40 @@ export const EstablishedTag = styled.div`
 
 export const TeamGrid = styled(motion.div)`
   display: grid;
-  grid-template-cols: 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr;
+  gap: 40px;
 
   @media (min-width: 768px) {
-    grid-template-cols: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
 export const TeamCard = styled(motion.div)`
-  border: 1px solid rgba(196, 199, 199, 0.2);
-  border-radius: 24px;
-  background-color: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all 0.5s ease;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 
   &:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-12px);
   }
 `;
 
 export const ImageWrapper = styled.div`
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  border-bottom: 1px solid rgba(196, 199, 199, 0.1);
   background-color: #edeeef;
+  border-radius: 20px;
+  margin-bottom: 20px;
 `;
 
 export const TeamImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(125%) brightness(95%);
-  transition: all 0.6s ease;
+  filter: grayscale(100%) brightness(95%);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 
   ${TeamCard}:hover & {
     transform: scale(1.05);
@@ -131,18 +130,18 @@ export const TeamImage = styled.img`
 `;
 
 export const CardInfo = styled.div`
-  padding: 24px;
   text-align: center;
+  padding: 0 16px;
 `;
 
 export const CuratorName = styled.h3`
-  font-family: monospace;
-  font-size: 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.2em;
   color: #000000;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  text-transform: none;
+  letter-spacing: normal;
 `;
 
 export const CuratorRole = styled.p`
