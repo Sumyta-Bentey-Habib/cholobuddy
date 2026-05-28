@@ -9,5 +9,8 @@
     "build:server": "pnpm --filter server build",
     "start:web": "pnpm --filter web start",
     "start:server": "pnpm --filter server start"
+  },
+  "devDependencies": {
+    "turbo": "^2.9.16"
   }
 }
