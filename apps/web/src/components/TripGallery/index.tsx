@@ -7,7 +7,7 @@ import {
   ThumbnailsGrid,
   ThumbnailWrapper,
   FallbackWrapper
-} from "./TripGallery.styles";
+} from "./styles";
 
 interface TripGalleryProps {
   primaryImg: string;

@@ -14,7 +14,7 @@ import {
   FooterLink,
   FooterBottom,
   FooterCopyright
-} from "./Footer.styles";
+} from "./styles";
 
 const footerLinks = {
   explore: [

@@ -10,7 +10,7 @@ import {
   SearchCard,
   SearchTitle,
   SearchDesc
-} from "./RecentSearches.styles";
+} from "./styles";
 
 export default function RecentSearches() {
   const {

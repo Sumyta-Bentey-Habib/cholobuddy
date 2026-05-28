@@ -14,7 +14,7 @@ import {
   SelectBox,
   MessageBox,
   SubmitButton
-} from "./SupportForm.styles";
+} from "./styles";
 
 export default function SupportForm() {
   const { t } = useLanguage();

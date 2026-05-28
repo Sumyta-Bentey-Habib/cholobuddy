@@ -26,7 +26,7 @@ import {
   DashboardButton,
   LogoutButton,
   MobileLogoutButton
-} from "./Navbar.styles";
+} from "./styles";
 
 export default function Navbar() {
   const pathname = usePathname();

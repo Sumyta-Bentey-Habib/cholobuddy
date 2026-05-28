@@ -27,7 +27,7 @@ import {
   InvoiceTotalRow,
   BookButton,
   SlotsText
-} from "./BookingWidget.styles";
+} from "./styles";
 
 interface BookingWidgetProps {
   pricePerTraveler: number;

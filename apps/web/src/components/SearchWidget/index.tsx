@@ -16,7 +16,7 @@ import {
   NumberInput,
   SubmitWrapper,
   SearchBtn
-} from "./SearchWidget.styles";
+} from "./styles";
 
 const DESTINATIONS = [
   { value: "coxs-bazar", label: "Cox's Bazar", labelBn: "কক্সবাজার" },

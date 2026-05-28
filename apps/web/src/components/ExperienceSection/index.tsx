@@ -11,7 +11,7 @@ import {
   ImageBadgesWrapper,
   ImageWrapper,
   FloatingBadge
-} from "./ExperienceSection.styles";
+} from "./styles";
 
 export default function ExperienceSection() {
   const {

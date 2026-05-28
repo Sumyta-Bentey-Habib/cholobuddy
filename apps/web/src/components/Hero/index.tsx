@@ -16,7 +16,7 @@ import {
   ThumbnailCard,
   LabelsRow,
   LabelItem
-} from "./Hero.styles";
+} from "./styles";
 
 export default function Hero() {
   const {

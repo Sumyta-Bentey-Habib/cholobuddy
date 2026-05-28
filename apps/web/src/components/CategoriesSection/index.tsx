@@ -13,7 +13,7 @@ import {
   IconWrapper,
   CategoryTitle,
   CategoryDesc
-} from "./CategoriesSection.styles";
+} from "./styles";
 
 const categories = [
   {

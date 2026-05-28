@@ -27,7 +27,7 @@ import {
   StrikethroughPrice,
   PriceText,
   BookCta
-} from "./TourCard.styles";
+} from "./styles";
 
 interface TourCardProps {
   tour: Tour;

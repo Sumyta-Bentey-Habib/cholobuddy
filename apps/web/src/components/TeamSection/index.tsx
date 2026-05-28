@@ -21,7 +21,7 @@ import {
   CardInfo,
   CuratorName,
   CuratorRole
-} from "./TeamSection.styles";
+} from "./styles";
 
 export default function TeamSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();

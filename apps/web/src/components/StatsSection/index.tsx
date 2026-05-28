@@ -11,7 +11,7 @@ import {
   StatCard,
   StatValue,
   StatLabel
-} from "./StatsSection.styles";
+} from "./styles";
 
 const statLabels: Record<string, string> = {
   "Verified Bookings": "যাচাইকৃত বুকিং",

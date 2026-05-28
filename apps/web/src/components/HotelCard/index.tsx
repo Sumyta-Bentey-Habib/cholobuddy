@@ -21,7 +21,7 @@ import {
   StrikethroughPrice,
   PriceText,
   SelectRoomBtn
-} from "./HotelCard.styles";
+} from "./styles";
 
 interface HotelCardProps {
   hotel: Hotel;

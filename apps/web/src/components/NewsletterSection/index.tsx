@@ -12,7 +12,7 @@ import {
   SubscribeForm,
   EmailInput,
   SubscribeButton
-} from "./NewsletterSection.styles";
+} from "./styles";
 
 export default function NewsletterSection() {
   const { email, setEmail, status, handleSubscribe } = useNewsletter();

@@ -14,7 +14,7 @@ import {
   TestimonialQuote,
   AuthorName,
   AuthorLocation
-} from "./TestimonialsSection.styles";
+} from "./styles";
 
 export default function TestimonialsSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();

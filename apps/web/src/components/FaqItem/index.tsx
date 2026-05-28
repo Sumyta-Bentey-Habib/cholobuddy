@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaqContainer, QuestionText, AnswerText } from "./FaqItem.styles";
+import { FaqContainer, QuestionText, AnswerText } from "./styles";
 
 interface FaqItemProps {
   question: string;
