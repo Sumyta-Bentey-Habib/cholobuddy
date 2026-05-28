@@ -2,9 +2,10 @@
   "name": "cholobuddy-monorepo",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.28.0",
   "scripts": {
-    "dev": "pnpm --filter web dev & pnpm --filter server dev",
-    "build": "pnpm --filter web build && pnpm --filter server build",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
     "build:web": "pnpm --filter web build",
     "build:server": "pnpm --filter server build",
     "start:web": "pnpm --filter web start",
