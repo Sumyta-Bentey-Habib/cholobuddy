@@ -17,7 +17,7 @@ graph TD
 
 ### 1. Web Application (`apps/web`)
 * **Framework**: Next.js 15+ (App Router).
-* **Styling**: Bypasses Tailwind CSS in favor of **Vanilla styled-components** (`*.styles.ts`) side-by-side with markup files to keep page logic and design systems isolated.
+* **Styling**: Bypasses Tailwind CSS in favor of **Vanilla styled-components** (`styles.ts`) encapsulated inside dedicated component directories alongside `index.tsx` markup to keep page logic and design systems isolated.
 * **Localization**: Full internationalization toggle system (English & Bengali) powered by `react-i18next` and loaded via static dictionaries in `locales/`.
 * **Animations**: Fluid, staggered entries and transitions managed through `framer-motion`.
 * **State Management & Custom Hooks**: Isolated client-side state hooks for reservations, authentication, search configurations, wishlists, and real-time support chat.
@@ -77,6 +77,6 @@ All workspace actions are driven from the root `package.json` package scripts us
 ## 🌟 Styling Standards & Component Modularity
 
 To maintain high aesthetics and performance:
-1. **No Utility Frameworks**: Bypasses Tailwind compile targets completely. Styles are defined inside separate `[component].styles.ts` or `[page].styles.ts` files.
+1. **No Utility Frameworks**: Bypasses Tailwind compile targets completely. Each component resides in its own subdirectory containing `index.tsx` for layout and `styles.ts` for styled components.
 2. **Design Tokens**: Reuses harmonious, tailored hex values (primary: `#000000`, secondary: `#526069`, tertiary: `#705d00`, surface: `#f8f9fa`) to build high-end editorial experiences.
 3. **No Placeholders**: Leverages native rendering and static resources directly from Google Photos and Unsplash asset caches.
