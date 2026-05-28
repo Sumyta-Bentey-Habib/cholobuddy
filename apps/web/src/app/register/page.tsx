@@ -180,30 +180,6 @@ function RegisterContent() {
                 {filled}/4 fields completed
               </p>
             </div>
-
-            {/* Social auth */}
-            <S.SocialAuthRow>
-              <S.SocialButton onClick={() => handleOAuth("Google")}>
-                <img alt="Google" src="https://www.gstatic.com/images/branding/product/1x/gsa_android_64dp.png" style={{ width: "15px", height: "15px" }} />
-                <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                  {t("register.google")}
-                </span>
-              </S.SocialButton>
-              <S.SocialButton onClick={handleOTP}>
-                <span className="material-symbols-outlined" style={{ fontSize: "15px" }}>sms</span>
-                <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                  {t("register.otp")}
-                </span>
-              </S.SocialButton>
-            </S.SocialAuthRow>
-
-            {/* Divider */}
-            <S.Divider>
-              <S.DividerLine />
-              <S.DividerText>{t("register.divider")}</S.DividerText>
-              <S.DividerLine />
-            </S.Divider>
-
             {/* Form */}
             <form onSubmit={handleSubmit} style={{ position: "relative", display: "flex", flexDirection: "column", gap: "14px" }}>
               {/* Full Name */}

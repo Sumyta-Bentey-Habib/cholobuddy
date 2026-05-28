@@ -162,30 +162,6 @@ function LoginContent() {
               <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#fff", marginBottom: "6px" }}>{t("login.welcome")}</h2>
               <p style={{ color: "#64748b", fontSize: "14px" }}>{t("login.desc")}</p>
             </div>
-
-            {/* Social auth */}
-            <S.SocialAuthRow>
-              <S.SocialButton onClick={() => handleOAuth("Google")}>
-                <img alt="Google" src="https://www.gstatic.com/images/branding/product/1x/gsa_android_64dp.png" style={{ width: "16px", height: "16px" }} />
-                <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                  {t("login.google")}
-                </span>
-              </S.SocialButton>
-              <S.SocialButton onClick={handleOTP}>
-                <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>sms</span>
-                <span style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                  {t("login.otp")}
-                </span>
-              </S.SocialButton>
-            </S.SocialAuthRow>
-
-            {/* Divider */}
-            <S.Divider>
-              <S.DividerLine />
-              <S.DividerText>{t("login.divider")}</S.DividerText>
-              <S.DividerLine />
-            </S.Divider>
-
             {/* Form */}
             <form onSubmit={handleSubmit} style={{ position: "relative", display: "flex", flexDirection: "column", gap: "16px" }}>
               {/* Email */}
@@ -205,12 +181,7 @@ function LoginContent() {
 
               {/* Password */}
               <div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                  <S.FormLabel style={{ marginBottom: 0 }}>{t("login.password_label")}</S.FormLabel>
-                  <a href="#" style={{ fontFamily: "monospace", fontSize: "10px", fontWeight: 700, color: "#c9a900", textTransform: "uppercase", letterSpacing: "0.1em", textDecoration: "none" }}>
-                    {t("login.forgot")}
-                  </a>
-                </div>
+                <S.FormLabel>{t("login.password_label")}</S.FormLabel>
                 <S.InputGroup>
                   <S.InputIcon className="material-symbols-outlined">lock</S.InputIcon>
                   <S.FormInput
