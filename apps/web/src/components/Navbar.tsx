@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useAuth } from "@/hooks/useAuth";
 import { navLinks } from "@/lib/data";
 import {
   HeaderContainer,
@@ -21,11 +22,16 @@ import {
   MobileNavLink,
   MobileLanguageButton,
   BottomNavBar,
-  BottomNavItem
+  BottomNavItem,
+  DashboardButton,
+  LogoutButton,
+  MobileLogoutButton
 } from "./Navbar.styles";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { session, signOut } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useScrolled(20);
   const {
@@ -33,6 +39,11 @@ export default function Navbar() {
     currentLanguage,
     toggleLanguage
   } = useLanguage();
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/");
+  };
 
   return (
     <>
@@ -60,7 +71,14 @@ export default function Navbar() {
             <span>{t("BN")}</span>
           </LanguageButton>
 
-          <LoginButton href="/login">{t("Login")}</LoginButton>
+          {session ? (
+            <>
+              <DashboardButton href="/dashboard">{t("common.dashboard")}</DashboardButton>
+              <LogoutButton onClick={handleLogout}>{t("common.logout")}</LogoutButton>
+            </>
+          ) : (
+            <LoginButton href="/login">{t("Login")}</LoginButton>
+          )}
 
           <MobileMenuToggle onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             <span className="material-symbols-outlined">
@@ -85,6 +103,34 @@ export default function Navbar() {
               </MobileNavLink>
             );
           })}
+
+          {session ? (
+            <>
+              <MobileNavLink
+                href="/dashboard"
+                $isActive={pathname === "/dashboard"}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("common.dashboard")}
+              </MobileNavLink>
+              <MobileLogoutButton
+                onClick={() => {
+                  handleLogout();
+                  setMobileMenuOpen(false);
+                }}
+              >
+                {t("common.logout")}
+              </MobileLogoutButton>
+            </>
+          ) : (
+            <MobileNavLink
+              href="/login"
+              $isActive={pathname === "/login"}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {t("Login")}
+            </MobileNavLink>
+          )}
 
           <MobileLanguageButton
             onClick={() => {

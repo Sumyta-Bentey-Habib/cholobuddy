@@ -129,6 +129,76 @@ export const LoginButton = styled(Link)`
   }
 `;
 
+export const DashboardButton = styled(Link)`
+  display: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: #e4e4e7;
+  }
+
+  @media (min-width: 768px) {
+    display: inline-block;
+  }
+`;
+
+export const LogoutButton = styled.button`
+  display: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+  }
+
+  @media (min-width: 768px) {
+    display: inline-block;
+  }
+`;
+
+export const MobileLogoutButton = styled.button`
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-bottom: 4px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #ffffff;
+  }
+`;
+
 export const MobileMenuToggle = styled.button`
   width: 32px;
   height: 32px;
