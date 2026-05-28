@@ -17,6 +17,8 @@ export const createTourSchema = z.object({
     popular: z.boolean().optional(),
     maxGroupSize: z.coerce.number().optional(),
     difficulty: z.string().optional(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
     image: z.string().url("Image must be a valid URL").optional().or(z.literal("")),
     images: z.array(z.string().url()).optional(),
     startDates: z.array(z.string()).optional(),

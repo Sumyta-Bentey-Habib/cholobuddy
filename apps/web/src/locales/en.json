@@ -190,6 +190,7 @@
       "btn_idle": "Confirm Booking",
       "btn_booking": "Reserving Slots...",
       "btn_booked": "Booking Secured!",
+      "btn_admin_blocked": "Admins cannot book",
       "remaining_slots": "Only 4 slots remaining for this date"
     }
   },
@@ -254,6 +255,7 @@
     "level": "Level",
     "welcome_title": "Welcome back, {{name}}!",
     "welcome_desc": "Your next eco-adventure starts in October. Check the coordinates and details of your booking below.",
+    "welcome_desc_admin": "Welcome to the CholoBuddy Admin control center. Monitor current listings and inspect available tour packages.",
     "stats": {
       "active_trips": "Active Trips",
       "active_trips_val": "1 Booking",

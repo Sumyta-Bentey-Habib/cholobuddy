@@ -34,46 +34,52 @@ interface BookingWidgetProps {
   ecoTaxPerTraveler: number;
   tourId: string;
   tourTitle: string;
+  endDate?: string;
 }
 
-export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tourId, tourTitle }: BookingWidgetProps) {
-  const { t } = useLanguage();
-  const { session } = useAuth();
+export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tourId, tourTitle, endDate }: BookingWidgetProps) {
+  const { t, currentLanguage } = useLanguage();
+  const { session, role } = useAuth();
   const router = useRouter();
+  const isAdmin = role === "admin";
 
   const {
     guests,
-    incrementGuests,
-    decrementGuests,
-    selectedDate,
-    setSelectedDate,
-    showDatePicker,
-    setShowDatePicker,
     bookingStatus,
     subtotal,
     ecoTax,
     total,
   } = useBooking({ pricePerTraveler, ecoTaxPerTraveler });
 
-  const datesList = ["oct_24", "nov_08", "dec_15"];
+  const isExpired = (() => {
+    if (!endDate) return false;
+    const end = new Date(endDate);
+    const today = new Date();
+    end.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    return end < today;
+  })();
 
   const handleBookingRedirect = () => {
+    if (isAdmin) return;
     if (!session) {
       router.push(`/login?callbackUrl=${encodeURIComponent(window.location.pathname)}`);
       return;
     }
     router.push(
-      `/payment?tourId=${tourId}&tourTitle=${encodeURIComponent(tourTitle)}&guests=${guests}&date=${selectedDate}&totalAmount=${total}`
+      `/payment?tourId=${tourId}&tourTitle=${encodeURIComponent(tourTitle)}&guests=${guests}&date=oct_24&totalAmount=${total}`
     );
   };
 
   return (
     <WidgetWrapper>
       {/* Crimson Urgency Alert Badge */}
-      <AlertBadge>
-        <span className="material-symbols-outlined">local_fire_department</span>
-        <span className="label">{t("Only 2 slots remaining!")}</span>
-      </AlertBadge>
+      {!isExpired && !isAdmin && (
+        <AlertBadge>
+          <span className="material-symbols-outlined">local_fire_department</span>
+          <span className="label">{t("Only 2 slots remaining!")}</span>
+        </AlertBadge>
+      )}
 
       <PricingHeader>
         <WidgetTitle>
@@ -86,55 +92,6 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
       </PricingHeader>
 
       <FormWrapper>
-        {/* Date Selector */}
-        <InputGroup>
-          <InputLabel>{t("trip_detail.widget.select_date")}</InputLabel>
-          <DatePickerBtn onClick={() => setShowDatePicker(!showDatePicker)}>
-            <span className="date-val">
-              {t("trip_detail.widget.dates." + selectedDate)}
-            </span>
-            <span className="material-symbols-outlined">calendar_today</span>
-          </DatePickerBtn>
-
-          {/* Dropdown Options */}
-          {showDatePicker && (
-            <DropdownMenu>
-              {datesList.map((d) => (
-                <DropdownItem
-                  key={d}
-                  onClick={() => {
-                    setSelectedDate(d);
-                    setShowDatePicker(false);
-                  }}
-                  $active={selectedDate === d}
-                >
-                  {t("trip_detail.widget.dates." + d)}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          )}
-        </InputGroup>
-
-        {/* Number of Guests Counter */}
-        <InputGroup>
-          <InputLabel>{t("trip_detail.widget.num_guests")}</InputLabel>
-          <CounterRow>
-            <CounterBtn
-              onClick={decrementGuests}
-              disabled={guests <= 1 || bookingStatus !== "idle"}
-            >
-              <span className="material-symbols-outlined">remove</span>
-            </CounterBtn>
-            <CounterVal>{guests}</CounterVal>
-            <CounterBtn
-              onClick={incrementGuests}
-              disabled={guests >= 10 || bookingStatus !== "idle"}
-            >
-              <span className="material-symbols-outlined">add</span>
-            </CounterBtn>
-          </CounterRow>
-        </InputGroup>
-
         {/* Price Breakdown Card */}
         <InvoiceCard>
           <InvoiceRow>
@@ -157,17 +114,21 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
         {/* Submit button */}
         <BookButton
           onClick={handleBookingRedirect}
-          disabled={bookingStatus !== "idle"}
-          $status={bookingStatus}
+          disabled={bookingStatus !== "idle" || isExpired || isAdmin}
+          $status={isExpired ? "booked" : (isAdmin ? "booked" : bookingStatus)}
         >
-          {bookingStatus === "idle" && t("trip_detail.widget.btn_idle")}
-          {bookingStatus === "booking" && t("trip_detail.widget.btn_booking")}
-          {bookingStatus === "booked" && t("trip_detail.widget.btn_booked")}
+          {isAdmin && t("trip_detail.widget.btn_admin_blocked")}
+          {!isAdmin && isExpired && (currentLanguage === "bn" ? "বুকিং বন্ধ" : "Booking Closed")}
+          {!isAdmin && !isExpired && bookingStatus === "idle" && t("trip_detail.widget.btn_idle")}
+          {!isAdmin && !isExpired && bookingStatus === "booking" && t("trip_detail.widget.btn_booking")}
+          {!isAdmin && !isExpired && bookingStatus === "booked" && t("trip_detail.widget.btn_booked")}
         </BookButton>
 
-        <SlotsText>
-          {t("trip_detail.widget.remaining_slots")}
-        </SlotsText>
+        {!isExpired && !isAdmin && (
+          <SlotsText>
+            {t("trip_detail.widget.remaining_slots")}
+          </SlotsText>
+        )}
       </FormWrapper>
     </WidgetWrapper>
   );

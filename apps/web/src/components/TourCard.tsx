@@ -5,6 +5,7 @@ import Link from "next/link";
 import { type Variants } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useWishlist } from "@/hooks/useWishlist";
+import { useAuth } from "@/hooks/useAuth";
 import type { Tour } from "@/lib/data";
 import {
   CardContainer,
@@ -39,6 +40,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
     currentLanguage
   } = useLanguage();
   const { savedTourIds, toggleWishlist } = useWishlist();
+  const { role } = useAuth();
 
   const tourId = (tour as any)._id || tour.id;
   const isSaved = savedTourIds.includes(tourId);
@@ -62,17 +64,19 @@ export default function TourCard({ tour, variants }: TourCardProps) {
               {t("Popular")}
             </PopularBadge>
           )}
-          <SaveBadge
-            onClick={(e) => {
-              e.preventDefault();
-              toggleWishlist(tourId);
-            }}
-            aria-label="Save to Wishlist"
-          >
-            <HeartIcon viewBox="0 0 24 24" $saved={isSaved}>
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </HeartIcon>
-          </SaveBadge>
+          {role !== "admin" && (
+            <SaveBadge
+              onClick={(e) => {
+                e.preventDefault();
+                toggleWishlist(tourId);
+              }}
+              aria-label="Save to Wishlist"
+            >
+              <HeartIcon viewBox="0 0 24 24" $saved={isSaved}>
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </HeartIcon>
+            </SaveBadge>
+          )}
         </ImageWrapper>
 
         {/* Body */}

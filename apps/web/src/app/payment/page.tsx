@@ -12,7 +12,7 @@ import * as S from "./payment.styles";
 function PaymentContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const { t } = useLanguage();
 
   const tourId = searchParams.get("tourId") || "";
@@ -49,11 +49,15 @@ function PaymentContent() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   useEffect(() => {
-    // Redirect to home if no tour details
+    // Redirect to home if user is an admin or no tour details
+    if (role === "admin") {
+      router.push("/");
+      return;
+    }
     if (!tourId || totalAmount <= 0) {
       router.push("/");
     }
-  }, [tourId, totalAmount, router]);
+  }, [tourId, totalAmount, role, router]);
 
   // Card type detector based on first digit
   const handleCardNumberChange = (val: string) => {

@@ -301,6 +301,13 @@ export const BookButton = styled.button<SubmitBtnProps>`
     background-color: ${props => props.$status === "idle" ? "#526069" : "#705d00"};
     border-color: ${props => props.$status === "idle" ? "#526069" : "#705d00"};
   }
+
+  &:disabled {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.35);
+    cursor: not-allowed;
+  }
 `;
 
 export const SlotsText = styled.p`

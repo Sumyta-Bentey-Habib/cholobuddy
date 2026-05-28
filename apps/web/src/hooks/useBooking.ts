@@ -10,9 +10,7 @@ interface BookingOptions {
 }
 
 export function useBooking(options: BookingOptions = { pricePerTraveler: 12500, ecoTaxPerTraveler: 500 }) {
-  const [guests, setGuests] = useState(2);
-  const [selectedDate, setSelectedDate] = useState("oct_24");
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [guests] = useState(1);
   const [bookingStatus, setBookingStatus] = useState<BookingStatusType>("idle");
 
   const { pricePerTraveler, ecoTaxPerTraveler } = options;
@@ -21,21 +19,13 @@ export function useBooking(options: BookingOptions = { pricePerTraveler: 12500, 
   const ecoTax = guests * ecoTaxPerTraveler;
   const total = subtotal + ecoTax;
 
-  const incrementGuests = () => {
-    if (guests < 10) setGuests((g) => g + 1);
-  };
-
-  const decrementGuests = () => {
-    if (guests > 1) setGuests((g) => g - 1);
-  };
-
   const handleBook = async (tourId: string, tourTitle: string) => {
     setBookingStatus("booking");
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tourId, tourTitle, guests, date: selectedDate, totalAmount: total }),
+        body: JSON.stringify({ tourId, tourTitle, guests, date: "oct_24", totalAmount: total }),
       });
       if (res.ok) {
         setBookingStatus("booked");
@@ -55,15 +45,9 @@ export function useBooking(options: BookingOptions = { pricePerTraveler: 12500, 
       console.error(error);
     }
   };
+
   return {
     guests,
-    setGuests,
-    incrementGuests,
-    decrementGuests,
-    selectedDate,
-    setSelectedDate,
-    showDatePicker,
-    setShowDatePicker,
     bookingStatus,
     handleBook,
     cancelBooking,

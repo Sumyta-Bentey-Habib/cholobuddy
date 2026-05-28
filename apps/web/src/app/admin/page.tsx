@@ -48,7 +48,9 @@ export default function AdminPage() {
     locationBn: "",
     distanceNote: "",
     imgUrl: "",
-    popular: false
+    popular: false,
+    startDate: "",
+    endDate: ""
   });
   const [tourFile, setTourFile] = useState<File | null>(null);
   const [editingTourId, setEditingTourId] = useState<string | null>(null);
@@ -93,7 +95,9 @@ export default function AdminPage() {
       distanceNote: tourForm.distanceNote,
       imgUrl: uploadedUrl,
       image: uploadedUrl, // fallback for backend validations
-      popular: tourForm.popular
+      popular: tourForm.popular,
+      startDate: tourForm.startDate,
+      endDate: tourForm.endDate
     };
 
     if (editingTourId) {
@@ -115,7 +119,9 @@ export default function AdminPage() {
       locationBn: "",
       distanceNote: "",
       imgUrl: "",
-      popular: false
+      popular: false,
+      startDate: "",
+      endDate: ""
     });
     setTourFile(null);
     setEditingTourId(null);
@@ -414,7 +420,9 @@ export default function AdminPage() {
                         locationBn: "",
                         distanceNote: "",
                         imgUrl: "",
-                        popular: false
+                        popular: false,
+                        startDate: "",
+                        endDate: ""
                       });
                       setTourFile(null);
                       setShowTourModal(true);
@@ -535,6 +543,25 @@ export default function AdminPage() {
                         />
                       </S.FieldWrapper>
 
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Starting Date</S.FieldLabel>
+                          <S.FieldInput
+                            type="date"
+                            value={tourForm.startDate}
+                            onChange={e => setTourForm({...tourForm, startDate: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                        <S.FieldWrapper>
+                          <S.FieldLabel>Ending Date</S.FieldLabel>
+                          <S.FieldInput
+                            type="date"
+                            value={tourForm.endDate}
+                            onChange={e => setTourForm({...tourForm, endDate: e.target.value})}
+                          />
+                        </S.FieldWrapper>
+                      </div>
+
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", alignItems: "center" }}>
                         <S.FieldWrapper>
                           <S.FieldLabel>Image File</S.FieldLabel>
@@ -621,7 +648,9 @@ export default function AdminPage() {
                                   locationBn: t.locationBn || "",
                                   distanceNote: t.distanceNote || "",
                                   imgUrl: t.imgUrl || "",
-                                  popular: !!t.popular
+                                  popular: !!t.popular,
+                                  startDate: t.startDate || "",
+                                  endDate: t.endDate || ""
                                 });
                                 setTourFile(null);
                                 setShowTourModal(true);

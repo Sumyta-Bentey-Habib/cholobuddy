@@ -24,9 +24,17 @@ const NAV_ITEMS: { id: ActiveTab; icon: string; label: string }[] = [
 export default function DashboardPage() {
   const { t } = useLanguage();
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
   const { bookings, deleteBooking } = useBookings();
   const { tours } = useTours();
+
+  const isAdmin = role === "admin";
+  const visibleNavItems = NAV_ITEMS.filter(item => {
+    if (isAdmin && (item.id === "my-trips" || item.id === "wishlist")) {
+      return false;
+    }
+    return true;
+  });
 
   const [activeTab, setActiveTab] = useState<ActiveTab>("dashboard");
   const [ticketMsg, setTicketMsg] = useState("");
@@ -107,7 +115,7 @@ export default function DashboardPage() {
                 <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "3px" }}>
                   <span style={{ width: "6px", height: "6px", borderRadius: "9999px", background: "#34d399" }} />
                   <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.15em" }}>
-                    Level 3 Traveler
+                    {isAdmin ? "Administrator" : "Level 3 Traveler"}
                   </p>
                 </div>
               </div>
@@ -116,7 +124,7 @@ export default function DashboardPage() {
 
           {/* Nav */}
           <S.SidebarNav>
-            {NAV_ITEMS.map(item => (
+            {visibleNavItems.map(item => (
               <S.DashNavBtn
                 key={item.id}
                 onClick={() => { setActiveTab(item.id); setSidebarOpen(false); }}
@@ -153,7 +161,7 @@ export default function DashboardPage() {
             </S.MobileMenuBtn>
             <div>
               <h1 style={{ fontFamily: "monospace", fontSize: "13px", fontWeight: 700, color: "#000000", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                {NAV_ITEMS.find(n => n.id === activeTab)?.label}
+                {visibleNavItems.find(n => n.id === activeTab)?.label || "Overview"}
               </h1>
               <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em", marginTop: "2px" }}>
                 CholoBuddy Dashboard
@@ -198,69 +206,73 @@ export default function DashboardPage() {
                       {user?.name?.split(" ")[0] || "Explorer"} 👋
                     </h2>
                     <p style={{ color: "#526069", fontSize: "14px", maxWidth: "540px", lineHeight: 1.6, marginBottom: "24px" }}>
-                      {t("dashboard.welcome_desc")}
+                      {isAdmin ? t("dashboard.welcome_desc_admin") : t("dashboard.welcome_desc")}
                     </p>
                     <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                       <S.BlueButton onClick={() => setActiveTab("all-tours")}>
                         <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>explore</span>
                         Browse Tours
                       </S.BlueButton>
-                      <button
-                        onClick={() => setActiveTab("my-trips")}
-                        style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 18px", borderRadius: "10px", fontFamily: "monospace", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", background: "#f1f3f5", border: "1px solid rgba(82, 96, 105, 0.15)", color: "#526069", cursor: "pointer", transition: "all .2s" }}
-                      >
-                        <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>luggage</span>
-                        My Bookings
-                      </button>
+                      {!isAdmin && (
+                        <button
+                          onClick={() => setActiveTab("my-trips")}
+                          style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 18px", borderRadius: "10px", fontFamily: "monospace", fontSize: "11px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", background: "#f1f3f5", border: "1px solid rgba(82, 96, 105, 0.15)", color: "#526069", cursor: "pointer", transition: "all .2s" }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>luggage</span>
+                          My Bookings
+                        </button>
+                      )}
                     </div>
                   </div>
                 </S.DashHero>
 
                 {/* Stats */}
-                <S.StatsGrid>
-                  <S.StatCardBlue>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
-                          {t("dashboard.stats.active_trips")}
-                        </p>
-                        <p style={{ fontFamily: "monospace", fontSize: "32px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
-                          {activeBookingsCount}
-                        </p>
+                {!isAdmin && (
+                  <S.StatsGrid>
+                    <S.StatCardBlue>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                        <div>
+                          <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
+                            {t("dashboard.stats.active_trips")}
+                          </p>
+                          <p style={{ fontFamily: "monospace", fontSize: "32px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
+                            {activeBookingsCount}
+                          </p>
+                        </div>
+                        <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>flight_takeoff</span>
                       </div>
-                      <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>flight_takeoff</span>
-                    </div>
-                  </S.StatCardBlue>
-                  <S.StatCardGreen>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
-                          {t("dashboard.stats.completed")}
-                        </p>
-                        <p style={{ fontFamily: "monospace", fontSize: "32px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
-                          {completedBookingsCount}
-                        </p>
+                    </S.StatCardBlue>
+                    <S.StatCardGreen>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                        <div>
+                          <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
+                            {t("dashboard.stats.completed")}
+                          </p>
+                          <p style={{ fontFamily: "monospace", fontSize: "32px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
+                            {completedBookingsCount}
+                          </p>
+                        </div>
+                        <span className="material-symbols-outlined" style={{ color: "#526069", fontSize: "28px", opacity: 0.8 }}>check_circle</span>
                       </div>
-                      <span className="material-symbols-outlined" style={{ color: "#526069", fontSize: "28px", opacity: 0.8 }}>check_circle</span>
-                    </div>
-                  </S.StatCardGreen>
-                  <S.StatCardAmber>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
-                          {t("dashboard.stats.level")}
-                        </p>
-                        <p style={{ fontFamily: "monospace", fontSize: "28px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
-                          Lvl 3
-                        </p>
+                    </S.StatCardGreen>
+                    <S.StatCardAmber>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                        <div>
+                          <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.2em" }}>
+                            {t("dashboard.stats.level")}
+                          </p>
+                          <p style={{ fontFamily: "monospace", fontSize: "28px", fontWeight: 700, color: "#000000", marginTop: "8px" }}>
+                            Lvl 3
+                          </p>
+                        </div>
+                        <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>military_tech</span>
                       </div>
-                      <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>military_tech</span>
-                    </div>
-                  </S.StatCardAmber>
-                </S.StatsGrid>
+                    </S.StatCardAmber>
+                  </S.StatsGrid>
+                )}
 
                 {/* Recent Bookings */}
-                {bookings.length > 0 && (
+                {!isAdmin && bookings.length > 0 && (
                   <S.DashCard>
                     <div style={{ padding: "18px 24px", borderBottom: "1px solid rgba(82, 96, 105, 0.08)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                       <h3 style={{ fontFamily: "monospace", fontSize: "11px", fontWeight: 700, color: "#000000", textTransform: "uppercase", letterSpacing: "0.1em" }}>
@@ -344,13 +356,22 @@ export default function DashboardPage() {
                         <h4 style={{ fontFamily: "monospace", fontSize: "12px", fontWeight: 700, color: "#000000", textTransform: "uppercase", letterSpacing: "0.08em", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0 }}>
                           {tour.title}
                         </h4>
-                        <S.BlueButton
-                          onClick={() => handleDashboardBook(tour._id, tour.title, tour.price)}
-                          style={{ padding: "8px 14px", borderRadius: "8px", fontSize: "10px" }}
-                        >
-                          Book
-                          <span className="material-symbols-outlined" style={{ fontSize: "13px" }}>arrow_forward</span>
-                        </S.BlueButton>
+                        {!isAdmin ? (
+                          <S.BlueButton
+                            onClick={() => handleDashboardBook(tour._id, tour.title, tour.price)}
+                            style={{ padding: "8px 14px", borderRadius: "8px", fontSize: "10px" }}
+                          >
+                            Book
+                            <span className="material-symbols-outlined" style={{ fontSize: "13px" }}>arrow_forward</span>
+                          </S.BlueButton>
+                        ) : (
+                          <S.BlueButton
+                            disabled
+                            style={{ padding: "8px 14px", borderRadius: "8px", fontSize: "10px", opacity: 0.5, cursor: "not-allowed", backgroundColor: "#e2e8f0", color: "#64748b", border: "1px solid #cbd5e1" }}
+                          >
+                            Admin
+                          </S.BlueButton>
+                        )}
                       </div>
                     </S.ImageCard>
                   ))}

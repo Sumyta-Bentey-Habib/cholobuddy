@@ -292,6 +292,7 @@ export default function TripDetailPage() {
               ecoTaxPerTraveler={ecoTaxPerTraveler}
               tourId={id}
               tourTitle={tour.title}
+              endDate={tour.endDate}
             />
           </SidebarCol>
         </ColumnsLayout>
