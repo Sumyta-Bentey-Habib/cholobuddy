@@ -19,29 +19,31 @@ export function useAnimationVariants() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 28 },
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 20 },
     },
   };
 
   const fadeInVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   const scaleInVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.92 },
+    hidden: { opacity: 0, scale: 0.85, rotate: -2 },
     show: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+      rotate: 0,
+      transition: { type: "spring", stiffness: 80, damping: 15 },
     },
   };
 

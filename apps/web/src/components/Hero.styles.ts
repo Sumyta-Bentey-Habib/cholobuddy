@@ -19,7 +19,7 @@ export const HeroHeader = styled.header`
   }
 `;
 
-export const HeroBg = styled.div`
+export const HeroBg = styled(motion.div)`
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -38,7 +38,7 @@ export const GradientFade = styled.div`
   background: linear-gradient(to bottom, rgba(248, 249, 250, 0) 0%, rgba(248, 249, 250, 1) 100%);
 `;
 
-export const HeroContent = styled.div`
+export const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 20;
   width: 100%;

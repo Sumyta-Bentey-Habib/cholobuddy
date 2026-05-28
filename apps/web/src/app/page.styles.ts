@@ -9,31 +9,6 @@ export const MainContainer = styled.main`
   color: #000000; /* primary */
 `;
 
-export const SearchSection = styled.section`
-  position: relative;
-  z-index: 30;
-  margin-top: -64px;
-  padding: 0 24px;
-  display: flex;
-  justify-content: center;
-`;
-
-export const RulerMotif = styled.div`
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='10' viewBox='0 0 40 10'%3E%3Cline x1='0' y1='5' x2='40' y2='5' stroke='%23526069' stroke-width='1'/%3E%3Cline x1='20' y1='0' x2='20' y2='10' stroke='%23705d00' stroke-width='1'/%3E%3C/svg%3E");
-  background-repeat: repeat-x;
-  background-size: 40px 10px;
-  height: 10px;
-  width: 100%;
-  margin-top: 64px;
-`;
-
-export const RecentSection = styled.section`
-  padding: 32px 24px;
-  background-color: #ffffff;
-  border-bottom: 1px solid rgba(196, 199, 199, 0.1);
-  display: flex;
-  justify-content: center;
-`;
 
 export const ToursSection = styled.section`
   padding: 96px 24px;
@@ -84,7 +59,7 @@ export const SectionHeading = styled.h2`
   }
 `;
 
-export const ViewAllBtn = styled.button`
+export const ViewAllBtn = styled(motion.button)`
   border: 1px solid #000000;
   padding: 10px 24px;
   border-radius: 9999px;
@@ -132,11 +107,11 @@ export const LoadingIndicator = styled.div`
 
 export const ToursGrid = styled(motion.div)`
   display: grid;
-  grid-template-cols: 1fr;
+  grid-template-columns: 1fr;
   gap: 32px;
 
   @media (min-width: 768px) {
-    grid-template-cols: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
@@ -188,71 +163,3 @@ export const AlponaCenterMotif = styled.div`
   }
 `;
 
-// Hotels scroll section (Dark theme)
-export const HotelsSection = styled.section`
-  padding: 96px 0;
-  background-color: #000000; /* primary */
-  color: #ffffff;
-  overflow: hidden;
-  border-bottom: 1px solid #000000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const HotelsInner = styled.div`
-  max-width: 1280px;
-  width: 100%;
-  padding: 0 24px;
-  margin-bottom: 64px;
-  user-select: none;
-`;
-
-export const HotelsTag = styled.span`
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #ffe16d; /* gold / tertiary-fixed */
-  letter-spacing: 0.15em;
-  display: block;
-`;
-
-export const HotelsHeading = styled.h2`
-  font-family: 'Playfair Display', serif;
-  font-size: 32px;
-  font-weight: 600;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  margin-top: 8px;
-
-  @media (min-width: 768px) {
-    font-size: 40px;
-  }
-`;
-
-export const HotelsScroll = styled(motion.div)`
-  max-width: 1280px;
-  width: 100%;
-  display: flex;
-  gap: 32px;
-  overflow-x: auto;
-  padding: 0 24px 32px;
-  scroll-snap-type: x mandatory;
-
-  @media (min-width: 768px) {
-    padding: 0 64px 32px;
-  }
-
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #526069;
-    border-radius: 4px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-`;

@@ -4,24 +4,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ChatBubble from "@/components/ChatBubble";
 import Hero from "@/components/Hero";
-import SearchWidget from "@/components/SearchWidget";
-import RecentSearches from "@/components/RecentSearches";
 import ExperienceSection from "@/components/ExperienceSection";
 import TourCard from "@/components/TourCard";
-import HotelCard from "@/components/HotelCard";
+import CategoriesSection from "@/components/CategoriesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import NewsletterSection from "@/components/NewsletterSection";
-import { hotelsData } from "@/lib/data";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAnimationVariants } from "@/hooks/useAnimationVariants";
 import { useTours } from "@/hooks/useTours";
 import {
   MainContainer,
-  SearchSection,
-  RulerMotif,
-  RecentSection,
   ToursSection,
   ToursInner,
   SectionHeader,
@@ -32,12 +25,7 @@ import {
   ToursGrid,
   NoDataText,
   AlponaDivider,
-  AlponaCenterMotif,
-  HotelsSection,
-  HotelsInner,
-  HotelsTag,
-  HotelsHeading,
-  HotelsScroll
+  AlponaCenterMotif
 } from "./page.styles";
 
 export default function ExplorePage() {
@@ -54,19 +42,6 @@ export default function ExplorePage() {
         {/* Hero */}
         <Hero />
 
-        {/* Search Widget */}
-        <SearchSection>
-          <SearchWidget />
-        </SearchSection>
-
-        {/* Blueprint Divider */}
-        <RulerMotif />
-
-        {/* Recent Searches */}
-        <RecentSection>
-          <RecentSearches />
-        </RecentSection>
-
         {/* CholoBuddy Experience */}
         <ExperienceSection />
 
@@ -82,7 +57,10 @@ export default function ExplorePage() {
                   {isEn ? "Top Destinations" : "শীর্ষ গন্তব্য"}
                 </SectionHeading>
               </div>
-              <ViewAllBtn>
+              <ViewAllBtn
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 {isEn ? "View All" : "সব দেখুন"}
               </ViewAllBtn>
             </SectionHeader>
@@ -116,29 +94,8 @@ export default function ExplorePage() {
           <AlponaCenterMotif />
         </AlponaDivider>
 
-        {/* Top Rated Hotels (Dark Horizontal Scroll) */}
-        <HotelsSection>
-          <HotelsInner>
-            <HotelsTag>
-              {isEn ? "Verified Stays" : "যাচাইকৃত থাকার ব্যবস্থা"}
-            </HotelsTag>
-            <HotelsHeading>
-              {isEn ? "Top Rated Hotels" : "শীর্ষ রেটেড হোটেল"}
-            </HotelsHeading>
-          </HotelsInner>
-
-          <HotelsScroll
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={containerVariants}
-            className="custom-scrollbar"
-          >
-            {hotelsData.map((hotel) => (
-              <HotelCard key={hotel.id} hotel={hotel} variants={itemVariants} />
-            ))}
-          </HotelsScroll>
-        </HotelsSection>
+        {/* Travel Categories */}
+        <CategoriesSection />
 
         {/* Testimonials */}
         <TestimonialsSection />
@@ -148,7 +105,6 @@ export default function ExplorePage() {
       </MainContainer>
 
       <Footer />
-      <ChatBubble />
     </>
   );
 }

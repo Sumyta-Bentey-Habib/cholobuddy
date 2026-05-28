@@ -45,7 +45,9 @@ export const PopularBadge = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: #000000;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
   font-family: 'Inter', sans-serif;
   font-size: 10px;
@@ -53,8 +55,9 @@ export const PopularBadge = styled.div`
   padding: 6px 14px;
   border-radius: 9999px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  letter-spacing: 0.15em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   user-select: none;
 `;
 
@@ -62,21 +65,26 @@ export const SaveBadge = styled.button`
   position: absolute;
   top: 16px;
   left: 16px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: none;
-  padding: 8px;
-  border-radius: 9999px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    background-color: #ffffff;
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.15);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
@@ -88,10 +96,18 @@ interface HeartIconProps {
   $saved: boolean;
 }
 
-export const HeartIcon = styled.span<HeartIconProps>`
-  font-size: 20px;
-  color: ${props => props.$saved ? "#ef4444" : "#000000"};
-  font-variation-settings: ${props => props.$saved ? "'FILL' 1" : "'FILL' 0"};
+export const HeartIcon = styled.svg<HeartIconProps>`
+  width: 18px;
+  height: 18px;
+  fill: ${props => props.$saved ? "#ef4444" : "transparent"};
+  stroke: ${props => props.$saved ? "#ef4444" : "rgba(0, 0, 0, 0.7)"};
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+  
+  ${SaveBadge}:hover & {
+    stroke: ${props => props.$saved ? "#ef4444" : "#000000"};
+  }
 `;
 
 export const CardBody = styled.div`

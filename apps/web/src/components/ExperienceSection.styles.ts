@@ -17,6 +17,10 @@ export const SectionContainer = styled.section`
   background-color: #f8f9fa; /* surface */
   position: relative;
   overflow: hidden;
+  margin-top: -64px;
+  z-index: 30;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
 `;
 
 export const SectionHeader = styled.div`

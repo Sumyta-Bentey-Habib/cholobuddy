@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { heroThumbnails } from "@/lib/data";
 import {
@@ -22,6 +22,11 @@ export default function Hero() {
   const { currentLanguage } = useLanguage();
   const isEn = currentLanguage === "en";
 
+  const { scrollY } = useScroll();
+  const bgY = useTransform(scrollY, [0, 800], ["0%", "30%"]);
+  const contentY = useTransform(scrollY, [0, 800], ["0%", "15%"]);
+  const contentOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+
   const handlePlanTrip = () => {
     window.location.href = "/trips/sundarbans";
   };
@@ -29,7 +34,7 @@ export default function Hero() {
   return (
     <HeroHeader>
       {/* Background */}
-      <HeroBg>
+      <HeroBg style={{ y: bgY }}>
         <img
           alt="Misty Sajek Valley, Bangladesh"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDh5PZhzrRLO_dBRY3zR3gEtEa3xx8T6NitI_Mc7GcG66aKAI4Kkpzm0I9UzhQf5PF86f-p09ktNR1Bm8wkJXYh_sQDUZnDppCT-qVnNNLsnyeCWi4OXk8DR4J0K_v4KsDbMyzqwIXvdiL6eDJCAfF9zFRtW1EjeqD55CVm_0SmDhKgBt3Tow0Rt33LUYFf8ZZk9DAI7-sXCyZfjNFL5Ve0k1FrP1HOMkFo24FGGUH4Dj9iczQclgQixUiJqD5Ab0fzHpvK4m5Zjhs"
@@ -38,7 +43,7 @@ export default function Hero() {
       </HeroBg>
 
       {/* Content */}
-      <HeroContent>
+      <HeroContent style={{ y: contentY, opacity: contentOpacity }}>
         <LabelSpan
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,6 +67,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
+          whileHover={{ scale: 1.05, y: -5 }}
+          whileTap={{ scale: 0.95 }}
         >
           {isEn ? "Plan My Trip" : "আমার ভ্রমণ পরিকল্পনা করুন"}
         </HeroBtn>
