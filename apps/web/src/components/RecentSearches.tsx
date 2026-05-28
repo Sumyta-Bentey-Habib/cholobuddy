@@ -13,13 +13,15 @@ import {
 } from "./RecentSearches.styles";
 
 export default function RecentSearches() {
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <Container>
       <LabelSpan>
-        {isEn ? "Recent Searches" : "সাম্প্রতিক অনুসন্ধান"}
+        {t("Recent Searches")}
       </LabelSpan>
       <SearchesRow>
         {recentSearchesData.map((search) => (
@@ -28,8 +30,8 @@ export default function RecentSearches() {
             <div>
               <SearchTitle>{search.destination}</SearchTitle>
               <SearchDesc>
-                {search.guests} {isEn ? "guest" : "অতিথি"}
-                {search.guests > 1 ? (isEn ? "s" : "") : ""} · {search.type} ·{" "}
+                {search.guests} {t("guest")}
+                {search.guests > 1 ? (t("s")) : ""} · {search.type} ·{" "}
                 {search.dates}
               </SearchDesc>
             </div>

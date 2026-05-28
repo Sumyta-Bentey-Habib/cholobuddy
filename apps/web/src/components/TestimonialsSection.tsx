@@ -18,15 +18,16 @@ import {
 
 export default function TestimonialsSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <SectionContainer>
       <SectionTitle>
-        {isEn ? "Loved by Discerning Travelers" : "বিচক্ষণ ভ্রমণকারীদের প্রিয়"}
+        {t("Loved by Discerning Travelers")}
       </SectionTitle>
-
       <GridContainer
         initial="hidden"
         whileInView="show"

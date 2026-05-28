@@ -52,16 +52,17 @@ const categories = [
 
 export default function CategoriesSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <SectionContainer>
       <SectionHeader>
-        <SectionTag>{isEn ? "Travel Styles" : "ভ্রমণের ধরন"}</SectionTag>
-        <SectionTitle>{isEn ? "Find Your Perfect Escape" : "আপনার নিখুঁত গন্তব্য খুঁজুন"}</SectionTitle>
+        <SectionTag>{t("Travel Styles")}</SectionTag>
+        <SectionTitle>{t("Find Your Perfect Escape")}</SectionTitle>
       </SectionHeader>
-
       <CategoriesGrid
         initial="hidden"
         whileInView="show"
@@ -73,8 +74,8 @@ export default function CategoriesSection() {
             <IconWrapper className="icon-wrapper">
               <span className="material-symbols-outlined">{cat.icon}</span>
             </IconWrapper>
-            <CategoryTitle>{isEn ? cat.title : cat.titleBn}</CategoryTitle>
-            <CategoryDesc>{isEn ? cat.desc : cat.descBn}</CategoryDesc>
+            <CategoryTitle>{t(cat.title)}</CategoryTitle>
+            <CategoryDesc>{t(cat.desc)}</CategoryDesc>
           </CategoryCard>
         ))}
       </CategoriesGrid>

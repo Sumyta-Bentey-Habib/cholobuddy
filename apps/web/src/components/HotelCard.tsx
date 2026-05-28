@@ -29,8 +29,10 @@ interface HotelCardProps {
 }
 
 export default function HotelCard({ hotel, variants }: HotelCardProps) {
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   const originalPrice = parseInt(hotel.price.replace(/,/g, "")) || 0;
   const strikethroughPrice = Math.round(originalPrice * 1.3).toLocaleString();
@@ -49,13 +51,12 @@ export default function HotelCard({ hotel, variants }: HotelCardProps) {
           {hotel.category}
         </CategoryTag>
       </ImageWrapper>
-
       {/* Body */}
       <CardBody>
         <div>
           <CardTitle>{hotel.name}</CardTitle>
           <LocationRow>
-            {isEn ? hotel.location : hotel.locationBn} · {hotel.distanceNote}
+            {t(hotel.location)} · {hotel.distanceNote}
           </LocationRow>
         </div>
 
@@ -75,7 +76,7 @@ export default function HotelCard({ hotel, variants }: HotelCardProps) {
           </RatingRow>
 
           <SelectRoomBtn>
-            {isEn ? "Select Room" : "রুম বেছে নিন"}
+            {t("Select Room")}
           </SelectRoomBtn>
         </CardFooter>
       </CardBody>

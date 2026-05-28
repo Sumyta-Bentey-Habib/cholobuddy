@@ -27,8 +27,10 @@ const DESTINATIONS = [
 ];
 
 export default function SearchWidget() {
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
   const {
     searchTab,
     setSearchTab,
@@ -47,8 +49,8 @@ export default function SearchWidget() {
         {/* Tab Switcher */}
         <TabSwitcher>
           {[
-            { value: "hotels", icon: "🛌", label: isEn ? "Stays" : "থাকার ব্যবস্থা" },
-            { value: "tours", icon: "🗺️", label: isEn ? "Tours" : "ট্যুর" },
+            { value: "hotels", icon: "🛌", label: t("Stays") },
+            { value: "tours", icon: "🗺️", label: t("Tours") },
           ].map((tab) => (
             <TabButton
               key={tab.value}
@@ -64,7 +66,7 @@ export default function SearchWidget() {
         {/* Destination */}
         <InputGroup>
           <InputLabel>
-            {isEn ? "Destination" : "গন্তব্য"}
+            {t("Destination")}
           </InputLabel>
           <SelectBox
             value={destination}
@@ -72,7 +74,7 @@ export default function SearchWidget() {
           >
             {DESTINATIONS.map((d) => (
               <option key={d.value} value={d.value}>
-                {isEn ? d.label : d.labelBn}
+                {t(d.label)}
               </option>
             ))}
           </SelectBox>
@@ -81,12 +83,12 @@ export default function SearchWidget() {
         {/* Dates */}
         <InputGroup>
           <InputLabel>
-            {isEn ? "Dates" : "তারিখ"}
+            {t("Dates")}
           </InputLabel>
           <IconInputRow>
             <span className="material-symbols-outlined">calendar_month</span>
             <TextInput
-              placeholder={isEn ? "When are you going?" : "কখন যাচ্ছেন?"}
+              placeholder={t("When are you going?")}
               type="text"
               value={dates}
               onChange={(e) => setDates(e.target.value)}
@@ -97,7 +99,7 @@ export default function SearchWidget() {
         {/* Guests */}
         <InputGroup>
           <InputLabel>
-            {isEn ? "Guests" : "অতিথি"}
+            {t("Guests")}
           </InputLabel>
           <IconInputRow>
             <span className="material-symbols-outlined">group</span>
@@ -114,7 +116,7 @@ export default function SearchWidget() {
         {/* Submit */}
         <SubmitWrapper>
           <SearchBtn type="submit">
-            {isEn ? "Search" : "খুঁজুন"}
+            {t("Search")}
           </SearchBtn>
         </SubmitWrapper>
       </FormRow>

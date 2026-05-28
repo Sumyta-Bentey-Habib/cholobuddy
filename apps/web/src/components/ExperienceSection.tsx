@@ -14,25 +14,26 @@ import {
 } from "./ExperienceSection.styles";
 
 export default function ExperienceSection() {
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <SectionContainer>
       <SectionHeader>
         <PhilosophyTag>
-          {isEn ? "Brand Philosophy" : "ব্র্যান্ড দর্শন"}
+          {t("Brand Philosophy")}
         </PhilosophyTag>
         <SectionTitle>
-          {isEn ? "The CholoBuddy Experience" : "চলোবাডি অভিজ্ঞতা"}
+          {t("The CholoBuddy Experience")}
         </SectionTitle>
         <SectionDesc>
-          {isEn
-            ? "Curated journeys designed for the discerning traveler, blending local authenticity with uncompromising comfort."
-            : "বিচক্ষণ ভ্রমণকারীর জন্য কিউরেটেড যাত্রা, স্থানীয় সত্যতা এবং অসাধারণ আরামের মিশেল।"}
+          {t(
+            "Curated journeys designed for the discerning traveler, blending local authenticity with uncompromising comfort."
+          )}
         </SectionDesc>
       </SectionHeader>
-
       <ImageBadgesWrapper>
         {/* Central Image */}
         <ImageWrapper>
@@ -45,17 +46,17 @@ export default function ExperienceSection() {
         {/* Floating Badges */}
         <FloatingBadge $top="40px" $left="10%" $delay={0}>
           <span className="material-symbols-outlined">diamond</span>
-          <span>{isEn ? "Premium Stays" : "প্রিমিয়াম থাকার ব্যবস্থা"}</span>
+          <span>{t("Premium Stays")}</span>
         </FloatingBadge>
 
         <FloatingBadge $bottom="80px" $left="5%" $delay={1} $reverse>
           <span className="material-symbols-outlined">explore</span>
-          <span>{isEn ? "Expert Guides" : "বিশেষজ্ঞ গাইড"}</span>
+          <span>{t("Expert Guides")}</span>
         </FloatingBadge>
 
         <FloatingBadge $top="130px" $right="10%" $delay={2}>
           <span className="material-symbols-outlined">restaurant</span>
-          <span>{isEn ? "Curated Dining" : "বিশেষ ডাইনিং"}</span>
+          <span>{t("Curated Dining")}</span>
         </FloatingBadge>
       </ImageBadgesWrapper>
     </SectionContainer>

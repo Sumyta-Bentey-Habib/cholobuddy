@@ -19,8 +19,10 @@ import {
 } from "./Hero.styles";
 
 export default function Hero() {
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 800], ["0%", "30%"]);
@@ -41,7 +43,6 @@ export default function Hero() {
         />
         <GradientFade />
       </HeroBg>
-
       {/* Content */}
       <HeroContent style={{ y: contentY, opacity: contentOpacity }}>
         <LabelSpan
@@ -49,7 +50,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {isEn ? "Bangladesh" : "বাংলাদেশ"} &nbsp;·&nbsp; {isEn ? "Discover" : "আবিষ্কার করুন"}
+          {t("Bangladesh")} &nbsp;·&nbsp; {t("Discover")}
         </LabelSpan>
 
         <Headline
@@ -57,9 +58,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {isEn
-            ? "Discover the Wild Beauty of Bangladesh"
-            : "বাংলাদেশের বন্য সৌন্দর্য আবিষ্কার করুন"}
+          {t("Discover the Wild Beauty of Bangladesh")}
         </Headline>
 
         <HeroBtn
@@ -70,7 +69,7 @@ export default function Hero() {
           whileHover={{ scale: 1.05, y: -5 }}
           whileTap={{ scale: 0.95 }}
         >
-          {isEn ? "Plan My Trip" : "আমার ভ্রমণ পরিকল্পনা করুন"}
+          {t("Plan My Trip")}
         </HeroBtn>
 
         {/* Squircle Thumbnails */}

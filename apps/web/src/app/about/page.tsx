@@ -91,9 +91,11 @@ const TRUST_CARDS = [
 ];
 
 export default function AboutPage() {
-  const { currentLanguage } = useLanguage();
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
   const { containerVariants, itemVariants, slideInLeftVariants } = useAnimationVariants();
-  const isEn = currentLanguage === "en";
 
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 1000], [0, 300]);
@@ -101,7 +103,6 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-
       <AboutContainer>
         {/* Hero Banner (Misty Dawn Hills) */}
         <HeroBanner>
@@ -109,7 +110,7 @@ export default function AboutPage() {
           <FadeToWhite />
           <HeroBannerContent>
             <CategoryTag>
-              {isEn ? "Editorial" : "সম্পাদকীয়"}
+              {t("Editorial")}
             </CategoryTag>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -118,15 +119,7 @@ export default function AboutPage() {
               style={{ display: "inline-block", width: "100%" }}
             >
               <BannerTitle>
-                {isEn ? (
-                  <>
-                    Curating the<br />Untamed.
-                  </>
-                ) : (
-                  <>
-                    বন্যতার<br />কিউরেশন।
-                  </>
-                )}
+                <>Curating the<br />Untamed.</>
               </BannerTitle>
             </motion.h1>
           </HeroBannerContent>
@@ -135,18 +128,18 @@ export default function AboutPage() {
         {/* The Story */}
         <StorySection>
           <StoryTitle>
-            {isEn ? "The CholoBuddy Story" : "চলোবাডির গল্প"}
+            {t("The CholoBuddy Story")}
           </StoryTitle>
           <StoryBody>
             <p>
-              {isEn
-                ? "Born from a desire to strip away the noise of modern tourism, CholoBuddy exists at the intersection of ethereal minimalism and profound discovery. We believe that luxury is not merely an accumulation of amenities, but the presence of space, silence, and curated intention."
-                : "আধুনিক পর্যটনের কোলাহল সরিয়ে ফেলার ইচ্ছা থেকে জন্ম নেওয়া, চলোবাডি অলীক মিনিমালিজম এবং গভীর আবিষ্কারের সংযোগস্থলে অবস্থান করে। আমরা বিশ্বাস করি যে বিলাসিতা কেবল সুযোগ-সুবিধার সমাহার নয়, বরং স্থান, নীরবতা এবং কিউরেটেড অভিপ্রায়ের উপস্থিতি।"}
+              {t(
+                "Born from a desire to strip away the noise of modern tourism, CholoBuddy exists at the intersection of ethereal minimalism and profound discovery. We believe that luxury is not merely an accumulation of amenities, but the presence of space, silence, and curated intention."
+              )}
             </p>
             <p>
-              {isEn
-                ? "Our journey began in the misty highlands of Sylhet, where the landscape demanded a different kind of observation — one that is slow, reverent, and deeply personal. Today, we craft editorial-grade travel experiences that serve as living galleries of Bangladesh's most breathtaking, quiet corners."
-                : "আমাদের যাত্রা শুরু হয়েছিল সিলেটের কুয়াশাচ্ছন্ন উচ্চভূমিতে, যেখানে প্রকৃতি একটি ভিন্ন ধরনের পর্যবেক্ষণের দাবি রাখে — ধীর, শ্রদ্ধাশীল এবং গভীরভাবে ব্যক্তিগত। আজ, আমরা সম্পাদকীয়-মানের ভ্রমণ অভিজ্ঞতা তৈরি করি যা বাংলাদেশের সবচেয়ে শ্বাসরুদ্ধকর এবং শান্ত কোণগুলোর সচিত্র গ্যালারি হিসেবে কাজ করে।"}
+              {t(
+                "Our journey began in the misty highlands of Sylhet, where the landscape demanded a different kind of observation — one that is slow, reverent, and deeply personal. Today, we craft editorial-grade travel experiences that serve as living galleries of Bangladesh's most breathtaking, quiet corners."
+              )}
             </p>
           </StoryBody>
         </StorySection>
@@ -163,10 +156,10 @@ export default function AboutPage() {
             {TRUST_CARDS.map((card) => (
               <TrustCard key={card.title}>
                 <TrustCardTitle>
-                  {isEn ? card.title : card.titleBn}
+                  {t(card.title)}
                 </TrustCardTitle>
                 <TrustCardBody>
-                  {isEn ? card.body : card.bodyBn}
+                  {t(card.body)}
                 </TrustCardBody>
               </TrustCard>
             ))}
@@ -191,12 +184,12 @@ export default function AboutPage() {
               variants={slideInLeftVariants}
             >
               <PhilosophyTitle>
-                {isEn ? "Our Philosophy" : "আমাদের দর্শন"}
+                {t("Our Philosophy")}
               </PhilosophyTitle>
               <PhilosophyDesc>
-                {isEn
-                  ? "We believe Bangladesh deserves to be experienced at the pace of a river — unhurried, wide, and full of quiet wonder. Our curation philosophy centres on depth over breadth."
-                  : "আমরা বিশ্বাস করি বাংলাদেশ একটি নদীর গতিতে অনুভব করার যোগ্য — তাড়াহীন, বিস্তৃত এবং শান্ত বিস্ময়ে পূর্ণ। আমাদের কিউরেশন দর্শনে পরিধির চেয়ে গভীরতাই গুরুত্ব পায়।"}
+                {t(
+                  "We believe Bangladesh deserves to be experienced at the pace of a river — unhurried, wide, and full of quiet wonder. Our curation philosophy centres on depth over breadth."
+                )}
               </PhilosophyDesc>
               <DotIndicatorsRow>
                 <DotIndicator $variant="filled" />
@@ -216,10 +209,10 @@ export default function AboutPage() {
                   <PhilosophyNum>{p.num}</PhilosophyNum>
                   <div>
                     <PhilosophyItemTitle>
-                      {isEn ? p.title : p.titleBn}
+                      {t(p.title)}
                     </PhilosophyItemTitle>
                     <PhilosophyItemDesc>
-                      {isEn ? p.desc : p.descBn}
+                      {t(p.desc)}
                     </PhilosophyItemDesc>
                   </div>
                 </PhilosophyItem>
@@ -237,9 +230,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <BeginJourneyTitle>
-              {isEn
-                ? "Begin Your Bangladesh Journey"
-                : "আপনার বাংলাদেশ যাত্রা শুরু করুন"}
+              {t("Begin Your Bangladesh Journey")}
             </BeginJourneyTitle>
             <BeginJourneyForm>
               <BeginJourneyInput
@@ -250,15 +241,13 @@ export default function AboutPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isEn ? "Get in Touch" : "যোগাযোগ করুন"}
+                {t("Get in Touch")}
               </BeginJourneyBtn>
             </BeginJourneyForm>
           </BeginJourneyCard>
         </BeginJourneySection>
       </AboutContainer>
-
       <Footer />
-
     </>
   );
 }

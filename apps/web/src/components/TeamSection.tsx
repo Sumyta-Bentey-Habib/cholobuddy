@@ -25,8 +25,10 @@ import {
 
 export default function TeamSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <SectionContainer>
@@ -35,17 +37,17 @@ export default function TeamSection() {
         <HeaderRow>
           <TitleCol>
             <SectionTitle>
-              {isEn ? "The Curators" : "কিউরেটরগণ"}
+              {t("The Curators")}
             </SectionTitle>
             <SectionDesc>
-              {isEn
-                ? "Architects of immersive Bangladesh travel experiences, each deeply rooted in the land."
-                : "বাংলাদেশের নিমজ্জিত ভ্রমণ অভিজ্ঞতার স্থপতি, প্রত্যেকে এই ভূমির সাথে গভীরভাবে সংযুক্ত।"}
+              {t(
+                "Architects of immersive Bangladesh travel experiences, each deeply rooted in the land."
+              )}
             </SectionDesc>
           </TitleCol>
           <LineSeparator />
           <EstablishedTag>
-            {isEn ? "Est. 2021, Dhaka" : "প্রতিষ্ঠা ২০২১, ঢাকা"}
+            {t("Est. 2021, Dhaka")}
           </EstablishedTag>
         </HeaderRow>
 
@@ -61,17 +63,17 @@ export default function TeamSection() {
               {/* Portrait */}
               <ImageWrapper>
                 <TeamImage
-                  alt={isEn ? member.name : member.nameBn}
+                  alt={t(member.name)}
                   src={member.imgUrl}
                 />
               </ImageWrapper>
               {/* Info */}
               <CardInfo>
                 <CuratorName>
-                  {isEn ? member.name : member.nameBn}
+                  {t(member.name)}
                 </CuratorName>
                 <CuratorRole>
-                  {isEn ? member.role : member.roleBn}
+                  {t(member.role)}
                 </CuratorRole>
               </CardInfo>
             </TeamCard>

@@ -29,15 +29,16 @@ import {
 } from "./page.styles";
 
 export default function ExplorePage() {
-  const { currentLanguage } = useLanguage();
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
   const { containerVariants, itemVariants } = useAnimationVariants();
   const { tours, isLoading } = useTours();
-  const isEn = currentLanguage === "en";
 
   return (
     <>
       <Navbar />
-
       <MainContainer>
         {/* Hero */}
         <Hero />
@@ -51,17 +52,17 @@ export default function ExplorePage() {
             <SectionHeader>
               <div>
                 <TagLine>
-                  {isEn ? "Recommended" : "সুপারিশকৃত"}
+                  {t("Recommended")}
                 </TagLine>
                 <SectionHeading>
-                  {isEn ? "Top Destinations" : "শীর্ষ গন্তব্য"}
+                  {t("Top Destinations")}
                 </SectionHeading>
               </div>
               <ViewAllBtn
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isEn ? "View All" : "সব দেখুন"}
+                {t("View All")}
               </ViewAllBtn>
             </SectionHeader>
 
@@ -81,7 +82,7 @@ export default function ExplorePage() {
                   ))
                 ) : (
                   <NoDataText>
-                    {isEn ? "No tours available yet." : "এখনও কোন ট্যুর উপলব্ধ নেই।"}
+                    {t("No tours available yet.")}
                   </NoDataText>
                 )}
               </ToursGrid>
@@ -103,7 +104,6 @@ export default function ExplorePage() {
         {/* Newsletter */}
         <NewsletterSection />
       </MainContainer>
-
       <Footer />
     </>
   );

@@ -66,7 +66,9 @@ const INQUIRY_TYPES = [
 ];
 
 export default function ContactPage() {
-  const { isEn } = useLanguage();
+  const {
+    t: t
+  } = useLanguage();
   const { containerVariants, itemVariants } = useAnimationVariants();
 
   const [name, setName] = useState("");
@@ -84,20 +86,19 @@ export default function ContactPage() {
   return (
     <ContactContainer>
       <Navbar />
-
       <main>
         {/* Hero Section */}
         <ContactHero>
           <ContactHeroBg />
           <HeroFade />
           <HeroContent>
-            <HeroSub>{isEn ? "Reach Out" : "যোগাযোগ করুন"}</HeroSub>
+            <HeroSub>{t("Reach Out")}</HeroSub>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <HeroTitle>{isEn ? "Let's Begin." : "শুরু করা যাক।"}</HeroTitle>
+              <HeroTitle>{t("Let's Begin.")}</HeroTitle>
             </motion.h1>
           </HeroContent>
         </ContactHero>
@@ -113,11 +114,11 @@ export default function ContactPage() {
               variants={containerVariants}
             >
               <InfoHeader>
-                <h2>{isEn ? "Get in Touch" : "যোগাযোগ করুন"}</h2>
+                <h2>{t("Get in Touch")}</h2>
                 <p>
-                  {isEn
-                    ? "Whether you're dreaming of a private Sundarbans safari, a tea estate retreat in Sylhet, or a bespoke coastal escape in Cox's Bazar — our concierge team is here to design it for you."
-                    : "আপনি সুন্দরবনে একটি ব্যক্তিগত সাফারি, সিলেটে একটি চা-বাগান রিট্রিট বা কক্সবাজারে একটি উপকূলীয় পালানোর স্বপ্ন দেখছেন — আমাদের কনসিয়ার্জ দল এটি আপনার জন্য ডিজাইন করতে এখানে আছে।"}
+                  {t(
+                    "Whether you're dreaming of a private Sundarbans safari, a tea estate retreat in Sylhet, or a bespoke coastal escape in Cox's Bazar — our concierge team is here to design it for you."
+                  )}
                 </p>
               </InfoHeader>
 
@@ -127,14 +128,14 @@ export default function ContactPage() {
                     <span className="material-symbols-outlined">{info.icon}</span>
                   </InfoIconWrapper>
                   <div>
-                    <InfoLabel>{isEn ? info.label : info.labelBn}</InfoLabel>
-                    <InfoValue>{isEn ? info.value : info.valueBn}</InfoValue>
+                    <InfoLabel>{t(info.label)}</InfoLabel>
+                    <InfoValue>{t(info.value)}</InfoValue>
                   </div>
                 </InfoCard>
               ))}
 
               <FollowJourney variants={itemVariants}>
-                <p>{isEn ? "Follow Our Journey" : "আমাদের যাত্রা অনুসরণ করুন"}</p>
+                <p>{t("Follow Our Journey")}</p>
                 <div>
                   <SocialHandle>@cholobuddy</SocialHandle>
                   <SocialHandle>@cholobuddybd</SocialHandle>
@@ -152,28 +153,26 @@ export default function ContactPage() {
               {status === "success" ? (
                 <SuccessCard>
                   <span className="material-symbols-outlined">check_circle</span>
-                  <h3>{isEn ? "Message Sent!" : "বার্তা পাঠানো হয়েছে!"}</h3>
+                  <h3>{t("Message Sent!")}</h3>
                   <p>
-                    {isEn
-                      ? "Our concierge will be in touch within 24 hours."
-                      : "আমাদের কনসিয়ার্জ ২৪ ঘণ্টার মধ্যে যোগাযোগ করবে।"}
+                    {t("Our concierge will be in touch within 24 hours.")}
                   </p>
                 </SuccessCard>
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div style={{ marginBottom: "24px" }}>
-                    <FormLabel>{isEn ? "Full Name" : "পুরো নাম"}</FormLabel>
+                    <FormLabel>{t("Full Name")}</FormLabel>
                     <FormInput
                       type="text"
                       required
-                      placeholder={isEn ? "Amira Khan" : "আমিরা খান"}
+                      placeholder={t("Amira Khan")}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
 
                   <div style={{ marginBottom: "24px" }}>
-                    <FormLabel>{isEn ? "Email Address" : "ইমেইল ঠিকানা"}</FormLabel>
+                    <FormLabel>{t("Email Address")}</FormLabel>
                     <FormInput
                       type="email"
                       required
@@ -184,7 +183,7 @@ export default function ContactPage() {
                   </div>
 
                   <div style={{ marginBottom: "24px" }}>
-                    <FormLabel>{isEn ? "Inquiry Type" : "অনুসন্ধানের ধরন"}</FormLabel>
+                    <FormLabel>{t("Inquiry Type")}</FormLabel>
                     <InquiryGroup>
                       {INQUIRY_TYPES.map((type) => (
                         <InquiryBtn
@@ -193,21 +192,19 @@ export default function ContactPage() {
                           $active={inquiryType === type.value}
                           onClick={() => setInquiryType(type.value)}
                         >
-                          {isEn ? type.label : type.labelBn}
+                          {t(type.label)}
                         </InquiryBtn>
                       ))}
                     </InquiryGroup>
                   </div>
 
                   <div style={{ marginBottom: "32px" }}>
-                    <FormLabel>{isEn ? "Your Message" : "আপনার বার্তা"}</FormLabel>
+                    <FormLabel>{t("Your Message")}</FormLabel>
                     <FormTextarea
                       rows={4}
                       required
                       placeholder={
-                        isEn
-                          ? "Tell us about your dream Bangladesh journey..."
-                          : "আপনার স্বপ্নের বাংলাদেশ যাত্রা সম্পর্কে বলুন..."
+                        t("Tell us about your dream Bangladesh journey...")
                       }
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -217,9 +214,7 @@ export default function ContactPage() {
                   <SubmitButton type="submit" disabled={status === "loading"}>
                     {status === "loading"
                       ? "..."
-                      : isEn
-                      ? "Send Message"
-                      : "বার্তা পাঠান"}
+                      : t("Send Message")}
                   </SubmitButton>
                 </form>
               )}
@@ -227,7 +222,6 @@ export default function ContactPage() {
           </ContactGrid>
         </ContactMain>
       </main>
-
       <Footer />
     </ContactContainer>
   );

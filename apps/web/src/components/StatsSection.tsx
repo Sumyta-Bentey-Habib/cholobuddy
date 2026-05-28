@@ -22,8 +22,10 @@ const statLabels: Record<string, string> = {
 
 export default function StatsSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();
-  const { currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
 
   return (
     <SectionContainer>
@@ -41,7 +43,7 @@ export default function StatsSection() {
             <div>
               <StatValue>{stat.value}</StatValue>
               <StatLabel>
-                {isEn ? stat.label : (statLabels[stat.label] ?? stat.label)}
+                {t(stat.label)}
               </StatLabel>
             </div>
           </StatCard>

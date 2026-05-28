@@ -34,9 +34,11 @@ interface TourCardProps {
 }
 
 export default function TourCard({ tour, variants }: TourCardProps) {
-  const { currentLanguage } = useLanguage();
+  const {
+    t: t,
+    currentLanguage
+  } = useLanguage();
   const { savedTourIds, toggleWishlist } = useWishlist();
-  const isEn = currentLanguage === "en";
 
   const tourId = (tour as any)._id || tour.id;
   const isSaved = savedTourIds.includes(tourId);
@@ -52,12 +54,12 @@ export default function TourCard({ tour, variants }: TourCardProps) {
         {/* Image */}
         <ImageWrapper>
           <TourImage
-            alt={isEn ? tour.title : tour.titleBn}
+            alt={t(tour.title)}
             src={tour.imgUrl}
           />
           {tour.popular && (
             <PopularBadge>
-              {isEn ? "Popular" : "জনপ্রিয়"}
+              {t("Popular")}
             </PopularBadge>
           )}
           <SaveBadge
@@ -77,15 +79,15 @@ export default function TourCard({ tour, variants }: TourCardProps) {
         <CardBody>
           <div>
             <CardTitle>
-              {isEn ? tour.title : tour.titleBn}
+              {t(tour.title)}
             </CardTitle>
 
             <LocationRow>
-              {isEn ? tour.location : tour.locationBn} · {tour.distanceNote}
+              {t(tour.location)} · {tour.distanceNote}
             </LocationRow>
 
             <InfoText>
-              {tour.duration} · {isEn ? tour.description : tour.descriptionBn}
+              {tour.duration} · {t(tour.description)}
             </InfoText>
           </div>
 
@@ -107,7 +109,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
 
             {/* Book CTA */}
             <BookCta>
-              {isEn ? "Book Now" : "এখনই বুক করুন"}
+              {t("Book Now")}
             </BookCta>
           </CardFooter>
         </CardBody>

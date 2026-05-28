@@ -28,8 +28,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrolled = useScrolled(20);
-  const { currentLanguage, toggleLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+  const {
+    t: t,
+    currentLanguage,
+    toggleLanguage
+  } = useLanguage();
 
   return (
     <>
@@ -45,7 +48,7 @@ export default function Navbar() {
                 href={link.href}
                 $isActive={isActive}
               >
-                {isEn ? link.name : link.nameBn}
+                {t(link.name)}
               </NavLink>
             );
           })}
@@ -54,7 +57,7 @@ export default function Navbar() {
         <ActionsWrapper>
           <LanguageButton onClick={toggleLanguage}>
             <span className="material-symbols-outlined">language</span>
-            <span>{isEn ? "BN" : "EN"}</span>
+            <span>{t("BN")}</span>
           </LanguageButton>
 
           <LoginButton href="/login">Login</LoginButton>
@@ -66,9 +69,7 @@ export default function Navbar() {
           </MobileMenuToggle>
         </ActionsWrapper>
       </HeaderContainer>
-
       {mobileMenuOpen && <MobileDrawerBackdrop onClick={() => setMobileMenuOpen(false)} />}
-
       <MobileDrawer $open={mobileMenuOpen}>
         <MobileNav>
           {navLinks.map((link) => {
@@ -80,7 +81,7 @@ export default function Navbar() {
                 $isActive={isActive}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {isEn ? link.name : link.nameBn}
+                {t(link.name)}
               </MobileNavLink>
             );
           })}
@@ -92,17 +93,16 @@ export default function Navbar() {
             }}
           >
             <span className="material-symbols-outlined">translate</span>
-            <span>{isEn ? "বাংলা" : "English"}</span>
+            <span>{t("বাংলা")}</span>
           </MobileLanguageButton>
         </MobileNav>
       </MobileDrawer>
-
       <BottomNavBar>
         {[
-          { href: "/", icon: "explore", label: isEn ? "Explore" : "অন্বেষণ" },
-          { href: "/dashboard?tab=wishlist", icon: "favorite", label: isEn ? "Saved" : "সংরক্ষিত" },
-          { href: "/trips/sundarbans", icon: "luggage", label: isEn ? "Trips" : "ভ্রমণ" },
-          { href: "/dashboard", icon: "person", label: isEn ? "Profile" : "প্রোফাইল" },
+          { href: "/", icon: "explore", label: t("Explore") },
+          { href: "/dashboard?tab=wishlist", icon: "favorite", label: t("Saved") },
+          { href: "/trips/sundarbans", icon: "luggage", label: t("Trips") },
+          { href: "/dashboard", icon: "person", label: t("Profile") },
         ].map(({ href, icon, label }) => {
           const isActive = pathname === href;
           return (

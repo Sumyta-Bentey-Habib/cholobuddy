@@ -55,7 +55,7 @@ export default function TripDetailPage() {
   const params = useParams();
   const id = params.id as string;
   const { t, currentLanguage } = useLanguage();
-  const isEn = currentLanguage === "en";
+
 
   const [tour, setTour] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -139,7 +139,7 @@ export default function TripDetailPage() {
                 </span>
               </CategoryBadge>
               <MainTitle>
-                {isEn ? tour.title : (tour.titleBn || tour.title)}
+                {t("trip_detail.title")}
               </MainTitle>
               <MetaLocation>
                 📍 Khulna division, Bangladesh • 2.5 km from forest base
@@ -223,16 +223,16 @@ export default function TripDetailPage() {
                     <TimelineCard>
                       <TimelineHeader>
                         <span>
-                          {isEn ? dayItem.day : dayItem.dayBn}
+                          {t(`trip_detail.days.day${idx + 1}_num`)}
                         </span>
                         <h3>
-                          {isEn ? dayItem.title : dayItem.titleBn}
+                          {t(`trip_detail.days.day${idx + 1}_title`)}
                         </h3>
                       </TimelineHeader>
 
                       <DayDetailsBox>
                         <p className="desc">
-                          {isEn ? dayItem.description : dayItem.descriptionBn}
+                          {t(`trip_detail.days.day${idx + 1}_desc`)}
                         </p>
 
                         {dayItem.activities.length > 0 && (
@@ -240,7 +240,7 @@ export default function TripDetailPage() {
                             {dayItem.activities.map((act, actIdx) => (
                               <ActivityItem key={actIdx}>
                                 <span className="material-symbols-outlined">{act.icon}</span>
-                                <span>{isEn ? act.name : act.nameBn}</span>
+                                <span>{t(`trip_detail.days.day${idx + 1}_act${actIdx + 1}`)}</span>
                               </ActivityItem>
                             ))}
                           </DayActivitiesList>
