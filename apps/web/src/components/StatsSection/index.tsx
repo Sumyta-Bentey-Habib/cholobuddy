@@ -13,12 +13,6 @@ import {
   StatLabel
 } from "./styles";
 
-const statLabels: Record<string, string> = {
-  "Verified Bookings": "যাচাইকৃত বুকিং",
-  "Verified Partners": "যাচাইকৃত অংশীদার",
-  Destinations: "গন্তব্য",
-  "Happy Explorers": "সন্তুষ্ট পর্যটক",
-};
 
 export default function StatsSection() {
   const { containerVariants, itemVariants } = useAnimationVariants();

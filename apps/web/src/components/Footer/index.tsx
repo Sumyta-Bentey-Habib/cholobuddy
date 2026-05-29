@@ -43,7 +43,7 @@ export default function Footer() {
             {t("Curating moments of discovery and quiet luxury across the wild beauty of Bangladesh.")}
           </FooterText>
           <BengaliTag>
-            ঢাকা · সিলেট · সুন্দরবন · কক্সবাজার
+            {t("footer.locations")}
           </BengaliTag>
         </FooterBrandColumn>
         

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export interface ChatMessage {
   id: number;
@@ -9,30 +10,28 @@ export interface ChatMessage {
   timestamp: string;
 }
 
-const INITIAL_MESSAGES: ChatMessage[] = [
-  {
-    id: 1,
-    text: "আসসালামুয়ালাইকুম! Hello Explorer 🌿 How can we assist your journey across Bangladesh today?",
-    sender: "agent",
-    timestamp: "now",
-  },
-];
-
-const AGENT_REPLIES = [
-  "Thank you for reaching out! Our travel concierge will review your inquiry shortly.",
-  "Great question! We'd love to help you plan the perfect Bangladesh itinerary.",
-  "Our expert guides know every corner of Bangladesh — from the Sundarbans to Sajek. We'll be in touch soon!",
-];
-
 /**
  * Manages chat widget state: open/close, message list, input, send logic.
  */
 export function useChat() {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputVal, setInputVal] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Initialize and translate initial message reactively
+  useEffect(() => {
+    setMessages([
+      {
+        id: 1,
+        text: t("chat.initial_message"),
+        sender: "agent",
+        timestamp: "now",
+      },
+    ]);
+  }, [t]);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -56,8 +55,13 @@ export function useChat() {
     setIsTyping(true);
 
     setTimeout(() => {
+      const agentReplies = [
+        t("chat.replies.review"),
+        t("chat.replies.itinerary"),
+        t("chat.replies.guides"),
+      ];
       const reply =
-        AGENT_REPLIES[Math.floor(Math.random() * AGENT_REPLIES.length)];
+        agentReplies[Math.floor(Math.random() * agentReplies.length)];
       setMessages((prev) => [
         ...prev,
         { id: Date.now() + 1, text: reply, sender: "agent", timestamp: now() },

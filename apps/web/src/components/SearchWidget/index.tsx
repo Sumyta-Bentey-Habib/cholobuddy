@@ -19,11 +19,11 @@ import {
 } from "./styles";
 
 const DESTINATIONS = [
-  { value: "coxs-bazar", label: "Cox's Bazar", labelBn: "কক্সবাজার" },
-  { value: "sylhet", label: "Sylhet Tea Gardens", labelBn: "সিলেট চা-বাগান" },
-  { value: "sundarbans", label: "Sundarbans", labelBn: "সুন্দরবন" },
-  { value: "sajek", label: "Sajek Valley", labelBn: "সাজেক ভ্যালি" },
-  { value: "dhaka", label: "Dhaka", labelBn: "ঢাকা" },
+  { value: "coxs-bazar", label: "Cox's Bazar" },
+  { value: "sylhet", label: "Sylhet Tea Gardens" },
+  { value: "sundarbans", label: "Sundarbans" },
+  { value: "sajek", label: "Sajek Valley" },
+  { value: "dhaka", label: "Dhaka" },
 ];
 
 export default function SearchWidget() {

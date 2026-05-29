@@ -65,13 +65,13 @@ export default function HotelCard({ hotel, variants }: HotelCardProps) {
             {/* Rating */}
             <RatingBadgeGroup>
               <RatingBadge>{hotel.rating}</RatingBadge>
-              <RatingLabel>{ratingLabel}</RatingLabel>
+              <RatingLabel>{t(ratingLabel)}</RatingLabel>
             </RatingBadgeGroup>
 
             {/* Price */}
             <PriceWrapper>
-              <StrikethroughPrice>৳{strikethroughPrice}</StrikethroughPrice>
-              <PriceText>৳{hotel.price}</PriceText>
+              <StrikethroughPrice>{t("common.currency")}{strikethroughPrice}</StrikethroughPrice>
+              <PriceText>{t("common.currency")}{hotel.price}</PriceText>
             </PriceWrapper>
           </RatingRow>
 

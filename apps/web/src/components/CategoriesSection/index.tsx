@@ -20,33 +20,25 @@ const categories = [
     id: 1,
     icon: "hiking",
     title: "Adventure & Trekking",
-    titleBn: "অ্যাডভেঞ্চার এবং ট্রেকিং",
-    desc: "Thrill-seeking experiences in the wild.",
-    descBn: "প্রকৃতির মাঝে রোমাঞ্চকর অভিজ্ঞতা।"
+    desc: "Thrill-seeking experiences in the wild."
   },
   {
     id: 2,
     icon: "account_balance",
     title: "Heritage & Culture",
-    titleBn: "ঐতিহ্য এবং সংস্কৃতি",
-    desc: "Dive deep into historical wonders.",
-    descBn: "ঐতিহাসিক বিস্ময়ের গভীরে প্রবেশ করুন।"
+    desc: "Dive deep into historical wonders."
   },
   {
     id: 3,
     icon: "sailing",
     title: "River Cruises",
-    titleBn: "নৌকা বিহার",
-    desc: "Relaxing journeys on serene waters.",
-    descBn: "শান্ত জলে আরামদায়ক ভ্রমণ।"
+    desc: "Relaxing journeys on serene waters."
   },
   {
     id: 4,
     icon: "forest",
     title: "Wildlife Safaris",
-    titleBn: "বন্যপ্রাণী সাফারি",
-    desc: "Encounter nature's majestic creatures.",
-    descBn: "প্রকৃতির রাজকীয় প্রাণীদের সাথে দেখা করুন।"
+    desc: "Encounter nature's majestic creatures."
   }
 ];
 

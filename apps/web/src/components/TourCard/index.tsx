@@ -57,7 +57,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
         {/* Image */}
         <ImageWrapper>
           <TourImage
-            alt={currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
+            alt={t(tour.title)}
             src={tour.imgUrl}
           />
           {tour.popular && (
@@ -84,15 +84,15 @@ export default function TourCard({ tour, variants }: TourCardProps) {
         <CardBody>
           <div>
             <CardTitle>
-              {currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
+              {t(tour.title)}
             </CardTitle>
 
             <LocationRow>
-              {currentLanguage === "bn" ? (tour.locationBn || tour.location) : tour.location} {tour.distanceNote ? `· ${tour.distanceNote}` : ""}
+              {t(tour.location || "")} {tour.distanceNote ? `· ${tour.distanceNote}` : ""}
             </LocationRow>
 
             <InfoText>
-              {currentLanguage === "bn" ? (tour.durationBn || tour.duration) : tour.duration} · {currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description}
+              {t(tour.duration)} · {t(tour.description)}
             </InfoText>
           </div>
 
@@ -107,8 +107,8 @@ export default function TourCard({ tour, variants }: TourCardProps) {
 
               {/* Price */}
               <PriceWrapper>
-                <StrikethroughPrice>৳{strikethroughPrice}</StrikethroughPrice>
-                <PriceText>৳{tour.price}</PriceText>
+                <StrikethroughPrice>{t("common.currency")}{strikethroughPrice}</StrikethroughPrice>
+                <PriceText>{t("common.currency")}{tour.price}</PriceText>
               </PriceWrapper>
             </RatingRow>
 

@@ -3,16 +3,12 @@
 export interface Tour {
   id: string;
   title: string;
-  titleBn?: string;
   price: string;
   duration: string;
-  durationBn?: string;
   description: string;
-  descriptionBn?: string;
   rating?: string;
   reviews?: string;
   location?: string;
-  locationBn?: string;
   distanceNote?: string;
   imgUrl?: string;
   popular?: boolean;
@@ -24,7 +20,6 @@ export interface Hotel {
   name: string;
   price: string;
   location: string;
-  locationBn: string;
   rating: string;
   category: string;
   distanceNote: string;
@@ -34,9 +29,7 @@ export interface Hotel {
 export interface TeamMember {
   id: string;
   name: string;
-  nameBn: string;
   role: string;
-  roleBn: string;
   imgUrl: string;
 }
 
@@ -91,7 +84,6 @@ export interface HeroThumbnail {
 
 export interface NavLink {
   name: string;
-  nameBn: string;
   href: string;
 }
 
@@ -106,10 +98,10 @@ export interface RecentSearch {
 // ─── Navigation ────────────────────────────────────────────────────────────────
 
 export const navLinks: NavLink[] = [
-  { name: "Explore", nameBn: "অন্বেষণ", href: "/" },
-  { name: "About", nameBn: "সম্পর্কে", href: "/about" },
-  { name: "Trips", nameBn: "ভ্রমণ", href: "/trips" },
-  { name: "Contact", nameBn: "যোগাযোগ", href: "/contact" },
+  { name: "Explore", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Trips", href: "/trips" },
+  { name: "Contact", href: "/contact" },
 ];
 
 // ─── Hero Thumbnails ───────────────────────────────────────────────────────────
@@ -145,7 +137,6 @@ export const hotelsData: Hotel[] = [
     name: "Sayeman Beach Resort",
     price: "9,000",
     location: "Cox's Bazar",
-    locationBn: "কক্সবাজার",
     rating: "9.4",
     category: "5-Star Beachfront",
     distanceNote: "0.2 km from beach",
@@ -157,7 +148,6 @@ export const hotelsData: Hotel[] = [
     name: "Grand Sultan Tea Resort",
     price: "12,000",
     location: "Sylhet",
-    locationBn: "সিলেট",
     rating: "9.1",
     category: "5-Star Heritage",
     distanceNote: "1.5 km from reserve",
@@ -169,7 +159,6 @@ export const hotelsData: Hotel[] = [
     name: "The Westin Dhaka",
     price: "18,000",
     location: "Gulshan, Dhaka",
-    locationBn: "গুলশান, ঢাকা",
     rating: "8.8",
     category: "Business Luxury",
     distanceNote: "0.8 km from center",
@@ -181,7 +170,6 @@ export const hotelsData: Hotel[] = [
     name: "DuSai Resort & Spa",
     price: "11,000",
     location: "Moulvibazar, Sylhet",
-    locationBn: "মৌলভীবাজার, সিলেট",
     rating: "8.7",
     category: "Boutique Eco",
     distanceNote: "0.5 km from hilltop",
@@ -196,27 +184,21 @@ export const teamData: TeamMember[] = [
   {
     id: "amira",
     name: "Amira Khan",
-    nameBn: "আমিরা খান",
     role: "Founder & Visionary",
-    roleBn: "প্রতিষ্ঠাতা ও স্বপ্নদ্রষ্টা",
     imgUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDP4ZfbxgME8nSotwIK_9kQ2aQSOHIv-iXDjyTosTUEVEfXCsMgO2yHFbcM0_6BYNquOMqWFfhxVBJKT3xrJSs6VXAyOsqpwzw5ZkGHUrhjWoTbBq4DOTMdZcW2keo36y5HYb2ru7OvhzYOnOUJT1pVM7k74ndvucU_TILtd3jElw2ZenJazWnUA-wuNw0O-TtijP2DRKmLJOtp3bw17plv0aGLY2CpNv-eQGq0x9IpPkYSOz8QLy5Qd9NRZkXVjEE8qzOKkvgpkMs",
   },
   {
     id: "tariq",
     name: "Tariq Rahman",
-    nameBn: "তারিক রহমান",
     role: "Director of Experiences",
-    roleBn: "অভিজ্ঞতা পরিচালক",
     imgUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAVv9hdrcoerhKUWAw1fuxRVUgRXDqGyi830PgERZ18veNLvDCns2Jyr09E0egbsK7cbPS4mjXAHZ6elpTyaA5BGceNZNdyw7AOBSF-IbuhvjnQcy5tOR0UfSwTOzxGqVFGwu6Gy1fP0eO5MsBghPQNsJBQdvOWt0FT1CChkliHxh96i5WeoGHdlSTBvUMR_NF8GQXSyUGGwFJSkQ51529vjtSnKc0KjoWzGIX5eS0QpZGP_pPYoICsvmQVGOtwE1N1sn64zf_pOtA",
   },
   {
     id: "nadia",
     name: "Nadia Ali",
-    nameBn: "নাদিয়া আলি",
     role: "Head of Curation",
-    roleBn: "কিউরেশন প্রধান",
     imgUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuC66nDO0-9JEIkMcnX-k8GfZ9xjdFY4NLFSzhizwl3OV1XkxtRGvv31fkK4zjtE-IyQiyOJ9Yx7pe54Ns9L9_AJBMYR5BZaiI6PLdLyILSzdpxKl_-xd51HFvEa77jUE5XIecj4IvJKuH2EUlwj1N90SfjhKS4Nw0MRXjvxlyHVGb0scPVae30qFsCW3SCaxB8kGbf42khkbrQhiW_6JPIMg4RnxSNDZJ1fbBGvknTF7F0EZVvtuTAknZD_l6ZecYui7ElPDBkoyNc",
   },
@@ -330,7 +312,7 @@ export const faqsData: Record<string, FaqCategory> = {
         id: "emi",
         question: "Is there an installment (EMI) option?",
         answer:
-          "For tours exceeding ৳20,000, interest-free EMI options are available for up to 6 months with selected banks.",
+          "For tours exceeding BDT 20,000, interest-free EMI options are available for up to 6 months with selected banks.",
       },
     ],
   },
@@ -425,17 +407,13 @@ export const recentSearchesData: RecentSearch[] = [
 
 export interface ItineraryActivity {
   name: string;
-  nameBn: string;
   icon: string;
 }
 
 export interface ItineraryDay {
   day: string;
-  dayBn: string;
   title: string;
-  titleBn: string;
   description: string;
-  descriptionBn: string;
   activities: ItineraryActivity[];
   imgUrl: string | null;
 }
@@ -443,44 +421,32 @@ export interface ItineraryDay {
 export const itineraryData: ItineraryDay[] = [
   {
     day: "Day 01",
-    dayBn: "প্রথম দিন",
     title: "Into the Deep Emerald",
-    titleBn: "গভীর পান্নার ভেতরে",
     description:
       "Arrival at Khulna and immediate boarding of the M.V. Eco-Spirit. We navigate the Rupsha river towards the forest gateway as evening mist settles over the water.",
-    descriptionBn:
-      "খুলনায় আগমন এবং এম.ভি. ইকো-স্পিরিটে আরোহণ। সন্ধ্যার কুয়াশায় রূপসা নদী বেয়ে বনের প্রবেশদ্বারের দিকে যাত্রা।",
     activities: [
-      { name: "Welcome feast with local organic produce", nameBn: "স্থানীয় জৈব উপাদানে স্বাগত ভোজ", icon: "restaurant" },
-      { name: "Sunset cruise through Harbaria channel", nameBn: "হারবাড়িয়া চ্যানেলে সূর্যাস্ত ক্রুজ", icon: "visibility" },
+      { name: "Welcome feast with local organic produce", icon: "restaurant" },
+      { name: "Sunset cruise through Harbaria channel", icon: "visibility" },
     ],
     imgUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuC_uf03Ji-brjcYeNrDvd4nEfLZwoqK52jEhmt1rF7tm_74HCmzIHhbqQ7OBbAReL5lzlpsChWCEsz2nXtLOADpaPecpE8wKxFEZyWIErh-EFlurAj-yeJt6Sdg4bUhup2Juby9qJEgtGiP9sacLQDZIu5XEJa0OpMgMBSmzhTEOt2v-FaVL5E2KcqK3U5-1_S-f0w5LMtS5Ub39hJMKT-cIfZdUEQp9JAMKbF5abIN98E9OxgzRe8M5GiNIlqvlQzbMqInaOmObI4",
   },
   {
     day: "Day 02",
-    dayBn: "দ্বিতীয় দিন",
     title: "The Tiger's Realm",
-    titleBn: "বাঘের রাজত্ব",
     description:
       "Dawn trek through the Katka wildlife sanctuary. Silent observation from watchtowers and beach exploration at Jamtola — one of the most secluded beaches on earth.",
-    descriptionBn:
-      "কটকা বন্যপ্রাণী অভয়ারণ্যে ভোরের ট্রেক। ওয়াচটাওয়ার থেকে নীরব পর্যবেক্ষণ এবং জামতলায় সৈকত অন্বেষণ।",
     activities: [
-      { name: "6:00 AM Jungle Walk with Expert Naturalist", nameBn: "সকাল ৬টায় বিশেষজ্ঞ প্রকৃতিবিদের সাথে জঙ্গল হাঁটা", icon: "directions_walk" },
-      { name: "Relaxation at Jamtola secluded beach", nameBn: "জামতলার নিভৃত সৈকতে বিশ্রাম", icon: "waves" },
+      { name: "6:00 AM Jungle Walk with Expert Naturalist", icon: "directions_walk" },
+      { name: "Relaxation at Jamtola secluded beach", icon: "waves" },
     ],
     imgUrl: null,
   },
   {
     day: "Day 03",
-    dayBn: "তৃতীয় দিন",
     title: "Rhythm of the Tides",
-    titleBn: "জোয়ারের ছন্দ",
     description:
       "Karamjal crocodile breeding center visit and reflection session before returning to the mainland. A farewell breakfast on the deck as the Sundarbans recedes into the horizon.",
-    descriptionBn:
-      "করমজল কুমির প্রজনন কেন্দ্র পরিদর্শন এবং মূল ভূখণ্ডে ফেরার আগে প্রতিফলন সেশন। ডেকে বিদায় প্রাতঃরাশ।",
     activities: [],
     imgUrl: null,
   },

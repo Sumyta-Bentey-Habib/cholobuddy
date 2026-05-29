@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -99,7 +99,7 @@ const NAV_ITEMS: { id: AdminTab; icon: string; label: string }[] = [
 ];
 
 export default function AdminPage() {
-  const { t } = useLanguage();
+  const { t, registerTranslations } = useLanguage();
   const router = useRouter();
   const { user, signOut } = useAuth();
 
@@ -108,6 +108,12 @@ export default function AdminPage() {
   const { tours, createTour, updateTour, deleteTour } = useTours();
   const { users, updateUserRole } = useUsers();
   const toast = useToast();
+
+  useEffect(() => {
+    if (tours && tours.length > 0) {
+      registerTranslations(tours);
+    }
+  }, [tours, registerTranslations]);
 
   const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -303,7 +309,7 @@ export default function AdminPage() {
                       <StatCardHeader>
                         <div>
                           <StatLabel>{t("admin.stats.revenue")}</StatLabel>
-                          <StatValue>৳{analytics?.totalRevenue?.toLocaleString() || 0}</StatValue>
+                          <StatValue>{t("common.currency")}{analytics?.totalRevenue?.toLocaleString() || 0}</StatValue>
                         </div>
                         <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>payments</span>
                       </StatCardHeader>
@@ -386,8 +392,8 @@ export default function AdminPage() {
                         {bookings.map((tx) => (
                           <TableTr key={tx._id}>
                             <TableTdMono>#{tx._id.slice(-6)}</TableTdMono>
-                            <TableTdTitle>{tx.tourTitle}</TableTdTitle>
-                            <TableTdBold>৳{tx.totalAmount}</TableTdBold>
+                            <TableTdTitle>{t(tx.tourTitle)}</TableTdTitle>
+                            <TableTdBold>{t("common.currency")}{tx.totalAmount}</TableTdBold>
                             <TableTdPad>
                               <Select
                                 value={tx.status}
@@ -453,13 +459,13 @@ export default function AdminPage() {
                           </FieldWrapper>
                           <FieldWrapper>
                             <FieldLabel>Tour Title (BN)</FieldLabel>
-                            <FieldInput placeholder="e.g. সুন্দরবন সাফারি" value={tourForm.titleBn} onChange={e => setTourForm({...tourForm, titleBn: e.target.value})} />
+                            <FieldInput placeholder={t("admin.placeholders.title_bn")} value={tourForm.titleBn} onChange={e => setTourForm({...tourForm, titleBn: e.target.value})} />
                           </FieldWrapper>
                         </TourFormGrid>
 
                         <TourFormGrid>
                           <FieldWrapper>
-                            <FieldLabel>Price (৳)</FieldLabel>
+                            <FieldLabel>Price ({t("common.currency")})</FieldLabel>
                             <FieldInput required placeholder="Price" type="number" value={tourForm.price} onChange={e => setTourForm({...tourForm, price: e.target.value})} />
                           </FieldWrapper>
                           <FieldWrapper>
@@ -475,7 +481,7 @@ export default function AdminPage() {
                           </FieldWrapper>
                           <FieldWrapper>
                             <FieldLabel>Duration (BN)</FieldLabel>
-                            <FieldInput placeholder="e.g. ৩ দিন / ২ রাত" value={tourForm.durationBn} onChange={e => setTourForm({...tourForm, durationBn: e.target.value})} />
+                            <FieldInput placeholder={t("admin.placeholders.duration_bn")} value={tourForm.durationBn} onChange={e => setTourForm({...tourForm, durationBn: e.target.value})} />
                           </FieldWrapper>
                         </TourFormGrid>
 
@@ -486,7 +492,7 @@ export default function AdminPage() {
                           </FieldWrapper>
                           <FieldWrapper>
                             <FieldLabel>Location (BN)</FieldLabel>
-                            <FieldInput placeholder="e.g. সুন্দরবন, বাংলাদেশ" value={tourForm.locationBn} onChange={e => setTourForm({...tourForm, locationBn: e.target.value})} />
+                            <FieldInput placeholder={t("admin.placeholders.location_bn")} value={tourForm.locationBn} onChange={e => setTourForm({...tourForm, locationBn: e.target.value})} />
                           </FieldWrapper>
                         </TourFormGrid>
 
@@ -575,25 +581,25 @@ export default function AdminPage() {
                         </TableHeaderRow>
                       </thead>
                       <tbody>
-                        {tours.map((t) => (
-                          <TableTr key={t._id}>
+                        {tours.map((tour) => (
+                          <TableTr key={tour._id}>
                             <TableImgTd>
-                              <TableImg src={t.imgUrl} alt={t.title} />
+                              <TableImg src={tour.imgUrl} alt={t(tour.title)} />
                             </TableImgTd>
-                            <TableTdTitle>{t.title}</TableTdTitle>
-                            <TableTdBold>৳{t.price}</TableTdBold>
+                            <TableTdTitle>{t(tour.title)}</TableTdTitle>
+                            <TableTdBold>{t("common.currency")}{tour.price}</TableTdBold>
                             <TableTdPad>
                               <EditBtn
                                 onClick={() => {
-                                  setEditingTourId(t._id);
+                                  setEditingTourId(tour._id);
                                   setTourForm({
-                                    title: t.title || "", titleBn: t.titleBn || "",
-                                    price: t.price?.toString() || "", duration: t.duration || "",
-                                    durationBn: t.durationBn || "", description: t.description || "",
-                                    descriptionBn: t.descriptionBn || "", location: t.location || "",
-                                    locationBn: t.locationBn || "", distanceNote: t.distanceNote || "",
-                                    imgUrl: t.imgUrl || "", popular: !!t.popular,
-                                    startDate: t.startDate || "", endDate: t.endDate || ""
+                                    title: tour.title || "", titleBn: tour.titleBn || "",
+                                    price: tour.price?.toString() || "", duration: tour.duration || "",
+                                    durationBn: tour.durationBn || "", description: tour.description || "",
+                                    descriptionBn: tour.descriptionBn || "", location: tour.location || "",
+                                    locationBn: tour.locationBn || "", distanceNote: tour.distanceNote || "",
+                                    imgUrl: tour.imgUrl || "", popular: !!tour.popular,
+                                    startDate: tour.startDate || "", endDate: tour.endDate || ""
                                   });
                                   setTourFile(null);
                                   setShowTourModal(true);
@@ -601,7 +607,7 @@ export default function AdminPage() {
                               >
                                 Edit
                               </EditBtn>
-                              <DeleteBtn onClick={() => deleteTour(t._id)}>
+                              <DeleteBtn onClick={() => deleteTour(tour._id)}>
                                 Delete
                               </DeleteBtn>
                             </TableTdPad>

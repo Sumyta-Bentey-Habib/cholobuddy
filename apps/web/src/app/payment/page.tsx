@@ -254,7 +254,7 @@ function PaymentContent() {
             </ReceiptRow>
             <ReceiptRow style={{ borderTop: "1px solid rgba(196, 199, 199, 0.2)", paddingTop: "12px", fontWeight: "bold", fontSize: "14px", color: "#000000" }}>
               <ReceiptLabel style={{ opacity: 1 }}>Amount Paid:</ReceiptLabel>
-              <span style={{ color: "#705d00" }}>৳{totalAmount.toLocaleString()}</span>
+              <span style={{ color: "#705d00" }}>{t("common.currency")}{totalAmount.toLocaleString()}</span>
             </ReceiptRow>
           </SuccessReceipt>
 
@@ -412,7 +412,7 @@ function PaymentContent() {
                   onClick={handlePaymentSubmit}
                   disabled={!cardNumber || !cardHolder || !cardExpiry || !cardCvv}
                 >
-                  Pay ৳{totalAmount.toLocaleString()} Securely
+                  Pay {t("common.currency")}{totalAmount.toLocaleString()} Securely
                 </PayButton>
               </div>
             )}
@@ -644,15 +644,15 @@ function PaymentContent() {
               <CostBox>
                 <CostRow>
                   <span>Booking Subtotal:</span>
-                  <span style={{ color: "#000000", fontWeight: "bold" }}>৳{(totalAmount * 0.96).toLocaleString()}</span>
+                  <span style={{ color: "#000000", fontWeight: "bold" }}>{t("common.currency")}{(totalAmount * 0.96).toLocaleString()}</span>
                 </CostRow>
                 <CostRow>
                   <span>Eco-Tax & Service (4%):</span>
-                  <span style={{ color: "#000000", fontWeight: "bold" }}>৳{(totalAmount * 0.04).toLocaleString()}</span>
+                  <span style={{ color: "#000000", fontWeight: "bold" }}>{t("common.currency")}{(totalAmount * 0.04).toLocaleString()}</span>
                 </CostRow>
                 <CostTotalRow>
                   <span>Total Amount:</span>
-                  <span style={{ color: "#705d00" }}>৳{totalAmount.toLocaleString()}</span>
+                  <span style={{ color: "#705d00" }}>{t("common.currency")}{totalAmount.toLocaleString()}</span>
                 </CostTotalRow>
               </CostBox>
             </div>

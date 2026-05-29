@@ -86,7 +86,7 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
           {t("trip_detail.widget.title")}
         </WidgetTitle>
         <PriceRow>
-          <PriceAmount>৳{pricePerTraveler.toLocaleString()}</PriceAmount>
+          <PriceAmount>{t("common.currency")}{pricePerTraveler.toLocaleString()}</PriceAmount>
           <PriceLabel>{t("trip_detail.widget.per_traveler")}</PriceLabel>
         </PriceRow>
       </PricingHeader>
@@ -96,18 +96,18 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
         <InvoiceCard>
           <InvoiceRow>
             <span>
-              {t("trip_detail.widget.breakdown.tour_price")} ({guests} x ৳{pricePerTraveler.toLocaleString()})
+              {t("trip_detail.widget.breakdown.tour_price")} ({guests} x {t("common.currency")}{pricePerTraveler.toLocaleString()})
             </span>
-            <span>৳{subtotal.toLocaleString()}</span>
+            <span>{t("common.currency")}{subtotal.toLocaleString()}</span>
           </InvoiceRow>
           <InvoiceRow>
             <span>{t("trip_detail.widget.breakdown.eco_tax")}</span>
-            <span>৳{ecoTax.toLocaleString()}</span>
+            <span>{t("common.currency")}{ecoTax.toLocaleString()}</span>
           </InvoiceRow>
           
           <InvoiceTotalRow>
             <span>{t("trip_detail.widget.breakdown.total")}</span>
-            <span>৳{total.toLocaleString()}</span>
+            <span>{t("common.currency")}{total.toLocaleString()}</span>
           </InvoiceTotalRow>
         </InvoiceCard>
 
@@ -118,7 +118,7 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
           $status={isExpired ? "booked" : (isAdmin ? "booked" : bookingStatus)}
         >
           {isAdmin && t("trip_detail.widget.btn_admin_blocked")}
-          {!isAdmin && isExpired && (currentLanguage === "bn" ? "বুকিং বন্ধ" : "Booking Closed")}
+          {!isAdmin && isExpired && t("trip_detail.widget.booking_closed")}
           {!isAdmin && !isExpired && bookingStatus === "idle" && t("trip_detail.widget.btn_idle")}
           {!isAdmin && !isExpired && bookingStatus === "booking" && t("trip_detail.widget.btn_booking")}
           {!isAdmin && !isExpired && bookingStatus === "booked" && t("trip_detail.widget.btn_booked")}

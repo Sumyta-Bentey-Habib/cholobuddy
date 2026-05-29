@@ -39,31 +39,25 @@ const CONTACT_INFO = [
   {
     icon: "location_on",
     label: "Head Office",
-    labelBn: "প্রধান কার্যালয়",
     value: "House 12, Road 27, Gulshan-1, Dhaka 1212",
-    valueBn: "হাউস ১২, রোড ২৭, গুলশান-১, ঢাকা ১২১২",
   },
   {
     icon: "phone",
     label: "Phone",
-    labelBn: "ফোন",
     value: "+880 1700-000000",
-    valueBn: "+৮৮০ ১৭০০-০০০০০০",
   },
   {
     icon: "mail",
     label: "Email",
-    labelBn: "ইমেইল",
     value: "hello@cholobuddy.com.bd",
-    valueBn: "hello@cholobuddy.com.bd",
   },
 ];
 
 const INQUIRY_TYPES = [
-  { value: "bespoke", label: "Bespoke Itinerary", labelBn: "বিশেষ ভ্রমণসূচি" },
-  { value: "group", label: "Group Travel", labelBn: "দলীয় ভ্রমণ" },
-  { value: "corporate", label: "Corporate Retreat", labelBn: "কর্পোরেট রিট্রিট" },
-  { value: "support", label: "Booking Support", labelBn: "বুকিং সহায়তা" },
+  { value: "bespoke", label: "Bespoke Itinerary" },
+  { value: "group", label: "Group Travel" },
+  { value: "corporate", label: "Corporate Retreat" },
+  { value: "support", label: "Booking Support" },
 ];
 
 export default function ContactPage() {

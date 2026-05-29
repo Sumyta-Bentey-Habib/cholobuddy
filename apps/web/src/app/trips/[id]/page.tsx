@@ -58,7 +58,7 @@ import {
 export default function TripDetailPage() {
   const params = useParams();
   const id = params.id as string;
-  const { t, currentLanguage } = useLanguage();
+  const { t, registerTranslations } = useLanguage();
 
 
   const [tour, setTour] = useState<any>(null);
@@ -76,6 +76,12 @@ export default function TripDetailPage() {
     };
     fetchTour();
   }, [id]);
+
+  useEffect(() => {
+    if (tour) {
+      registerTranslations(tour);
+    }
+  }, [tour, registerTranslations]);
 
   if (loading) {
     return (
@@ -143,10 +149,10 @@ export default function TripDetailPage() {
                 </span>
               </CategoryBadge>
               <MainTitle>
-                {currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title}
+                {t(tour.title)}
               </MainTitle>
               <MetaLocation>
-                📍 {currentLanguage === "bn" ? (tour.locationBn || tour.location) : tour.location} {tour.distanceNote ? `• ${tour.distanceNote}` : ""}
+                📍 {t(tour.location || "")} {tour.distanceNote ? `• ${tour.distanceNote}` : ""}
               </MetaLocation>
             </div>
 
@@ -181,10 +187,10 @@ export default function TripDetailPage() {
             {/* Always show dynamic Description */}
             <TourDescBox>
               <TourDescHeading>
-                {currentLanguage === "bn" ? "ভ্রমণের বিবরণ" : "Tour Description"}
+                {t("trip_detail.description_label")}
               </TourDescHeading>
               <TourDescText>
-                {currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description}
+                {t(tour.description)}
               </TourDescText>
             </TourDescBox>
 
@@ -196,7 +202,7 @@ export default function TripDetailPage() {
                   {tour.inclusions.map((inc: any, index: number) => (
                     <InclusionCard key={index}>
                       <span className="material-symbols-outlined">{inc.icon || "check_circle"}</span>
-                      <span className="label">{currentLanguage === "bn" ? (inc.nameBn || inc.name) : inc.name}</span>
+                      <span className="label">{t(inc.name)}</span>
                     </InclusionCard>
                   ))}
                 </InclusionGrid>
@@ -225,16 +231,16 @@ export default function TripDetailPage() {
                       <TimelineCard>
                         <TimelineHeader>
                           <span>
-                            {currentLanguage === "bn" ? (dayItem.dayBn || dayItem.day) : dayItem.day}
+                            {t(dayItem.day)}
                           </span>
                           <h3>
-                            {currentLanguage === "bn" ? (dayItem.titleBn || dayItem.title) : dayItem.title}
+                            {t(dayItem.title)}
                           </h3>
                         </TimelineHeader>
 
                         <DayDetailsBox>
                           <p className="desc">
-                            {currentLanguage === "bn" ? (dayItem.descriptionBn || dayItem.description) : dayItem.description}
+                            {t(dayItem.description)}
                           </p>
 
                           {dayItem.activities && dayItem.activities.length > 0 && (
@@ -242,7 +248,7 @@ export default function TripDetailPage() {
                               {dayItem.activities.map((act: any, actIdx: number) => (
                                 <ActivityItem key={actIdx}>
                                   <span className="material-symbols-outlined">{act.icon || "explore"}</span>
-                                  <span>{currentLanguage === "bn" ? (act.nameBn || act.name) : act.name}</span>
+                                  <span>{t(act.name)}</span>
                                 </ActivityItem>
                               ))}
                             </DayActivitiesList>

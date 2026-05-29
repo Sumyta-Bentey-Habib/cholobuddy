@@ -369,7 +369,7 @@ export default function DashboardPage() {
                               </BookingInfo>
                             </BookingLeft>
                             <BookingRight>
-                              <BookingAmount>৳{b.totalAmount}</BookingAmount>
+                              <BookingAmount>{t("common.currency")}{b.totalAmount}</BookingAmount>
                               <StatusPill $status={b.status}>{b.status}</StatusPill>
                             </BookingRight>
                           </BookingRow>
@@ -412,7 +412,7 @@ export default function DashboardPage() {
                             onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                           />
                           <CardImgFade style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)" }} />
-                          <CardPrice>৳{tour.price}</CardPrice>
+                          <CardPrice>{t("common.currency")}{tour.price}</CardPrice>
                         </CardImageWrapper>
                         <CardBody>
                           <CardName>{tour.title}</CardName>
@@ -468,7 +468,7 @@ export default function DashboardPage() {
                           <TableTdMono>#{b._id.slice(-6)}</TableTdMono>
                           <TableTdTitle>{b.tourTitle}</TableTdTitle>
                           <TableTdGray>{b.guests}</TableTdGray>
-                          <TableTdBold>৳{b.totalAmount}</TableTdBold>
+                          <TableTdBold>{t("common.currency")}{b.totalAmount}</TableTdBold>
                           <TableTdPad>
                             <StatusPill $status={b.status}>{b.status}</StatusPill>
                           </TableTdPad>
@@ -530,7 +530,7 @@ export default function DashboardPage() {
                           <WishlistHeart>
                             <span className="material-symbols-outlined" style={{ color: "#f87171", fontSize: "14px", fontVariationSettings: "'FILL' 1" }}>favorite</span>
                           </WishlistHeart>
-                          <CardPrice>৳{trip.price}</CardPrice>
+                          <CardPrice>{t("common.currency")}{trip.price}</CardPrice>
                         </CardImageWrapper>
                         <CardBody>
                           <CardName>{trip.title}</CardName>

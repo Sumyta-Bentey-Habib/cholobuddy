@@ -51,42 +51,27 @@ const PHILOSOPHY_PRINCIPLES = [
   {
     num: "01",
     title: "Slow Travel",
-    titleBn: "ধীর ভ্রমণ",
     desc: "We design itineraries that allow you to breathe — long mornings in Sylhet tea estates, unhurried river drifts through the Sundarbans, and golden evenings on Cox's Bazar sands.",
-    descBn:
-      "আমরা ইটিনারারি ডিজাইন করি যা আপনাকে ভ্রমণ উপভোগ করতে সময় দেয় — সিলেটের চা-বাগানে দীর্ঘ সকাল, সুন্দরবনের নদীতে শান্ত ভ্রমণ।",
   },
   {
     num: "02",
     title: "Local Depth",
-    titleBn: "স্থানীয় গভীরতা",
     desc: "Our expert local guides — born in the delta, the hills, and the coast — translate Bangladesh's living culture into unforgettable narrative for you.",
-    descBn:
-      "আমাদের বিশেষজ্ঞ স্থানীয় গাইডরা — বদ্বীপ, পাহাড় এবং উপকূলে জন্মানো — বাংলাদেশের জীবন্ত সংস্কৃতিকে আপনার জন্য অবিস্মরণীয় আখ্যানে রূপান্তর করেন।",
   },
 ];
 
 const TRUST_CARDS = [
   {
     title: "Corporate Status",
-    titleBn: "কর্পোরেট স্ট্যাটাস",
     body: "CholoBuddy is registered under the Registrar of Joint Stock Companies and Firms (RJSC) of Bangladesh. Trade License No. TRAD/DSCC/012495/2023, ensuring complete financial safety for every traveler.",
-    bodyBn:
-      "চলোবাডি বাংলাদেশের যৌথ মূলধনী কোম্পানি ও ফার্মসমূহের নিবন্ধক-এর অধীনে নিবন্ধিত। ট্রেড লাইসেন্স নং TRAD/DSCC/012495/2023।",
   },
   {
     title: "Eco-Tourism Fund",
-    titleBn: "ইকো-ট্যুরিজম তহবিল",
     body: "2% of all booking revenues are allocated directly to local eco-conservation projects in Sundarbans and Sajek Valley, preserving Bangladesh's natural heritage.",
-    bodyBn:
-      "সকল বুকিং রাজস্বের ২% সুন্দরবন ও সাজেক ভ্যালিতে স্থানীয় পরিবেশ-সংরক্ষণ প্রকল্পে সরাসরি বরাদ্দ।",
   },
   {
     title: "Verified Operators",
-    titleBn: "যাচাইকৃত অপারেটর",
     body: "Every hotel partner and tour organizer undergoes strict physical audits and license validation before receiving the CholoBuddy Verification Seal.",
-    bodyBn:
-      "প্রতিটি হোটেল অংশীদার এবং ট্যুর সংগঠক কঠোর শারীরিক অডিট এবং লাইসেন্স যাচাইয়ের পরে চলোবাডি সিল পায়।",
   },
 ];
 

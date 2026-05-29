@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TourCard from "@/components/TourCard";
@@ -27,14 +27,18 @@ interface TripsListClientProps {
 }
 
 export default function TripsListClient({ initialTours }: TripsListClientProps) {
-  const { currentLanguage } = useLanguage();
+  const { t, registerTranslations } = useLanguage();
   const { containerVariants, itemVariants } = useAnimationVariants();
   const [searchQuery, setSearchQuery] = useState("");
 
+  useEffect(() => {
+    registerTranslations(initialTours);
+  }, [initialTours, registerTranslations]);
+
   const filteredTours = initialTours.filter((tour) => {
-    const title = (currentLanguage === "bn" ? (tour.titleBn || tour.title) : tour.title) || "";
-    const location = (currentLanguage === "bn" ? (tour.locationBn || tour.location) : tour.location) || "";
-    const description = (currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description) || "";
+    const title = t(tour.title) || "";
+    const location = t(tour.location) || "";
+    const description = t(tour.description) || "";
     const query = searchQuery.toLowerCase();
     
     return (
@@ -52,12 +56,10 @@ export default function TripsListClient({ initialTours }: TripsListClientProps) 
           {/* Page Header */}
           <HeaderSection>
             <MainTitle>
-              {currentLanguage === "bn" ? "সকল ভ্রমণ পরিকল্পনা" : "All Tour Plans"}
+              {t("trips.list.title")}
             </MainTitle>
             <Subtitle>
-              {currentLanguage === "bn"
-                ? "বাংলাদেশ জুড়ে আমাদের সিগনেচার লাক্সারি ইকো-ক্রুজ এবং এক্সক্লুসিভ ভ্রমণ পরিকল্পনার সংগ্রহ।"
-                : "A curated collection of our signature luxury eco-cruises and exclusive itineraries across Bangladesh."}
+              {t("trips.list.subtitle")}
             </Subtitle>
           </HeaderSection>
 
@@ -67,15 +69,13 @@ export default function TripsListClient({ initialTours }: TripsListClientProps) 
               <span className="material-symbols-outlined">search</span>
               <SearchInput
                 type="text"
-                placeholder={currentLanguage === "bn" ? "গন্তব্য বা ভ্রমণের নাম দিয়ে খুঁজুন..." : "Search by destination or tour name..."}
+                placeholder={t("trips.list.search_placeholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </SearchContainer>
             <StatsInfo>
-              {currentLanguage === "bn"
-                ? `মোট ${filteredTours.length} টি ভ্রমণ পরিকল্পনা পাওয়া গেছে`
-                : `Found ${filteredTours.length} ${filteredTours.length === 1 ? "tour plan" : "tour plans"}`}
+              {t("trips.list.found_count", { count: filteredTours.length })}
             </StatsInfo>
           </FiltersWrapper>
 
@@ -97,13 +97,11 @@ export default function TripsListClient({ initialTours }: TripsListClientProps) 
                 travel_explore
               </NoDataIcon>
               <p>
-                {currentLanguage === "bn"
-                  ? "আপনার অনুসন্ধানের সাথে মিলে যাওয়া কোনো ভ্রমণ পরিকল্পনা পাওয়া যায়নি।"
-                  : "No tour plans found matching your search."}
+                {t("trips.list.no_results")}
               </p>
               {searchQuery && (
                 <ClearFiltersBtn onClick={() => setSearchQuery("")}>
-                  {currentLanguage === "bn" ? "অনুসন্ধান মুছুন" : "Clear Search"}
+                  {t("trips.list.clear_search")}
                 </ClearFiltersBtn>
               )}
             </NoDataText>

@@ -139,7 +139,7 @@ export default function Navbar() {
             }}
           >
             <span className="material-symbols-outlined">translate</span>
-            <span>{t("বাংলা")}</span>
+            <span>{t("common.language_toggle_label")}</span>
           </MobileLanguageButton>
         </MobileNav>
       </MobileDrawer>
