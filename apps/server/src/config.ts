@@ -1,13 +1,8 @@
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 import { z } from "zod";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load environment variables from the project root .env file
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+// Load environment variables from the .env file in the current working directory
+dotenv.config();
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(3001),
