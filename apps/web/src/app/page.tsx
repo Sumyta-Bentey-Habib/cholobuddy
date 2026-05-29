@@ -6,7 +6,8 @@ export const dynamic = "force-dynamic";
 export default async function ExplorePage() {
   let tours = [];
   try {
-    const res = await fetch("http://localhost:3001/api/tours", { cache: "no-store" });
+    const apiURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+    const res = await fetch(`${apiURL}/api/tours`, { cache: "no-store" });
     if (res.ok) {
       tours = await res.json();
     } else {
