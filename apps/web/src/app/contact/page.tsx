@@ -31,7 +31,8 @@ import {
   InquiryGroup,
   InquiryBtn,
   SubmitButton,
-  SuccessCard
+  SuccessCard,
+  FormFieldWrapper
 } from "./contact.styles";
 
 const CONTACT_INFO = [
@@ -160,7 +161,7 @@ export default function ContactPage() {
                 </SuccessCard>
               ) : (
                 <form onSubmit={handleSubmit}>
-                  <div style={{ marginBottom: "24px" }}>
+                  <FormFieldWrapper>
                     <FormLabel>{t("Full Name")}</FormLabel>
                     <FormInput
                       type="text"
@@ -169,9 +170,9 @@ export default function ContactPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-                  </div>
+                  </FormFieldWrapper>
 
-                  <div style={{ marginBottom: "24px" }}>
+                  <FormFieldWrapper>
                     <FormLabel>{t("Email Address")}</FormLabel>
                     <FormInput
                       type="email"
@@ -180,9 +181,9 @@ export default function ContactPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                  </div>
+                  </FormFieldWrapper>
 
-                  <div style={{ marginBottom: "24px" }}>
+                  <FormFieldWrapper>
                     <FormLabel>{t("Inquiry Type")}</FormLabel>
                     <InquiryGroup>
                       {INQUIRY_TYPES.map((type) => (
@@ -196,9 +197,9 @@ export default function ContactPage() {
                         </InquiryBtn>
                       ))}
                     </InquiryGroup>
-                  </div>
+                  </FormFieldWrapper>
 
-                  <div style={{ marginBottom: "32px" }}>
+                  <FormFieldWrapper $mb="32px">
                     <FormLabel>{t("Your Message")}</FormLabel>
                     <FormTextarea
                       rows={4}
@@ -209,7 +210,7 @@ export default function ContactPage() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                     />
-                  </div>
+                  </FormFieldWrapper>
 
                   <SubmitButton type="submit" disabled={status === "loading"}>
                     {status === "loading"

@@ -468,3 +468,49 @@ export const ErrorText = styled.p`
   font-weight: 700;
   text-transform: uppercase;
 `;
+
+// ── Extra helpers for trips/[id]/page.tsx ───────────────────────────────────────
+export const CenteredContainer = styled.main`
+  min-height: 100vh;
+  padding-top: 96px;
+  background-color: #f8f9fa;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TourDescBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #ffffff;
+  border: 1px solid rgba(196, 199, 199, 0.3);
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+`;
+
+export const TourDescHeading = styled.h2`
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  border-left: 2px solid #526069;
+  padding-left: 16px;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+
+  @media (min-width: 768px) {
+    font-size: 30px;
+  }
+`;
+
+export const TourDescText = styled.p`
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.7;
+  white-space: pre-line;
+`;

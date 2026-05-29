@@ -46,7 +46,6 @@ export default function TestimonialsSection() {
                   <span
                     key={si}
                     className="material-symbols-outlined"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     star
                   </span>

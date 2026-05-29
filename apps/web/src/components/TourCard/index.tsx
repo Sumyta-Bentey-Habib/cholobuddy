@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import type { Tour } from "@/lib/data";
 import {
   CardContainer,
+  CardLink,
   ImageWrapper,
   TourImage,
   PopularBadge,
@@ -52,7 +53,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
 
   return (
     <CardContainer variants={variants}>
-      <Link href={`/trips/${tourId}`} style={{ display: "flex", flexDirection: "column", height: "100%", textDecoration: "none" }}>
+      <CardLink as={Link} href={`/trips/${tourId}`}>
         {/* Image */}
         <ImageWrapper>
           <TourImage
@@ -117,7 +118,7 @@ export default function TourCard({ tour, variants }: TourCardProps) {
             </BookCta>
           </CardFooter>
         </CardBody>
-      </Link>
+      </CardLink>
     </CardContainer>
   );
 }

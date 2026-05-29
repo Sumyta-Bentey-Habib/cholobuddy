@@ -13,7 +13,8 @@ import {
   TextInput,
   SelectBox,
   MessageBox,
-  SubmitButton
+  SubmitButton,
+  FormBody
 } from "./styles";
 
 export default function SupportForm() {
@@ -40,7 +41,7 @@ export default function SupportForm() {
         {t("support.send_msg_desc")}
       </FormDesc>
 
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <FormBody onSubmit={handleSubmit}>
         
         {/* Name and Email side-by-side */}
         <FormGrid>
@@ -104,7 +105,7 @@ export default function SupportForm() {
           {formState === "success" && t("support.form.submit_sent")}
         </SubmitButton>
 
-      </form>
+      </FormBody>
     </FormContainer>
   );
 }

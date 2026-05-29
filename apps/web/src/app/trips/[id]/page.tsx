@@ -48,7 +48,11 @@ import {
   ProgressBarFill,
   SidebarCol,
   SpinnerWrapper,
-  ErrorText
+  ErrorText,
+  CenteredContainer,
+  TourDescBox,
+  TourDescHeading,
+  TourDescText
 } from "./trips.styles";
 
 export default function TripDetailPage() {
@@ -77,9 +81,9 @@ export default function TripDetailPage() {
     return (
       <>
         <Navbar />
-        <PageContainer style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <CenteredContainer>
           <SpinnerWrapper />
-        </PageContainer>
+        </CenteredContainer>
         <Footer />
       </>
     );
@@ -89,9 +93,9 @@ export default function TripDetailPage() {
     return (
       <>
         <Navbar />
-        <PageContainer style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <CenteredContainer>
           <ErrorText>Tour not found</ErrorText>
-        </PageContainer>
+        </CenteredContainer>
         <Footer />
       </>
     );
@@ -175,14 +179,14 @@ export default function TripDetailPage() {
           {/* Left Column: Facilities, Timeline Itinerary & Review Bars */}
           <LeftContentCol>
             {/* Always show dynamic Description */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px", backgroundColor: "#ffffff", border: "1px solid rgba(196, 199, 199, 0.3)", padding: "24px", borderRadius: "24px", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.02)" }}>
-              <SectionHeading style={{ borderLeft: "2px solid #526069", paddingLeft: "16px" }}>
+            <TourDescBox>
+              <TourDescHeading>
                 {currentLanguage === "bn" ? "ভ্রমণের বিবরণ" : "Tour Description"}
-              </SectionHeading>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "rgba(0, 0, 0, 0.8)", lineHeight: "1.7", whiteSpace: "pre-line" }}>
+              </TourDescHeading>
+              <TourDescText>
                 {currentLanguage === "bn" ? (tour.descriptionBn || tour.description) : tour.description}
-              </p>
-            </div>
+              </TourDescText>
+            </TourDescBox>
 
             {/* Top Facilities Indicators */}
             {tour.inclusions && tour.inclusions.length > 0 && (

@@ -230,3 +230,11 @@ export const BookCta = styled.div`
     color: #ffffff;
   }
 `;
+
+export const CardLink = styled.a`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+`;

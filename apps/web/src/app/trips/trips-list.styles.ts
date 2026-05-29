@@ -184,3 +184,8 @@ export const LoadingIndicator = styled.div`
     100% { transform: rotate(360deg); }
   }
 `;
+
+export const NoDataIcon = styled.span`
+  font-size: 48px;
+  color: rgba(68, 71, 72, 0.3);
+`;

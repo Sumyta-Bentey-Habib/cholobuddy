@@ -216,3 +216,18 @@ export const FaqList = styled.div`
   flex-direction: column;
   gap: 24px;
 `;
+
+export const IframeEl = styled.iframe`
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+`;
+
+export const CardWithPadding = styled.div`
+  background-color: #ffffff;
+  border: 1px solid rgba(196, 199, 199, 0.3);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+`;

@@ -17,7 +17,7 @@ export const GalleryContainer = styled.div<{ $hasThumbnails?: boolean }>`
   }
 `;
 
-export const PrimaryWrapper = styled.div`
+export const PrimaryWrapper = styled.div<{ $fullHeight?: boolean }>`
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
@@ -26,7 +26,7 @@ export const PrimaryWrapper = styled.div`
 
   @media (min-width: 768px) {
     aspect-ratio: auto;
-    height: 384px;
+    height: ${props => props.$fullHeight ? "480px" : "384px"};
   }
 
   img {

@@ -381,3 +381,395 @@ export const ChartBarLabel = styled.span`
   color: rgba(25, 28, 29, 0.4);
   margin-top: 4px;
 `;
+
+// ── Sidebar extras ─────────────────────────────────────────────────────
+export const SidebarBrandLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+`;
+
+export const BrandName = styled.span`
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #000000;
+  text-transform: uppercase;
+`;
+
+export const UserCardInner = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const UserAvatarLg = styled(UserAvatar)`
+  width: 40px;
+  height: 40px;
+  font-size: 13px;
+`;
+
+export const UserInfo = styled.div`
+  min-width: 0;
+`;
+
+export const UserName = styled.p`
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const UserStatusRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+`;
+
+export const StatusDot = styled.span<{ $color?: string }>`
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: ${props => props.$color || "#705d00"};
+  display: inline-block;
+`;
+
+export const UserRole = styled.p`
+  font-family: monospace;
+  font-size: 9px;
+  color: #526069;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+`;
+
+export const NavActiveDot = styled.span`
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #c9a900;
+  display: inline-block;
+`;
+
+// ── Topbar ───────────────────────────────────────────────────────────────────
+export const TopbarLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const TopbarRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const TopbarTitle = styled.h1`
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+export const TopbarSubtitle = styled.p`
+  font-family: monospace;
+  font-size: 9px;
+  color: #526069;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 2px;
+`;
+
+export const HomeLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(82, 96, 105, 0.15);
+  background: #f1f3f5;
+  font-family: monospace;
+  font-size: 11px;
+  color: #526069;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e5e7eb;
+    color: #000000;
+  }
+`;
+
+export const UserAvatarSm = styled(UserAvatar)`
+  width: 32px;
+  height: 32px;
+  font-size: 11px;
+`;
+
+// ── Tab wrappers ────────────────────────────────────────────────────────────
+export const TabPane = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+`;
+
+export const TabPaneGap20 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+// ── Stat card internals ──────────────────────────────────────────────────
+export const StatCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+export const StatLabel = styled.p`
+  font-family: monospace;
+  font-size: 9px;
+  color: #526069;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+`;
+
+export const StatValue = styled.p`
+  font-family: monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 8px;
+`;
+
+// ── Chart header ────────────────────────────────────────────────────────────
+export const ChartHeaderRow = styled.div`
+  margin-bottom: 20px;
+`;
+
+export const ChartTitle = styled.h3`
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+export const ChartDesc = styled.p`
+  color: #526069;
+  font-size: 12px;
+  margin-top: 4px;
+`;
+
+// ── Section headers ──────────────────────────────────────────────────────────
+export const SectionTopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const SectionTitle = styled.h2`
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+`;
+
+export const SectionCount = styled.span`
+  font-family: monospace;
+  font-size: 10px;
+  color: #526069;
+  text-transform: uppercase;
+`;
+
+// ── Table extras ────────────────────────────────────────────────────────────
+export const TableHeaderRow = styled.tr`
+  border-bottom: 1px solid rgba(82, 96, 105, 0.08);
+`;
+
+export const TableTh = styled.th`
+  padding: 14px 20px;
+  text-align: left;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: #526069;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+`;
+
+export const TableTr = styled.tr`
+  border-bottom: 1px solid rgba(82, 96, 105, 0.08);
+`;
+
+export const TableTdMono = styled.td`
+  padding: 14px 20px;
+  font-family: monospace;
+  font-size: 11px;
+  color: #8e9aa2;
+`;
+
+export const TableTdTitle = styled.td`
+  padding: 14px 20px;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const TableTdBold = styled.td`
+  padding: 14px 20px;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000;
+`;
+
+export const TableTdPad = styled.td`
+  padding: 14px 20px;
+`;
+
+export const DeleteBtn = styled.button`
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(239, 68, 68, 0.7);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+`;
+
+export const EditBtn = styled.button`
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #705d00;
+  border: 1px solid rgba(82, 96, 105, 0.15);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s;
+  margin-right: 8px;
+
+  &:hover {
+    background: rgba(201, 169, 0, 0.08);
+    border-color: rgba(201, 169, 0, 0.3);
+  }
+`;
+
+export const TableImgTd = styled.td`
+  padding: 14px 20px;
+`;
+
+export const TableImg = styled.img`
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 12px;
+`;
+
+// ── Tour form ─────────────────────────────────────────────────────────────────
+export const TourFormTitle = styled.h4`
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+`;
+
+export const TourFormBody = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const TourFormGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+`;
+
+export const TourFormGridCenter = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+`;
+
+export const TourFormActions = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const CheckboxRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+`;
+
+export const CheckboxInput = styled.input`
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+`;
+
+export const CheckboxLabel = styled.label`
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  text-transform: uppercase;
+`;
+
+export const TextareaField = styled.input`
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(82, 96, 105, 0.15);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 14px;
+  color: #000000;
+  font-family: monospace;
+  outline: none;
+  resize: vertical;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: #8e9aa2;
+  }
+
+  &:focus {
+    border-color: rgba(201,169,0,.60);
+    box-shadow: 0 0 0 2px rgba(201,169,0,0.15);
+  }
+`;

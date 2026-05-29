@@ -342,3 +342,7 @@ export const SocialHandle = styled.span`
     color: #ffffff;
   }
 `;
+
+export const FormFieldWrapper = styled.div<{ $mb?: string }>`
+  margin-bottom: ${props => props.$mb || "24px"};
+`;

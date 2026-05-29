@@ -7,7 +7,31 @@ import SupportForm from "@/components/SupportForm";
 import FaqItem from "@/components/FaqItem";
 import { faqsData } from "@/lib/data";
 import { useLanguage } from "@/hooks/useLanguage";
-import * as S from "./support.styles";
+import {
+  SupportContainer,
+  SupportHeader,
+  SupportTitle,
+  AlponaBorderTop,
+  GridSection,
+  GridContainer,
+  Sidebar,
+  Card,
+  SidebarTitle,
+  CategoryNav,
+  CategoryBtn,
+  InfoItem,
+  InfoLabel,
+  InfoValue,
+  Separator,
+  MapWrapper,
+  MapBadge,
+  MapContainer,
+  IframeEl,
+  MainContent,
+  CardWithPadding,
+  FaqTitle,
+  FaqList
+} from "./support.styles";
 
 type FaqCategory = "cancellations" | "refunds" | "payments";
 
@@ -19,101 +43,98 @@ export default function SupportPage() {
     <>
       <Navbar />
 
-      <S.SupportContainer>
+      <SupportContainer>
         {/* Support Header */}
-        <S.SupportHeader>
-          <S.SupportTitle
+        <SupportHeader>
+          <SupportTitle
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             {t("support.title")}
-          </S.SupportTitle>
-        </S.SupportHeader>
+          </SupportTitle>
+        </SupportHeader>
 
         {/* Blueprint Ruler Divider */}
-        <S.AlponaBorderTop />
+        <AlponaBorderTop />
 
         {/* Help-Center Layout Grid */}
-        <S.GridSection>
-          <S.GridContainer>
+        <GridSection>
+          <GridContainer>
             
             {/* Left Sidebar: FAQ Categories & Hotlines */}
-            <S.Sidebar>
+            <Sidebar>
               
               {/* FAQ Categories Selection */}
-              <S.Card>
-                <S.SidebarTitle>{t("FAQ Categories")}</S.SidebarTitle>
-                <S.CategoryNav>
-                  <S.CategoryBtn
+              <Card>
+                <SidebarTitle>{t("FAQ Categories")}</SidebarTitle>
+                <CategoryNav>
+                  <CategoryBtn
                     onClick={() => setActiveCategory("cancellations")}
                     $active={activeCategory === "cancellations"}
                   >
                     <span className="material-symbols-outlined">cancel</span>
                     <span>{t("Cancellations")}</span>
-                  </S.CategoryBtn>
-                  <S.CategoryBtn
+                  </CategoryBtn>
+                  <CategoryBtn
                     onClick={() => setActiveCategory("refunds")}
                     $active={activeCategory === "refunds"}
                   >
                     <span className="material-symbols-outlined">assignment_return</span>
                     <span>{t("Refunds")}</span>
-                  </S.CategoryBtn>
-                  <S.CategoryBtn
+                  </CategoryBtn>
+                  <CategoryBtn
                     onClick={() => setActiveCategory("payments")}
                     $active={activeCategory === "payments"}
                   >
                     <span className="material-symbols-outlined">payments</span>
                     <span>{t("Payments & Billing")}</span>
-                  </S.CategoryBtn>
-                </S.CategoryNav>
-              </S.Card>
+                  </CategoryBtn>
+                </CategoryNav>
+              </Card>
 
               {/* Direct Hotlines & Office Addresses */}
-              <S.Card>
-                <S.InfoItem>
-                  <S.InfoLabel>{t("support.address_label")}</S.InfoLabel>
-                  <S.InfoValue>{t("support.address_val")}</S.InfoValue>
-                </S.InfoItem>
+              <Card>
+                <InfoItem>
+                  <InfoLabel>{t("support.address_label")}</InfoLabel>
+                  <InfoValue>{t("support.address_val")}</InfoValue>
+                </InfoItem>
 
-                <S.Separator />
+                <Separator />
 
-                <S.InfoItem>
-                  <S.InfoLabel>{t("support.phone_label")}</S.InfoLabel>
-                  <S.InfoValue>{t("support.phone_val")}</S.InfoValue>
-                </S.InfoItem>
-                <S.InfoItem>
-                  <S.InfoLabel>{t("support.email_label")}</S.InfoLabel>
-                  <S.InfoValue>hello@cholobuddy.com</S.InfoValue>
-                </S.InfoItem>
-              </S.Card>
+                <InfoItem>
+                  <InfoLabel>{t("support.phone_label")}</InfoLabel>
+                  <InfoValue>{t("support.phone_val")}</InfoValue>
+                </InfoItem>
+                <InfoItem>
+                  <InfoLabel>{t("support.email_label")}</InfoLabel>
+                  <InfoValue>hello@cholobuddy.com</InfoValue>
+                </InfoItem>
+              </Card>
 
               {/* Grayscale Map Snippet */}
-              <S.MapWrapper>
-                <S.MapBadge>{t("support.map_badge")}</S.MapBadge>
-                <S.MapContainer>
-                  <iframe
+              <MapWrapper>
+                <MapBadge>{t("support.map_badge")}</MapBadge>
+                <MapContainer>
+                  <IframeEl
                     title="CholoBuddy HQ location map"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.285816999742!2d90.41724031536254!3d23.737198994532296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b85c3b123457%3A0x6b2e3e548dbcd81f!2sMotijheel%2C%20Dhaka%201000!5e0!3m2!1sen!2sbd!4v1694294022849!5m2!1sen!2sbd"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
                     allowFullScreen={false}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
-                </S.MapContainer>
-              </S.MapWrapper>
+                </MapContainer>
+              </MapWrapper>
 
-            </S.Sidebar>
+            </Sidebar>
 
             {/* Main Content Column */}
-            <S.MainContent>
+            <MainContent>
               
               {/* FAQ Active List Panel */}
-              <S.Card style={{ padding: "32px" }}>
-                <S.FaqTitle>{t("Frequently Asked Questions")}</S.FaqTitle>
-                <S.FaqList>
+              <CardWithPadding>
+                <FaqTitle>{t("Frequently Asked Questions")}</FaqTitle>
+                <FaqList>
                   {faqsData[activeCategory].items.map((faq, idx) => (
                     <FaqItem
                       key={idx}
@@ -122,17 +143,17 @@ export default function SupportPage() {
                       idx={idx}
                     />
                   ))}
-                </S.FaqList>
-              </S.Card>
+                </FaqList>
+              </CardWithPadding>
 
               {/* Contact Message Form Component */}
               <SupportForm />
 
-            </S.MainContent>
+            </MainContent>
 
-          </S.GridContainer>
-        </S.GridSection>
-      </S.SupportContainer>
+          </GridContainer>
+        </GridSection>
+      </SupportContainer>
 
       <Footer />
     </>

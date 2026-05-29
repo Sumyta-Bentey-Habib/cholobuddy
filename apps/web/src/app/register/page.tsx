@@ -7,7 +7,53 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/context/Toast";
-import * as S from "./register.styles";
+import {
+  AuthPage,
+  AuthLeft,
+  AuthBgImage,
+  AuthBgFade,
+  AuthGridTexture,
+  AuthOrb,
+  LeftPanelContent,
+  BrandRow,
+  BrandIcon,
+  BrandName,
+  HeadlineSection,
+  AdTagline,
+  HeroH1,
+  GradientSpan,
+  HeroDesc,
+  FeatureGrid,
+  FeatureItem,
+  FeatureIconBox,
+  FeatureLabel,
+  QuoteBlock,
+  QuoteItalic,
+  QuoteAuthor,
+  AuthRight,
+  FloatingHomeArea,
+  HomeLink,
+  FloatOrb,
+  AuthGlassCard,
+  GlassShimmer,
+  FormHeader,
+  FormTitle,
+  FormSubtitle,
+  ProgressBarWrapper,
+  ProgressBarFill,
+  ProgressNote,
+  FormBody,
+  FormLabel,
+  InputGroup,
+  InputIcon,
+  FormInput,
+  EyeButton,
+  SubmitBtn,
+  FormFooterText,
+  FormLink,
+  SuspenseFallback,
+  SpinnerDiv
+} from "./register.styles";
 
 const features = [
   { icon: "travel_explore", label: "120+ destinations" },
@@ -55,98 +101,85 @@ function RegisterContent() {
   const progress = (filled / 4) * 100;
 
   return (
-    <S.AuthPage>
+    <AuthPage>
       {/* LEFT PANEL */}
-      <S.AuthLeft>
-        <S.AuthBgImage style={{ backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop')" }} />
-        <S.AuthBgFade />
-        <S.AuthGridTexture />
-        <S.AuthOrb $position="p1" />
-        <S.AuthOrb $position="p2" />
+      <AuthLeft>
+        <AuthBgImage style={{ backgroundImage: "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600&auto=format&fit=crop')" }} />
+        <AuthBgFade />
+        <AuthGridTexture />
+        <AuthOrb $position="p1" />
+        <AuthOrb $position="p2" />
 
-        <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", padding: "48px 56px" }}>
+        <LeftPanelContent>
           {/* Brand */}
           <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "12px", textDecoration: "none" }}>
-              <S.BrandIcon $variant="purple">
+            <BrandRow as={Link} href="/">
+              <BrandIcon $variant="purple">
                 <span className="material-symbols-outlined" style={{ color: "#fff", fontSize: "18px" }}>flight_takeoff</span>
-              </S.BrandIcon>
-              <span style={{ fontFamily: "monospace", fontSize: "13px", fontWeight: 700, letterSpacing: "0.2em", color: "#fff", textTransform: "uppercase" }}>
-                CholoBuddy
-              </span>
-            </Link>
+              </BrandIcon>
+              <BrandName>CholoBuddy</BrandName>
+            </BrandRow>
           </motion.div>
 
           {/* Headline */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <HeadlineSection>
             <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
-              <p style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "0.3em", color: "#c9a900", textTransform: "uppercase", marginBottom: "20px" }}>
-                Begin your journey
-              </p>
-              <h1 style={{ fontSize: "36px", fontWeight: 800, color: "#fff", lineHeight: 1.15, marginBottom: "16px" }}>
+              <AdTagline>Begin your journey</AdTagline>
+              <HeroH1>
                 Join thousands of<br />
-                <span style={{ background: "linear-gradient(135deg,#526069,#c9a900,#e9c400)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-                  adventurous travelers
-                </span>
-              </h1>
-              <p style={{ color: "#94a3b8", fontSize: "14px", lineHeight: 1.7, maxWidth: "400px", marginTop: "10px" }}>
+                <GradientSpan>adventurous travelers</GradientSpan>
+              </HeroH1>
+              <HeroDesc>
                 Create your account and unlock premium travel experiences across Bangladesh's most breathtaking destinations.
-              </p>
+              </HeroDesc>
             </motion.div>
 
             {/* Feature grid */}
-            <S.FeatureGrid
+            <FeatureGrid
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
             >
               {features.map((f, i) => (
-                <S.FeatureItem
+                <FeatureItem
                   key={f.label}
                   initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.35, delay: 0.5 + i * 0.07 }}
                 >
-                  <S.FeatureIconBox>
+                  <FeatureIconBox>
                     <span className="material-symbols-outlined" style={{ color: "#e9c400", fontSize: "16px" }}>{f.icon}</span>
-                  </S.FeatureIconBox>
-                  <S.FeatureLabel>{f.label}</S.FeatureLabel>
-                </S.FeatureItem>
+                  </FeatureIconBox>
+                  <FeatureLabel>{f.label}</FeatureLabel>
+                </FeatureItem>
               ))}
-            </S.FeatureGrid>
-          </div>
+            </FeatureGrid>
+          </HeadlineSection>
 
           {/* Quote */}
-          <S.QuoteBlock
+          <QuoteBlock
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.75 }}
           >
-            <p style={{ color: "#475569", fontSize: "13px", fontStyle: "italic", lineHeight: 1.7 }}>
+            <QuoteItalic>
               "The world is a book, and those who do not travel read only one page."
-            </p>
-            <p style={{ fontFamily: "monospace", fontSize: "10px", color: "#334155", textTransform: "uppercase", letterSpacing: "0.2em", marginTop: "8px" }}>
-              — Saint Augustine
-            </p>
-          </S.QuoteBlock>
-        </div>
-      </S.AuthLeft>
+            </QuoteItalic>
+            <QuoteAuthor>— Saint Augustine</QuoteAuthor>
+          </QuoteBlock>
+        </LeftPanelContent>
+      </AuthLeft>
 
       {/* RIGHT PANEL */}
-      <S.AuthRight>
+      <AuthRight>
         {/* Floating Home Button */}
-        <div style={{ position: "absolute", top: "24px", right: "24px", zIndex: 50 }}>
-          <Link
-            href="/"
-            style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 14px", borderRadius: "10px", border: "1px solid rgba(255, 255, 255, 0.09)", background: "rgba(255, 255, 255, 0.04)", fontFamily: "monospace", fontSize: "11px", color: "#bac9d3", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", transition: "all 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,.09)"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,.20)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,.04)"; (e.currentTarget as HTMLAnchorElement).style.color = "#bac9d3"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,.09)"; }}
-          >
+        <FloatingHomeArea>
+          <HomeLink as={Link} href="/">
             <span className="material-symbols-outlined" style={{ fontSize: "14px" }}>home</span>
             Home
-          </Link>
-        </div>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "360px", height: "360px", borderRadius: "9999px", background: "rgba(139,92,246,.05)", filter: "blur(80px)", pointerEvents: "none" }} />
+          </HomeLink>
+        </FloatingHomeArea>
+        <FloatOrb />
 
         <motion.div
           initial={{ opacity: 0, y: 36 }}
@@ -154,30 +187,29 @@ function RegisterContent() {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           style={{ position: "relative", width: "100%", maxWidth: "420px" }}
         >
-          <S.AuthGlassCard>
-            <S.GlassShimmer $variant="purple" />
+          <AuthGlassCard>
+            <GlassShimmer $variant="purple" />
 
             {/* Header + progress */}
-            <div style={{ position: "relative", marginBottom: "24px" }}>
-              <h2 style={{ fontSize: "22px", fontWeight: 700, color: "#fff", marginBottom: "4px" }}>{t("register.welcome")}</h2>
-              <p style={{ color: "#64748b", fontSize: "13px", marginBottom: "16px" }}>{t("register.desc")}</p>
+            <FormHeader>
+              <FormTitle>{t("register.welcome")}</FormTitle>
+              <FormSubtitle>{t("register.desc")}</FormSubtitle>
 
               {/* Progress bar */}
-              <S.ProgressBarWrapper>
-                <S.ProgressBarFill animate={{ width: `${progress}%` }} transition={{ duration: 0.35 }} />
-              </S.ProgressBarWrapper>
-              <p style={{ fontFamily: "monospace", fontSize: "9px", color: "#334155", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: "4px" }}>
-                {filled}/4 fields completed
-              </p>
-            </div>
+              <ProgressBarWrapper>
+                <ProgressBarFill animate={{ width: `${progress}%` }} transition={{ duration: 0.35 }} />
+              </ProgressBarWrapper>
+              <ProgressNote>{filled}/4 fields completed</ProgressNote>
+            </FormHeader>
+
             {/* Form */}
-            <form onSubmit={handleSubmit} style={{ position: "relative", display: "flex", flexDirection: "column", gap: "14px" }}>
+            <FormBody onSubmit={handleSubmit}>
               {/* Full Name */}
               <div>
-                <S.FormLabel>{t("register.fullname_label")}</S.FormLabel>
-                <S.InputGroup>
-                  <S.InputIcon className="material-symbols-outlined">person</S.InputIcon>
-                  <S.FormInput
+                <FormLabel>{t("register.fullname_label")}</FormLabel>
+                <InputGroup>
+                  <InputIcon className="material-symbols-outlined">person</InputIcon>
+                  <FormInput
                     required
                     type="text"
                     value={fullname}
@@ -185,15 +217,15 @@ function RegisterContent() {
                     placeholder={t("register.fullname_placeholder")}
                     $focusVariant="purple"
                   />
-                </S.InputGroup>
+                </InputGroup>
               </div>
 
               {/* Email */}
               <div>
-                <S.FormLabel>{t("register.email_label")}</S.FormLabel>
-                <S.InputGroup>
-                  <S.InputIcon className="material-symbols-outlined">mail</S.InputIcon>
-                  <S.FormInput
+                <FormLabel>{t("register.email_label")}</FormLabel>
+                <InputGroup>
+                  <InputIcon className="material-symbols-outlined">mail</InputIcon>
+                  <FormInput
                     required
                     type="email"
                     value={email}
@@ -201,15 +233,15 @@ function RegisterContent() {
                     placeholder={t("register.email_placeholder")}
                     $focusVariant="purple"
                   />
-                </S.InputGroup>
+                </InputGroup>
               </div>
 
               {/* Password */}
               <div>
-                <S.FormLabel>{t("register.password_label")}</S.FormLabel>
-                <S.InputGroup>
-                  <S.InputIcon className="material-symbols-outlined">lock</S.InputIcon>
-                  <S.FormInput
+                <FormLabel>{t("register.password_label")}</FormLabel>
+                <InputGroup>
+                  <InputIcon className="material-symbols-outlined">lock</InputIcon>
+                  <FormInput
                     required
                     type={showPassword ? "text" : "password"}
                     value={password}
@@ -218,20 +250,20 @@ function RegisterContent() {
                     $hasRightIcon={true}
                     $focusVariant="purple"
                   />
-                  <S.EyeButton type="button" onClick={() => setShowPassword(v => !v)}>
+                  <EyeButton type="button" onClick={() => setShowPassword(v => !v)}>
                     <span className="material-symbols-outlined" style={{ fontSize: "17px" }}>
                       {showPassword ? "visibility_off" : "visibility"}
                     </span>
-                  </S.EyeButton>
-                </S.InputGroup>
+                  </EyeButton>
+                </InputGroup>
               </div>
 
               {/* Confirm Password */}
               <div>
-                <S.FormLabel>{t("register.confirm_password_label")}</S.FormLabel>
-                <S.InputGroup>
-                  <S.InputIcon className="material-symbols-outlined">lock_clock</S.InputIcon>
-                  <S.FormInput
+                <FormLabel>{t("register.confirm_password_label")}</FormLabel>
+                <InputGroup>
+                  <InputIcon className="material-symbols-outlined">lock_clock</InputIcon>
+                  <FormInput
                     required
                     type={showConfirm ? "text" : "password"}
                     value={confirmPassword}
@@ -240,39 +272,39 @@ function RegisterContent() {
                     $hasRightIcon={true}
                     $focusVariant="purple"
                   />
-                  <S.EyeButton type="button" onClick={() => setShowConfirm(v => !v)}>
+                  <EyeButton type="button" onClick={() => setShowConfirm(v => !v)}>
                     <span className="material-symbols-outlined" style={{ fontSize: "17px" }}>
                       {showConfirm ? "visibility_off" : "visibility"}
                     </span>
-                  </S.EyeButton>
-                </S.InputGroup>
+                  </EyeButton>
+                </InputGroup>
               </div>
 
               {/* Submit */}
-              <S.SubmitBtn type="submit" disabled={isSubmitting}>
+              <SubmitBtn type="submit" disabled={isSubmitting}>
                 {isSubmitting ? t("register.submit_loading") : t("register.submit_idle")}
-              </S.SubmitBtn>
+              </SubmitBtn>
 
-              <p style={{ textAlign: "center", fontFamily: "monospace", fontSize: "11px", color: "#475569", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+              <FormFooterText>
                 {t("register.have_account")}{" "}
-                <Link href={callbackUrl ? `/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/login"} style={{ color: "#c9a900", fontWeight: 700, textDecoration: "none" }}>
+                <FormLink as={Link} href={callbackUrl ? `/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/login"}>
                   {t("register.sign_in")}
-                </Link>
-              </p>
-            </form>
-          </S.AuthGlassCard>
+                </FormLink>
+              </FormFooterText>
+            </FormBody>
+          </AuthGlassCard>
         </motion.div>
-      </S.AuthRight>
-    </S.AuthPage>
+      </AuthRight>
+    </AuthPage>
   );
 }
 
 export default function RegisterPage() {
   return (
     <Suspense fallback={
-      <main style={{ minHeight: "100vh", backgroundColor: "#0b0c10", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "32px", height: "32px", border: "4px solid #ffffff", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
-      </main>
+      <SuspenseFallback>
+        <SpinnerDiv />
+      </SuspenseFallback>
     }>
       <RegisterContent />
     </Suspense>

@@ -150,3 +150,9 @@ export const SubmitButton = styled.button<SubmitBtnProps>`
     transform: scale(0.98);
   }
 `;
+
+export const FormBody = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;

@@ -2,7 +2,12 @@
 
 import React, { createContext, useContext, useState, useCallback, useMemo } from "react";
 import { AnimatePresence } from "framer-motion";
-import * as S from "./styles";
+import {
+  ToastContainer,
+  ToastItem,
+  ToastIcon,
+  ToastMessage
+} from "./styles";
 
 import type { ToastType } from "./styles";
 
@@ -52,10 +57,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      <S.ToastContainer>
+      <ToastContainer>
         <AnimatePresence>
           {toasts.map((t) => (
-            <S.ToastItem
+            <ToastItem
               key={t.id}
               $type={t.type}
               initial={{ opacity: 0, y: 24, scale: 0.92 }}
@@ -64,17 +69,17 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               layout
             >
-              <S.ToastIcon className="material-symbols-outlined">
+              <ToastIcon className="material-symbols-outlined">
                 {t.type === "success" && "check_circle"}
                 {t.type === "error" && "error"}
                 {t.type === "warning" && "warning"}
                 {t.type === "info" && "info"}
-              </S.ToastIcon>
-              <S.ToastMessage>{t.message}</S.ToastMessage>
-            </S.ToastItem>
+              </ToastIcon>
+              <ToastMessage>{t.message}</ToastMessage>
+            </ToastItem>
           ))}
         </AnimatePresence>
-      </S.ToastContainer>
+      </ToastContainer>
     </ToastContext.Provider>
   );
 }

@@ -20,7 +20,7 @@ export default function TripGallery({ primaryImg, galleryImages }: TripGalleryPr
   return (
     <GalleryContainer $hasThumbnails={hasThumbnails}>
       {/* Left: 1 Large Image */}
-      <PrimaryWrapper style={{ height: hasThumbnails ? undefined : "480px" }}>
+      <PrimaryWrapper $fullHeight={!hasThumbnails}>
         <img
           alt="Tour Primary"
           src={primaryImg}

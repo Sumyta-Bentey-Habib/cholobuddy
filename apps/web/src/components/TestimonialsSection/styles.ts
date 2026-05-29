@@ -95,6 +95,7 @@ export const StarsWrapper = styled.div`
   
   span {
     font-size: 16px;
+    font-variation-settings: 'FILL' 1;
   }
 `;
 

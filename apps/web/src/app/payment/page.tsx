@@ -8,7 +8,62 @@ import { useLanguage } from "@/hooks/useLanguage";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/context/Toast";
-import * as S from "./payment.styles";
+import {
+  SuccessContainer,
+  SuccessCard,
+  CheckCircle,
+  PageTitle,
+  SuccessReceipt,
+  ReceiptRow,
+  ReceiptLabel,
+  ReceiptVal,
+  ActionButtonGroup,
+  PrimaryBtn,
+  SecondaryBtn,
+  PaymentContainer,
+  ProcessingOverlay,
+  LoaderWrapper,
+  Spinner,
+  ProcessingMsg,
+  GridWrapper,
+  BreadcrumbButton,
+  PageSubtitle,
+  ContentLayout,
+  PaymentFormPanel,
+  TabHeader,
+  TabButton,
+  TabTitle,
+  CardPreview,
+  CardHeader,
+  CardSystemLabel,
+  CardBrand,
+  CardNumberDisplay,
+  CardFooter,
+  CardHolderBlock,
+  CardDetailLabel,
+  CardDetailValue,
+  CardFieldsGrid,
+  FieldWrapper,
+  FieldLabel,
+  FieldInput,
+  PayButton,
+  ProviderGrid,
+  ProviderBtn,
+  MobileFormWrapper,
+  ProviderBadgeWrapper,
+  ProviderBadge,
+  ButtonGroup,
+  SummaryCard,
+  SummaryHeader,
+  SummaryTourTitle,
+  DetailRow,
+  DetailCell,
+  DetailLabel,
+  DetailVal,
+  CostBox,
+  CostRow,
+  CostTotalRow
+} from "./payment.styles";
 
 function PaymentContent() {
   const searchParams = useSearchParams();
@@ -155,224 +210,224 @@ function PaymentContent() {
 
   if (paymentSuccess) {
     return (
-      <S.SuccessContainer>
-        <S.SuccessCard
+      <SuccessContainer>
+        <SuccessCard
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Animated checkmark */}
-          <S.CheckCircle>
+          <CheckCircle>
             <span className="material-symbols-outlined">check</span>
-          </S.CheckCircle>
+          </CheckCircle>
 
-          <S.PageTitle style={{ fontSize: "24px", marginBottom: "8px" }}>
+          <PageTitle style={{ fontSize: "24px", marginBottom: "8px" }}>
             Payment Successful!
-          </S.PageTitle>
+          </PageTitle>
           <p style={{ color: "rgba(25, 28, 29, 0.8)", fontSize: "14px", marginBottom: "24px" }}>
             Your booking for <strong style={{ color: "#000000" }}>{tourTitle}</strong> has been secured.
           </p>
 
           {/* Receipt details */}
-          <S.SuccessReceipt>
-            <S.ReceiptRow>
-              <S.ReceiptLabel>Transaction ID:</S.ReceiptLabel>
-              <S.ReceiptVal>{txnId}</S.ReceiptVal>
-            </S.ReceiptRow>
-            <S.ReceiptRow>
-              <S.ReceiptLabel>Payment Type:</S.ReceiptLabel>
-              <S.ReceiptVal style={{ textTransform: "uppercase" }}>
+          <SuccessReceipt>
+            <ReceiptRow>
+              <ReceiptLabel>Transaction ID:</ReceiptLabel>
+              <ReceiptVal>{txnId}</ReceiptVal>
+            </ReceiptRow>
+            <ReceiptRow>
+              <ReceiptLabel>Payment Type:</ReceiptLabel>
+              <ReceiptVal style={{ textTransform: "uppercase" }}>
                 {activeTab === "cards" ? "Credit Card" : activeTab === "mobile" ? `${selectedMobile} mobile` : "Net Banking"}
-              </S.ReceiptVal>
-            </S.ReceiptRow>
-            <S.ReceiptRow>
-              <S.ReceiptLabel>Traveler:</S.ReceiptLabel>
-              <S.ReceiptVal>{user?.name || "Premium Explorer"}</S.ReceiptVal>
-            </S.ReceiptRow>
-            <S.ReceiptRow>
-              <S.ReceiptLabel>Total Guests:</S.ReceiptLabel>
-              <S.ReceiptVal>{guests} traveler(s)</S.ReceiptVal>
-            </S.ReceiptRow>
-            <S.ReceiptRow>
-              <S.ReceiptLabel>Date Range:</S.ReceiptLabel>
-              <S.ReceiptVal>{dateLabels[dateKey] || dateKey}</S.ReceiptVal>
-            </S.ReceiptRow>
-            <S.ReceiptRow style={{ borderTop: "1px solid rgba(196, 199, 199, 0.2)", paddingTop: "12px", fontWeight: "bold", fontSize: "14px", color: "#000000" }}>
-              <S.ReceiptLabel style={{ opacity: 1 }}>Amount Paid:</S.ReceiptLabel>
+              </ReceiptVal>
+            </ReceiptRow>
+            <ReceiptRow>
+              <ReceiptLabel>Traveler:</ReceiptLabel>
+              <ReceiptVal>{user?.name || "Premium Explorer"}</ReceiptVal>
+            </ReceiptRow>
+            <ReceiptRow>
+              <ReceiptLabel>Total Guests:</ReceiptLabel>
+              <ReceiptVal>{guests} traveler(s)</ReceiptVal>
+            </ReceiptRow>
+            <ReceiptRow>
+              <ReceiptLabel>Date Range:</ReceiptLabel>
+              <ReceiptVal>{dateLabels[dateKey] || dateKey}</ReceiptVal>
+            </ReceiptRow>
+            <ReceiptRow style={{ borderTop: "1px solid rgba(196, 199, 199, 0.2)", paddingTop: "12px", fontWeight: "bold", fontSize: "14px", color: "#000000" }}>
+              <ReceiptLabel style={{ opacity: 1 }}>Amount Paid:</ReceiptLabel>
               <span style={{ color: "#705d00" }}>৳{totalAmount.toLocaleString()}</span>
-            </S.ReceiptRow>
-          </S.SuccessReceipt>
+            </ReceiptRow>
+          </SuccessReceipt>
 
-          <S.ActionButtonGroup>
-            <S.PrimaryBtn
+          <ActionButtonGroup>
+            <PrimaryBtn
               onClick={() => router.push("/dashboard")}
               style={{ flex: "none", padding: "14px 28px" }}
             >
               Go to Dashboard
-            </S.PrimaryBtn>
-            <S.SecondaryBtn
+            </PrimaryBtn>
+            <SecondaryBtn
               onClick={() => router.push("/")}
               style={{ flex: "none", padding: "14px 28px" }}
             >
               Return Home
-            </S.SecondaryBtn>
-          </S.ActionButtonGroup>
-        </S.SuccessCard>
-      </S.SuccessContainer>
+            </SecondaryBtn>
+          </ActionButtonGroup>
+        </SuccessCard>
+      </SuccessContainer>
     );
   }
 
   return (
-    <S.PaymentContainer>
+    <PaymentContainer>
       {/* Processing Loader Overlay */}
       <AnimatePresence>
         {processing && (
-          <S.ProcessingOverlay
+          <ProcessingOverlay
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <S.LoaderWrapper>
-              <S.Spinner />
-              <S.ProcessingMsg>
+            <LoaderWrapper>
+              <Spinner />
+              <ProcessingMsg>
                 {processingMsg}
-              </S.ProcessingMsg>
-            </S.LoaderWrapper>
-          </S.ProcessingOverlay>
+              </ProcessingMsg>
+            </LoaderWrapper>
+          </ProcessingOverlay>
         )}
       </AnimatePresence>
 
-      <S.GridWrapper>
+      <GridWrapper>
         {/* Breadcrumb / Title */}
         <div style={{ marginBottom: "32px", userSelect: "none" }}>
-          <S.BreadcrumbButton onClick={() => router.back()}>
+          <BreadcrumbButton onClick={() => router.back()}>
             <span className="material-symbols-outlined">arrow_back</span>
             Back to Tour Details
-          </S.BreadcrumbButton>
-          <S.PageTitle>
+          </BreadcrumbButton>
+          <PageTitle>
             Checkout Securely
-          </S.PageTitle>
-          <S.PageSubtitle>
+          </PageTitle>
+          <PageSubtitle>
             SSLCommerz Dummy Sandbox Gateway
-          </S.PageSubtitle>
+          </PageSubtitle>
         </div>
 
-        <S.ContentLayout>
+        <ContentLayout>
           {/* Left Column - Payment Tabs */}
-          <S.PaymentFormPanel>
-            <S.TabHeader>
-              <S.TabButton
+          <PaymentFormPanel>
+            <TabHeader>
+              <TabButton
                 onClick={() => setActiveTab("cards")}
                 $active={activeTab === "cards"}
               >
                 <span className="material-symbols-outlined">credit_card</span>
                 Cards
-              </S.TabButton>
-              <S.TabButton
+              </TabButton>
+              <TabButton
                 onClick={() => setActiveTab("mobile")}
                 $active={activeTab === "mobile"}
               >
                 <span className="material-symbols-outlined">phone_iphone</span>
                 Mobile Banking
-              </S.TabButton>
-              <S.TabButton
+              </TabButton>
+              <TabButton
                 onClick={() => setActiveTab("internet")}
                 $active={activeTab === "internet"}
               >
                 <span className="material-symbols-outlined">language</span>
                 Net Banking
-              </S.TabButton>
-            </S.TabHeader>
+              </TabButton>
+            </TabHeader>
 
             {/* TAB CONTENT: CARDS */}
             {activeTab === "cards" && (
               <div>
-                <S.TabTitle>Enter Card Details</S.TabTitle>
+                <TabTitle>Enter Card Details</TabTitle>
 
                 {/* Mock Card Preview */}
-                <S.CardPreview>
-                  <S.CardHeader>
-                    <S.CardSystemLabel>CholoBuddy Card</S.CardSystemLabel>
-                    {cardType === "visa" && <S.CardBrand $brandColor="#2A52BE">VISA</S.CardBrand>}
-                    {cardType === "mastercard" && <S.CardBrand $brandColor="#E52A2D">MasterCard</S.CardBrand>}
-                    {cardType === "amex" && <S.CardBrand $brandColor="#007BC4">AMEX</S.CardBrand>}
-                    {cardType === "unknown" && <S.CardSystemLabel style={{ opacity: 0.4 }}>CARD</S.CardSystemLabel>}
-                  </S.CardHeader>
-                  <S.CardNumberDisplay>
+                <CardPreview>
+                  <CardHeader>
+                    <CardSystemLabel>CholoBuddy Card</CardSystemLabel>
+                    {cardType === "visa" && <CardBrand $brandColor="#2A52BE">VISA</CardBrand>}
+                    {cardType === "mastercard" && <CardBrand $brandColor="#E52A2D">MasterCard</CardBrand>}
+                    {cardType === "amex" && <CardBrand $brandColor="#007BC4">AMEX</CardBrand>}
+                    {cardType === "unknown" && <CardSystemLabel style={{ opacity: 0.4 }}>CARD</CardSystemLabel>}
+                  </CardHeader>
+                  <CardNumberDisplay>
                     {cardNumber ? formatCardNumber(cardNumber) : "•••• •••• •••• ••••"}
-                  </S.CardNumberDisplay>
-                  <S.CardFooter>
-                    <S.CardHolderBlock>
-                      <S.CardDetailLabel>Card Holder</S.CardDetailLabel>
-                      <S.CardDetailValue>{cardHolder || "EXPLORER NAME"}</S.CardDetailValue>
-                    </S.CardHolderBlock>
+                  </CardNumberDisplay>
+                  <CardFooter>
+                    <CardHolderBlock>
+                      <CardDetailLabel>Card Holder</CardDetailLabel>
+                      <CardDetailValue>{cardHolder || "EXPLORER NAME"}</CardDetailValue>
+                    </CardHolderBlock>
                     <div>
-                      <S.CardDetailLabel>Expires</S.CardDetailLabel>
-                      <S.CardDetailValue>{cardExpiry || "MM/YY"}</S.CardDetailValue>
+                      <CardDetailLabel>Expires</CardDetailLabel>
+                      <CardDetailValue>{cardExpiry || "MM/YY"}</CardDetailValue>
                     </div>
-                  </S.CardFooter>
-                </S.CardPreview>
+                  </CardFooter>
+                </CardPreview>
 
                 {/* Form fields */}
-                <S.CardFieldsGrid>
-                  <S.FieldWrapper>
-                    <S.FieldLabel>Card Number</S.FieldLabel>
-                    <S.FieldInput
+                <CardFieldsGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Card Number</FieldLabel>
+                    <FieldInput
                       type="text"
                       value={cardNumber}
                       onChange={(e) => handleCardNumberChange(e.target.value)}
                       placeholder="4000 1234 5678 9010"
                     />
-                  </S.FieldWrapper>
-                  <S.FieldWrapper>
-                    <S.FieldLabel>Card Holder Name</S.FieldLabel>
-                    <S.FieldInput
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Card Holder Name</FieldLabel>
+                    <FieldInput
                       type="text"
                       value={cardHolder}
                       onChange={(e) => setCardHolder(e.target.value)}
                       placeholder="Marcus Chen"
                     />
-                  </S.FieldWrapper>
-                  <S.FieldWrapper>
-                    <S.FieldLabel>Expiration Date</S.FieldLabel>
-                    <S.FieldInput
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Expiration Date</FieldLabel>
+                    <FieldInput
                       type="text"
                       value={cardExpiry}
                       onChange={(e) => setCardExpiry(e.target.value.slice(0, 5))}
                       placeholder="MM/YY"
                     />
-                  </S.FieldWrapper>
-                  <S.FieldWrapper>
-                    <S.FieldLabel>CVV</S.FieldLabel>
-                    <S.FieldInput
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>CVV</FieldLabel>
+                    <FieldInput
                       type="password"
                       value={cardCvv}
                       onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, "").slice(0, 3))}
                       placeholder="•••"
                     />
-                  </S.FieldWrapper>
-                </S.CardFieldsGrid>
+                  </FieldWrapper>
+                </CardFieldsGrid>
 
-                <S.PayButton
+                <PayButton
                   onClick={handlePaymentSubmit}
                   disabled={!cardNumber || !cardHolder || !cardExpiry || !cardCvv}
                 >
                   Pay ৳{totalAmount.toLocaleString()} Securely
-                </S.PayButton>
+                </PayButton>
               </div>
             )}
 
             {/* TAB CONTENT: MOBILE BANKING */}
             {activeTab === "mobile" && (
               <div>
-                <S.TabTitle>Select Mobile Provider</S.TabTitle>
+                <TabTitle>Select Mobile Provider</TabTitle>
 
                 {/* Mobile provider buttons */}
-                <S.ProviderGrid>
+                <ProviderGrid>
                   {(Object.keys(mobileProviderDetails) as Array<keyof typeof mobileProviderDetails>).map((prov) => {
                     const info = mobileProviderDetails[prov];
                     return (
-                      <S.ProviderBtn
+                      <ProviderBtn
                         key={prov}
                         onClick={() => {
                           setSelectedMobile(prov);
@@ -383,40 +438,40 @@ function PaymentContent() {
                         $bgColor={info.bg}
                       >
                         <span>{info.label}</span>
-                      </S.ProviderBtn>
+                      </ProviderBtn>
                     );
                   })}
-                </S.ProviderGrid>
+                </ProviderGrid>
 
                 {/* Mobile Sub-views */}
-                <S.MobileFormWrapper>
-                  <S.ProviderBadgeWrapper>
-                    <S.ProviderBadge>
+                <MobileFormWrapper>
+                  <ProviderBadgeWrapper>
+                    <ProviderBadge>
                       {selectedMobile} sandbox checkout
-                    </S.ProviderBadge>
-                  </S.ProviderBadgeWrapper>
+                    </ProviderBadge>
+                  </ProviderBadgeWrapper>
 
                   {mobileStep === "number" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                      <S.FieldWrapper>
-                        <S.FieldLabel style={{ textAlign: "left" }}>
+                      <FieldWrapper>
+                        <FieldLabel style={{ textAlign: "left" }}>
                           {selectedMobile} Wallet Number
-                        </S.FieldLabel>
-                        <S.FieldInput
+                        </FieldLabel>
+                        <FieldInput
                           type="text"
                           value={mobileNumber}
                           onChange={(e) => handleMobileNumberChange(e.target.value)}
                           placeholder="017xxxxxxxx"
                           style={{ textAlign: "center", fontFamily: "monospace", fontWeight: "bold", letterSpacing: "0.1em" }}
                         />
-                      </S.FieldWrapper>
-                      <S.PrimaryBtn
+                      </FieldWrapper>
+                      <PrimaryBtn
                         onClick={() => setMobileStep("otp")}
                         disabled={mobileNumber.length !== 11}
                         style={{ width: "100%" }}
                       >
                         Send Verification Code
-                      </S.PrimaryBtn>
+                      </PrimaryBtn>
                     </div>
                   )}
 
@@ -425,28 +480,28 @@ function PaymentContent() {
                       <p style={{ textAlign: "center", fontSize: "12px", color: "rgba(25, 28, 29, 0.8)" }}>
                         Verification code sent to <strong style={{ fontFamily: "monospace" }}>{mobileNumber}</strong>. (Hint: Enter <strong style={{ fontFamily: "monospace" }}>123456</strong>)
                       </p>
-                      <S.FieldWrapper>
-                        <S.FieldInput
+                      <FieldWrapper>
+                        <FieldInput
                           type="text"
                           value={otpCode}
                           onChange={(e) => handleOtpChange(e.target.value)}
                           placeholder="••••••"
                           style={{ textAlign: "center", fontFamily: "monospace", fontWeight: "bold", letterSpacing: "0.15em" }}
                         />
-                      </S.FieldWrapper>
-                      <S.ButtonGroup>
-                        <S.SecondaryBtn
+                      </FieldWrapper>
+                      <ButtonGroup>
+                        <SecondaryBtn
                           onClick={() => setMobileStep("number")}
                         >
                           Back
-                        </S.SecondaryBtn>
-                        <S.PrimaryBtn
+                        </SecondaryBtn>
+                        <PrimaryBtn
                           onClick={() => setMobileStep("pin")}
                           disabled={otpCode.length !== 6}
                         >
                           Verify OTP
-                        </S.PrimaryBtn>
-                      </S.ButtonGroup>
+                        </PrimaryBtn>
+                      </ButtonGroup>
                     </div>
                   )}
 
@@ -455,48 +510,48 @@ function PaymentContent() {
                       <p style={{ textAlign: "center", fontSize: "12px", color: "rgba(25, 28, 29, 0.8)" }}>
                         Enter wallet PIN to confirm. (Hint: Enter <strong style={{ fontFamily: "monospace" }}>1234</strong>)
                       </p>
-                      <S.FieldWrapper>
-                        <S.FieldInput
+                      <FieldWrapper>
+                        <FieldInput
                           type="password"
                           value={pinCode}
                           onChange={(e) => handlePinChange(e.target.value)}
                           placeholder="••••"
                           style={{ textAlign: "center", fontFamily: "monospace", fontWeight: "bold", letterSpacing: "0.15em" }}
                         />
-                      </S.FieldWrapper>
-                      <S.ButtonGroup>
-                        <S.SecondaryBtn
+                      </FieldWrapper>
+                      <ButtonGroup>
+                        <SecondaryBtn
                           onClick={() => setMobileStep("otp")}
                         >
                           Back
-                        </S.SecondaryBtn>
-                        <S.PrimaryBtn
+                        </SecondaryBtn>
+                        <PrimaryBtn
                           onClick={handlePaymentSubmit}
                           disabled={pinCode.length !== 4}
                         >
                           Confirm Pay
-                        </S.PrimaryBtn>
-                      </S.ButtonGroup>
+                        </PrimaryBtn>
+                      </ButtonGroup>
                     </div>
                   )}
-                </S.MobileFormWrapper>
+                </MobileFormWrapper>
               </div>
             )}
 
             {/* TAB CONTENT: NET BANKING */}
             {activeTab === "internet" && (
               <div>
-                <S.TabTitle>Select Internet Bank</S.TabTitle>
+                <TabTitle>Select Internet Bank</TabTitle>
 
                 {bankStep === "select" && (
-                  <S.ProviderGrid>
+                  <ProviderGrid>
                     {[
                       { id: "brac", name: "BRAC Bank" },
                       { id: "city", name: "City Bank" },
                       { id: "islamic", name: "Islami Bank" },
                       { id: "mtb", name: "Mutual Trust" },
                     ].map((b) => (
-                      <S.ProviderBtn
+                      <ProviderBtn
                         key={b.id}
                         onClick={() => {
                           setSelectedBank(b.name);
@@ -508,103 +563,103 @@ function PaymentContent() {
                         style={{ height: "80px" }}
                       >
                         <span style={{ fontSize: "12px" }}>{b.name}</span>
-                      </S.ProviderBtn>
+                      </ProviderBtn>
                     ))}
-                  </S.ProviderGrid>
+                  </ProviderGrid>
                 )}
 
                 {bankStep === "login" && selectedBank && (
-                  <S.MobileFormWrapper>
-                    <S.ProviderBadgeWrapper>
-                      <S.ProviderBadge>
+                  <MobileFormWrapper>
+                    <ProviderBadgeWrapper>
+                      <ProviderBadge>
                         {selectedBank} Portal Login
-                      </S.ProviderBadge>
-                    </S.ProviderBadgeWrapper>
+                      </ProviderBadge>
+                    </ProviderBadgeWrapper>
 
                     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                      <S.FieldWrapper>
-                        <S.FieldLabel>Username</S.FieldLabel>
-                        <S.FieldInput
+                      <FieldWrapper>
+                        <FieldLabel>Username</FieldLabel>
+                        <FieldInput
                           type="text"
                           value={bankUsername}
                           onChange={(e) => setBankUsername(e.target.value)}
                           placeholder="marcus_chen"
                         />
-                      </S.FieldWrapper>
-                      <S.FieldWrapper>
-                        <S.FieldLabel>Password</S.FieldLabel>
-                        <S.FieldInput
+                      </FieldWrapper>
+                      <FieldWrapper>
+                        <FieldLabel>Password</FieldLabel>
+                        <FieldInput
                           type="password"
                           value={bankPassword}
                           onChange={(e) => setBankPassword(e.target.value)}
                           placeholder="••••••••"
                         />
-                      </S.FieldWrapper>
-                      <S.ButtonGroup style={{ marginTop: "8px" }}>
-                        <S.SecondaryBtn
+                      </FieldWrapper>
+                      <ButtonGroup style={{ marginTop: "8px" }}>
+                        <SecondaryBtn
                           onClick={() => {
                             setBankStep("select");
                             setSelectedBank(null);
                           }}
                         >
                           Cancel
-                        </S.SecondaryBtn>
-                        <S.PrimaryBtn
+                        </SecondaryBtn>
+                        <PrimaryBtn
                           onClick={handlePaymentSubmit}
                           disabled={!bankUsername || !bankPassword}
                         >
                           Login & Pay
-                        </S.PrimaryBtn>
-                      </S.ButtonGroup>
+                        </PrimaryBtn>
+                      </ButtonGroup>
                     </div>
-                  </S.MobileFormWrapper>
+                  </MobileFormWrapper>
                 )}
               </div>
             )}
-          </S.PaymentFormPanel>
+          </PaymentFormPanel>
 
           {/* Right Column - Booking Summary Card */}
-          <S.SummaryCard>
-            <S.SummaryHeader>Booking Summary</S.SummaryHeader>
+          <SummaryCard>
+            <SummaryHeader>Booking Summary</SummaryHeader>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
                 <span style={{ fontFamily: "monospace", fontSize: "10px", color: "#526069", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: "bold", display: "block" }}>
                   Tour Plan
                 </span>
-                <S.SummaryTourTitle>{tourTitle}</S.SummaryTourTitle>
+                <SummaryTourTitle>{tourTitle}</SummaryTourTitle>
               </div>
 
-              <S.DetailRow>
-                <S.DetailCell>
-                  <S.DetailLabel>Travel Date</S.DetailLabel>
-                  <S.DetailVal>{dateLabels[dateKey] || dateKey}</S.DetailVal>
-                </S.DetailCell>
-                <S.DetailCell>
-                  <S.DetailLabel>Travelers</S.DetailLabel>
-                  <S.DetailVal>{guests} guest(s)</S.DetailVal>
-                </S.DetailCell>
-              </S.DetailRow>
+              <DetailRow>
+                <DetailCell>
+                  <DetailLabel>Travel Date</DetailLabel>
+                  <DetailVal>{dateLabels[dateKey] || dateKey}</DetailVal>
+                </DetailCell>
+                <DetailCell>
+                  <DetailLabel>Travelers</DetailLabel>
+                  <DetailVal>{guests} guest(s)</DetailVal>
+                </DetailCell>
+              </DetailRow>
 
-              <S.CostBox>
-                <S.CostRow>
+              <CostBox>
+                <CostRow>
                   <span>Booking Subtotal:</span>
                   <span style={{ color: "#000000", fontWeight: "bold" }}>৳{(totalAmount * 0.96).toLocaleString()}</span>
-                </S.CostRow>
-                <S.CostRow>
+                </CostRow>
+                <CostRow>
                   <span>Eco-Tax & Service (4%):</span>
                   <span style={{ color: "#000000", fontWeight: "bold" }}>৳{(totalAmount * 0.04).toLocaleString()}</span>
-                </S.CostRow>
-                <S.CostTotalRow>
+                </CostRow>
+                <CostTotalRow>
                   <span>Total Amount:</span>
                   <span style={{ color: "#705d00" }}>৳{totalAmount.toLocaleString()}</span>
-                </S.CostTotalRow>
-              </S.CostBox>
+                </CostTotalRow>
+              </CostBox>
             </div>
-          </S.SummaryCard>
-        </S.ContentLayout>
-      </S.GridWrapper>
-    </S.PaymentContainer>
+          </SummaryCard>
+        </ContentLayout>
+      </GridWrapper>
+    </PaymentContainer>
   );
 }
 

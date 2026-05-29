@@ -333,3 +333,205 @@ export const ToastNotification = styled(motion.div)<{ $type: "success" | "info" 
   border: 1px solid ${props => props.$type === "success" ? "rgba(16,185,129,.3)" : props.$type === "error" ? "rgba(239,68,68,.3)" : "rgba(82,96,105,.4)"};
   color: ${props => props.$type === "success" ? "#34d399" : props.$type === "error" ? "#f87171" : "#e9c400"};
 `;
+
+// ── Shared Left Panel wrappers ────────────────────────────────────────────────
+export const LeftPanelContent = styled.div`
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 48px 56px;
+`;
+
+export const BrandRow = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+`;
+
+export const BrandName = styled.span`
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #fff;
+  text-transform: uppercase;
+`;
+
+export const HeadlineSection = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const AdTagline = styled.p`
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #c9a900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+`;
+
+export const HeroH1 = styled.h1`
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+`;
+
+export const GradientSpan = styled.span`
+  background: linear-gradient(135deg, #526069, #c9a900, #e9c400);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+export const HeroDesc = styled.p`
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 400px;
+  margin-top: 10px;
+`;
+
+export const QuoteItalic = styled.p`
+  color: #475569;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.7;
+`;
+
+export const QuoteAuthor = styled.p`
+  font-family: monospace;
+  font-size: 10px;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 8px;
+`;
+
+// ── Right Panel wrappers ─────────────────────────────────────────────────────
+export const FloatingHomeArea = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 50;
+`;
+
+export const HomeLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: monospace;
+  font-size: 11px;
+  color: #bac9d3;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.20);
+  }
+`;
+
+export const FloatOrb = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 360px;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.05);
+  filter: blur(80px);
+  pointer-events: none;
+`;
+
+export const FormMotionWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+`;
+
+export const FormHeader = styled.div`
+  position: relative;
+  margin-bottom: 24px;
+`;
+
+export const FormTitle = styled.h2`
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+`;
+
+export const FormSubtitle = styled.p`
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 16px;
+`;
+
+export const ProgressNote = styled.p`
+  font-family: monospace;
+  font-size: 9px;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 4px;
+`;
+
+export const FormBody = styled.form`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+`;
+
+export const FormFooterText = styled.p`
+  text-align: center;
+  font-family: monospace;
+  font-size: 11px;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+`;
+
+export const FormLink = styled.a`
+  color: #c9a900;
+  font-weight: 700;
+  text-decoration: none;
+`;
+
+// ── Suspense Fallback ────────────────────────────────────────────────────────
+export const SuspenseFallback = styled.main`
+  min-height: 100vh;
+  background-color: #0b0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SpinnerDiv = styled.div`
+  width: 32px;
+  height: 32px;
+  border: 4px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+`;

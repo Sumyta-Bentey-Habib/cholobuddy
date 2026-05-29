@@ -41,7 +41,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="overflow-x-hidden min-h-screen flex flex-col">
+      <body>
         <StyledComponentsRegistry>
           <I18nProvider>
             <ToastProvider>
