@@ -5,6 +5,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./auth.js";
 import mainRouter from "./routes/index.js";
 import { errorHandler } from "./middleware/errors.js";
+import { clientPromise } from "./db.js";
 
 const app = express();
 const port = config.PORT;
@@ -38,6 +39,17 @@ app.get("/health", (req, res) => {
 // Centralized error handling middleware (MUST be mounted last)
 app.use(errorHandler);
 
+// Test MongoDB connection
+clientPromise
+  .then(async (client) => {
+    await client.db().admin().command({ ping: 1 });
+    console.log("mongodb is pined succesfully⚙️");
+  })
+  .catch((err) => {
+    console.error("error it is not connected❌", err);
+  });
+
 app.listen(port, () => {
-  console.log(`[Server] Running on port ${port}`);
+  console.log(`[Server] Running on port ${port} 👻`);
 });
+
