@@ -11,7 +11,7 @@ const app = express();
 const port = config.PORT;
 
 // CORS setup - critical for cross-port sessions
-const allowedOrigin = config.NEXT_PUBLIC_APP_URL;
+const allowedOrigin = config.NEXT_PUBLIC_FRONTEND_URL;
 app.use(
   cors({
     origin: allowedOrigin,
