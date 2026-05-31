@@ -43,13 +43,13 @@ app.use(errorHandler);
 clientPromise
   .then(async (client) => {
     await client.db().admin().command({ ping: 1 });
-    console.log("mongodb is pined succesfully⚙️");
+    console.log("mongodb is pined succesfully 🎉");
   })
   .catch((err) => {
-    console.error("error it is not connected❌", err);
+    console.error("error it is not connected ❌", err);
   });
 
 app.listen(port, () => {
-  console.log(`[Server] Running on port ${port} 👻`);
+  console.log(`[Server] Running on port ${port} 🎶`);
 });
 
