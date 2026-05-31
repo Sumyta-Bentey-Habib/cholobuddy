@@ -49,7 +49,12 @@ clientPromise
     console.error("error it is not connected ❌", err);
   });
 
-app.listen(port, () => {
-  console.log(`[Server] Running on port ${port} 🎶`);
-});
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`[Server] Running on port ${port} 🎶`);
+  });
+}
+
+export default app;
+
 
