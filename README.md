@@ -7,7 +7,12 @@
 [![pnpm](https://img.shields.io/badge/pnpm-10.28-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](https://pnpm.io/)
 [![Turborepo](https://img.shields.io/badge/Turborepo-2.9-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build/)
 
-CholoBuddy is a premium, high-end travel portal and editorial platform designed to discover and manage curated tours across Bangladesh. Architected as a modern **monorepo**, it pairs a responsive, internationalized Next.js frontend with a secure, serverless-ready Express.js backend.
+> **CholoBuddy** is a premium travel portal 🗺️ and editorial platform 📖 designed to explore and book curated tours across Bangladesh 🇧🇩.
+
+✨ **Tech Highlights:**
+* 🖥️ **Frontend:** Next.js 15 + Styled-Components + Framer Motion (Bilingual Toggle 🇬🇧/🇧🇩)
+* ⚙️ **Backend:** Express.js + TS (Serverless-ready for Vercel ⚡)
+* 💾 **Database & Auth:** MongoDB 🍃 + Better Auth 🔒
 
 ---
 
