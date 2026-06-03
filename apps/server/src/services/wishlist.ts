@@ -1,28 +1,33 @@
 import { db } from "../db.js";
-
-interface WishlistDocument {
-  userId: string;
-  tourIds: string[];
-}
+import { FieldValue } from "firebase-admin/firestore";
 
 export const wishlistService = {
   async getWishlist(userId: string) {
-    const wishlist = await db.collection<WishlistDocument>("wishlists").findOne({ userId });
-    return wishlist?.tourIds || [];
+    const doc = await db.collection("wishlists").doc(userId).get();
+    if (!doc.exists) {
+      return [];
+    }
+    return doc.data()?.tourIds || [];
   },
 
   async addToWishlist(userId: string, tourId: string) {
-    await db.collection<WishlistDocument>("wishlists").updateOne(
-      { userId },
-      { $addToSet: { tourIds: tourId } },
-      { upsert: true }
+    const docRef = db.collection("wishlists").doc(userId);
+    await docRef.set(
+      {
+        userId,
+        tourIds: FieldValue.arrayUnion(tourId),
+      },
+      { merge: true }
     );
   },
 
   async removeFromWishlist(userId: string, tourId: string) {
-    await db.collection<WishlistDocument>("wishlists").updateOne(
-      { userId },
-      { $pull: { tourIds: tourId } }
-    );
+    const docRef = db.collection("wishlists").doc(userId);
+    const doc = await docRef.get();
+    if (doc.exists) {
+      await docRef.update({
+        tourIds: FieldValue.arrayRemove(tourId),
+      });
+    }
   }
 };

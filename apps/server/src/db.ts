@@ -1,25 +1,31 @@
+import { initializeApp, getApps, getApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
 import { config } from "./config.js";
-import { MongoClient } from 'mongodb';
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
-const uri = config.MONGODB_URI;
-const options = {};
-
-let mongoClient: MongoClient;
-
-if (config.NODE_ENV === 'development') {
-  let globalWithMongo = global as typeof globalThis & {
-    _mongoClient?: MongoClient;
-  };
-
-  if (!globalWithMongo._mongoClient) {
-    globalWithMongo._mongoClient = new MongoClient(uri, options);
+// Resolve GOOGLE_APPLICATION_CREDENTIALS path if it is relative to ensure robust credential loading
+if (process.env.GOOGLE_APPLICATION_CREDENTIALS && !path.isAbsolute(process.env.GOOGLE_APPLICATION_CREDENTIALS)) {
+  const absolutePath = path.resolve(process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  if (fs.existsSync(absolutePath)) {
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = absolutePath;
+  } else {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const alternativePath = path.resolve(__dirname, "..", process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    if (fs.existsSync(alternativePath)) {
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = alternativePath;
+    }
   }
-  mongoClient = globalWithMongo._mongoClient;
-} else {
-  mongoClient = new MongoClient(uri, options);
 }
 
-export const clientPromise = mongoClient.connect();
-export const dbPromise = clientPromise.then((client) => client.db('CholobuddyDb'));
-export const client = mongoClient;
-export const db = mongoClient.db('CholobuddyDb');
+// Initialize Firebase Admin SDK.
+// If FIRESTORE_EMULATOR_HOST is set, it will automatically connect to local emulator.
+const app = getApps().length === 0
+  ? initializeApp({
+      projectId: config.FIREBASE_PROJECT_ID,
+    })
+  : getApp();
+
+export const db = getFirestore(app);

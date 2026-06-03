@@ -86,7 +86,14 @@ import {
   GhostButton,
   TableImgTd,
   TableImg,
-  EditBtn
+  EditBtn,
+  ModalBackdrop,
+  ModalCard,
+  FormModalCard,
+  ModalIconBox,
+  ModalTitle,
+  ModalDesc,
+  ModalActions
 } from "./admin.styles";
 
 type AdminTab = "dashboard" | "bookings" | "tours" | "users";
@@ -120,6 +127,7 @@ export default function AdminPage() {
 
   // Tour Form Modal State
   const [showTourModal, setShowTourModal] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; type: "tour" | "booking" } | null>(null);
   const [tourForm, setTourForm] = useState({
     title: "",
     titleBn: "",
@@ -248,7 +256,7 @@ export default function AdminPage() {
                 onClick={() => { setActiveTab(item.id); setSidebarOpen(false); }}
                 $active={activeTab === item.id}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: activeTab === item.id ? "#705d00" : undefined }}>
+                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: activeTab === item.id ? "#e8b84b" : "#8899b0" }}>
                   {item.icon}
                 </span>
                 {item.label}
@@ -311,7 +319,7 @@ export default function AdminPage() {
                           <StatLabel>{t("admin.stats.revenue")}</StatLabel>
                           <StatValue>{t("common.currency")}{analytics?.totalRevenue?.toLocaleString() || 0}</StatValue>
                         </div>
-                        <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>payments</span>
+                        <span className="material-symbols-outlined" style={{ color: "#e8b84b", fontSize: "28px", opacity: 0.9 }}>payments</span>
                       </StatCardHeader>
                     </StatCardBlue>
 
@@ -321,7 +329,7 @@ export default function AdminPage() {
                           <StatLabel>{t("admin.stats.active")}</StatLabel>
                           <StatValue>{analytics?.activeTrips || 0}</StatValue>
                         </div>
-                        <span className="material-symbols-outlined" style={{ color: "#526069", fontSize: "28px", opacity: 0.8 }}>flight_takeoff</span>
+                        <span className="material-symbols-outlined" style={{ color: "#34d399", fontSize: "28px", opacity: 0.9 }}>flight_takeoff</span>
                       </StatCardHeader>
                     </StatCardGreen>
 
@@ -331,7 +339,7 @@ export default function AdminPage() {
                           <StatLabel>Total Users</StatLabel>
                           <StatValue>{analytics?.newUsers || 0}</StatValue>
                         </div>
-                        <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>group</span>
+                        <span className="material-symbols-outlined" style={{ color: "#8b5cf6", fontSize: "28px", opacity: 0.9 }}>group</span>
                       </StatCardHeader>
                     </StatCardAmber>
 
@@ -341,7 +349,7 @@ export default function AdminPage() {
                           <StatLabel>Completed Trips</StatLabel>
                           <StatValue>{analytics?.completedBookings || 0}</StatValue>
                         </div>
-                        <span className="material-symbols-outlined" style={{ color: "#526069", fontSize: "28px", opacity: 0.8 }}>check_circle</span>
+                        <span className="material-symbols-outlined" style={{ color: "#34d399", fontSize: "28px", opacity: 0.9 }}>check_circle</span>
                       </StatCardHeader>
                     </StatCardGreen>
                   </StatsGrid>
@@ -405,7 +413,7 @@ export default function AdminPage() {
                               </Select>
                             </TableTdPad>
                             <TableTdPad>
-                              <DeleteBtn onClick={() => deleteBooking(tx._id)}>
+                              <DeleteBtn onClick={() => setDeleteTarget({ id: tx._id, type: "booking" })}>
                                 Delete
                               </DeleteBtn>
                             </TableTdPad>
@@ -446,130 +454,7 @@ export default function AdminPage() {
                     </BlueButton>
                   </SectionTopRow>
 
-                  {showTourModal && (
-                    <DashCard style={{ padding: "24px" }}>
-                      <TourFormBody onSubmit={handleSaveTour}>
-                        <TourFormTitle>
-                          {editingTourId ? "Edit Tour" : "Create New Tour"}
-                        </TourFormTitle>
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Tour Title (EN)</FieldLabel>
-                            <FieldInput required placeholder="e.g. Sundarbans Safari" value={tourForm.title} onChange={e => setTourForm({...tourForm, title: e.target.value})} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Tour Title (BN)</FieldLabel>
-                            <FieldInput placeholder={t("admin.placeholders.title_bn")} value={tourForm.titleBn} onChange={e => setTourForm({...tourForm, titleBn: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Price ({t("common.currency")})</FieldLabel>
-                            <FieldInput required placeholder="Price" type="number" value={tourForm.price} onChange={e => setTourForm({...tourForm, price: e.target.value})} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Distance Note</FieldLabel>
-                            <FieldInput placeholder="e.g. 2.5 km from forest base" value={tourForm.distanceNote} onChange={e => setTourForm({...tourForm, distanceNote: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Duration (EN)</FieldLabel>
-                            <FieldInput required placeholder="e.g. 3 Days / 2 Nights" value={tourForm.duration} onChange={e => setTourForm({...tourForm, duration: e.target.value})} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Duration (BN)</FieldLabel>
-                            <FieldInput placeholder={t("admin.placeholders.duration_bn")} value={tourForm.durationBn} onChange={e => setTourForm({...tourForm, durationBn: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Location (EN)</FieldLabel>
-                            <FieldInput placeholder="e.g. Sundarbans, Bangladesh" value={tourForm.location} onChange={e => setTourForm({...tourForm, location: e.target.value})} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Location (BN)</FieldLabel>
-                            <FieldInput placeholder={t("admin.placeholders.location_bn")} value={tourForm.locationBn} onChange={e => setTourForm({...tourForm, locationBn: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <FieldWrapper>
-                          <FieldLabel>Description (EN)</FieldLabel>
-                          <FieldInput
-                            as="textarea"
-                            rows={3}
-                            required
-                            placeholder="English Tour Description"
-                            value={tourForm.description}
-                            onChange={e => setTourForm({...tourForm, description: e.target.value})}
-                            style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
-                          />
-                        </FieldWrapper>
-
-                        <FieldWrapper>
-                          <FieldLabel>Description (BN)</FieldLabel>
-                          <FieldInput
-                            as="textarea"
-                            rows={3}
-                            placeholder="Bangla Tour Description"
-                            value={tourForm.descriptionBn}
-                            onChange={e => setTourForm({...tourForm, descriptionBn: e.target.value})}
-                            style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
-                          />
-                        </FieldWrapper>
-
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Starting Date</FieldLabel>
-                            <FieldInput type="date" value={tourForm.startDate} onChange={e => setTourForm({...tourForm, startDate: e.target.value})} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Ending Date</FieldLabel>
-                            <FieldInput type="date" value={tourForm.endDate} onChange={e => setTourForm({...tourForm, endDate: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <TourFormGrid>
-                          <FieldWrapper>
-                            <FieldLabel>Image File</FieldLabel>
-                            <FieldInput type="file" accept="image/*" onChange={e => setTourFile(e.target.files?.[0] || null)} />
-                          </FieldWrapper>
-                          <FieldWrapper>
-                            <FieldLabel>Or Image URL</FieldLabel>
-                            <FieldInput placeholder="Image URL (if not uploading)" value={tourForm.imgUrl} onChange={e => setTourForm({...tourForm, imgUrl: e.target.value})} />
-                          </FieldWrapper>
-                        </TourFormGrid>
-
-                        <CheckboxRow>
-                          <CheckboxInput
-                            id="popular"
-                            type="checkbox"
-                            checked={tourForm.popular}
-                            onChange={e => setTourForm({...tourForm, popular: e.target.checked})}
-                          />
-                          <CheckboxLabel htmlFor="popular">
-                            Mark as Popular / Featured Tour
-                          </CheckboxLabel>
-                        </CheckboxRow>
-
-                        <TourFormActions>
-                          <BlueButton type="submit">Save</BlueButton>
-                          <GhostButton
-                            type="button"
-                            onClick={() => {
-                              setShowTourModal(false);
-                              setEditingTourId(null);
-                            }}
-                          >
-                            Cancel
-                          </GhostButton>
-                        </TourFormActions>
-                      </TourFormBody>
-                    </DashCard>
-                  )}
+                  {/* Tour form is now rendered as a modern glassmorphic popup modal below */}
 
                   <DashCard style={{ overflowX: "auto" }}>
                     <DashTable>
@@ -607,7 +492,7 @@ export default function AdminPage() {
                               >
                                 Edit
                               </EditBtn>
-                              <DeleteBtn onClick={() => deleteTour(tour._id)}>
+                              <DeleteBtn onClick={() => setDeleteTarget({ id: tour._id, type: "tour" })}>
                                 Delete
                               </DeleteBtn>
                             </TableTdPad>
@@ -669,6 +554,199 @@ export default function AdminPage() {
           </AnimatePresence>
         </DashContent>
       </DashMain>
+
+      {/* MODERN GLASSMORPHIC TOUR CREATION/EDITING MODAL */}
+      <AnimatePresence>
+        {showTourModal && (
+          <ModalBackdrop
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              setShowTourModal(false);
+              setEditingTourId(null);
+            }}
+          >
+            <FormModalCard
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <TourFormBody onSubmit={handleSaveTour}>
+                <TourFormTitle>
+                  {editingTourId ? "Edit Tour" : "Create New Tour"}
+                </TourFormTitle>
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Tour Title (EN)</FieldLabel>
+                    <FieldInput required placeholder="e.g. Sundarbans Safari" value={tourForm.title} onChange={e => setTourForm({...tourForm, title: e.target.value})} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Tour Title (BN)</FieldLabel>
+                    <FieldInput placeholder={t("admin.placeholders.title_bn")} value={tourForm.titleBn} onChange={e => setTourForm({...tourForm, titleBn: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Price ({t("common.currency")})</FieldLabel>
+                    <FieldInput required placeholder="Price" type="number" value={tourForm.price} onChange={e => setTourForm({...tourForm, price: e.target.value})} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Distance Note</FieldLabel>
+                    <FieldInput placeholder="e.g. 2.5 km from forest base" value={tourForm.distanceNote} onChange={e => setTourForm({...tourForm, distanceNote: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Duration (EN)</FieldLabel>
+                    <FieldInput required placeholder="e.g. 3 Days / 2 Nights" value={tourForm.duration} onChange={e => setTourForm({...tourForm, duration: e.target.value})} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Duration (BN)</FieldLabel>
+                    <FieldInput placeholder={t("admin.placeholders.duration_bn")} value={tourForm.durationBn} onChange={e => setTourForm({...tourForm, durationBn: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Location (EN)</FieldLabel>
+                    <FieldInput placeholder="e.g. Sundarbans, Bangladesh" value={tourForm.location} onChange={e => setTourForm({...tourForm, location: e.target.value})} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Location (BN)</FieldLabel>
+                    <FieldInput placeholder={t("admin.placeholders.location_bn")} value={tourForm.locationBn} onChange={e => setTourForm({...tourForm, locationBn: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <FieldWrapper>
+                  <FieldLabel>Description (EN)</FieldLabel>
+                  <FieldInput
+                    as="textarea"
+                    rows={3}
+                    required
+                    placeholder="English Tour Description"
+                    value={tourForm.description}
+                    onChange={e => setTourForm({...tourForm, description: e.target.value})}
+                    style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
+                  />
+                </FieldWrapper>
+
+                <FieldWrapper>
+                  <FieldLabel>Description (BN)</FieldLabel>
+                  <FieldInput
+                    as="textarea"
+                    rows={3}
+                    placeholder="Bangla Tour Description"
+                    value={tourForm.descriptionBn}
+                    onChange={e => setTourForm({...tourForm, descriptionBn: e.target.value})}
+                    style={{ padding: "10px", borderRadius: "8px", border: "1px solid rgba(82, 96, 105, 0.15)", outline: "none", resize: "vertical" }}
+                  />
+                </FieldWrapper>
+
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Starting Date</FieldLabel>
+                    <FieldInput type="date" value={tourForm.startDate} onChange={e => setTourForm({...tourForm, startDate: e.target.value})} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Ending Date</FieldLabel>
+                    <FieldInput type="date" value={tourForm.endDate} onChange={e => setTourForm({...tourForm, endDate: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <TourFormGrid>
+                  <FieldWrapper>
+                    <FieldLabel>Image File</FieldLabel>
+                    <FieldInput type="file" accept="image/*" onChange={e => setTourFile(e.target.files?.[0] || null)} />
+                  </FieldWrapper>
+                  <FieldWrapper>
+                    <FieldLabel>Or Image URL</FieldLabel>
+                    <FieldInput placeholder="Image URL (if not uploading)" value={tourForm.imgUrl} onChange={e => setTourForm({...tourForm, imgUrl: e.target.value})} />
+                  </FieldWrapper>
+                </TourFormGrid>
+
+                <CheckboxRow>
+                  <CheckboxInput
+                    id="popular"
+                    type="checkbox"
+                    checked={tourForm.popular}
+                    onChange={e => setTourForm({...tourForm, popular: e.target.checked})}
+                  />
+                  <CheckboxLabel htmlFor="popular">
+                    Mark as Popular / Featured Tour
+                  </CheckboxLabel>
+                </CheckboxRow>
+
+                <TourFormActions>
+                  <BlueButton type="submit">Save</BlueButton>
+                  <GhostButton
+                    type="button"
+                    onClick={() => {
+                      setShowTourModal(false);
+                      setEditingTourId(null);
+                    }}
+                  >
+                    Cancel
+                  </GhostButton>
+                </TourFormActions>
+              </TourFormBody>
+            </FormModalCard>
+          </ModalBackdrop>
+        )}
+      </AnimatePresence>
+
+      {/* CONFIRM DELETE MODAL */}
+      <AnimatePresence>
+        {deleteTarget && (
+          <ModalBackdrop
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setDeleteTarget(null)}
+          >
+            <ModalCard
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ModalIconBox>
+                <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>warning</span>
+              </ModalIconBox>
+              <ModalTitle>Confirm Delete</ModalTitle>
+              <ModalDesc>
+                Are you sure you want to permanently delete this {deleteTarget.type}? This action is irreversible and will remove all associated database records.
+              </ModalDesc>
+              <ModalActions>
+                <GhostButton
+                  onClick={() => setDeleteTarget(null)}
+                  style={{ minWidth: "90px" }}
+                >
+                  Cancel
+                </GhostButton>
+                <DeleteBtn
+                  onClick={async () => {
+                    if (deleteTarget.type === "tour") {
+                      await deleteTour(deleteTarget.id);
+                    } else if (deleteTarget.type === "booking") {
+                      await deleteBooking(deleteTarget.id);
+                    }
+                    setDeleteTarget(null);
+                  }}
+                  style={{ minWidth: "90px", padding: "10px 16px", borderRadius: "12px", background: "#ef4444", color: "#ffffff", borderColor: "#ef4444" }}
+                >
+                  Yes, Delete
+                </DeleteBtn>
+              </ModalActions>
+            </ModalCard>
+          </ModalBackdrop>
+        )}
+      </AnimatePresence>
     </DashPage>
   );
 }
