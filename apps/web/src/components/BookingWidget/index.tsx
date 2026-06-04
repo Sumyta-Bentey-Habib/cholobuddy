@@ -45,7 +45,6 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
 
   const {
     guests,
-    bookingStatus,
     subtotal,
     ecoTax,
     total,
@@ -114,14 +113,12 @@ export default function BookingWidget({ pricePerTraveler, ecoTaxPerTraveler, tou
         {/* Submit button */}
         <BookButton
           onClick={handleBookingRedirect}
-          disabled={bookingStatus !== "idle" || isExpired || isAdmin}
-          $status={isExpired ? "booked" : (isAdmin ? "booked" : bookingStatus)}
+          disabled={isExpired || isAdmin}
+          $status={isExpired ? "booked" : (isAdmin ? "booked" : "idle")}
         >
           {isAdmin && t("trip_detail.widget.btn_admin_blocked")}
           {!isAdmin && isExpired && t("trip_detail.widget.booking_closed")}
-          {!isAdmin && !isExpired && bookingStatus === "idle" && t("trip_detail.widget.btn_idle")}
-          {!isAdmin && !isExpired && bookingStatus === "booking" && t("trip_detail.widget.btn_booking")}
-          {!isAdmin && !isExpired && bookingStatus === "booked" && t("trip_detail.widget.btn_booked")}
+          {!isAdmin && !isExpired && t("trip_detail.widget.btn_idle")}
         </BookButton>
 
         {!isExpired && !isAdmin && (
