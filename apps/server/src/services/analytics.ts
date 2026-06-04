@@ -2,8 +2,11 @@ import { db } from "../db.js";
 
 export const analyticsService = {
   async getDashboardAnalytics() {
-    const bookings = await db.collection("bookings").find({}).toArray();
-    const usersCount = await db.collection("user").countDocuments();
+    const bookingsSnapshot = await db.collection("bookings").get();
+    const bookings = bookingsSnapshot.docs.map((doc) => doc.data());
+
+    const userSnapshot = await db.collection("user").count().get();
+    const usersCount = userSnapshot.data().count;
 
     let totalRevenue = 0;
     let completedBookings = 0;
@@ -20,7 +23,7 @@ export const analyticsService = {
       activeTrips: bookings.filter((b: any) => b.status === "Pending").length,
       completedBookings,
       newUsers: usersCount,
-      conversionRate: 3.4
+      conversionRate: 3.4,
     };
-  }
+  },
 };

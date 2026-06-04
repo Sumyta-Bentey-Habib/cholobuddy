@@ -6,7 +6,8 @@ dotenv.config();
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(3001),
-  MONGODB_URI: z.string().url(),
+  FIREBASE_PROJECT_ID: z.string().min(1),
+  FIRESTORE_EMULATOR_HOST: z.string().optional(),
   BETTER_AUTH_SECRET: z.string().min(1),
   BETTER_AUTH_URL: z.string().url(),
   NEXT_PUBLIC_FRONTEND_URL: z.string().url(),

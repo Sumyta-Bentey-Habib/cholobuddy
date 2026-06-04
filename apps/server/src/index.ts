@@ -5,7 +5,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./auth.js";
 import mainRouter from "./routes/index.js";
 import { errorHandler } from "./middleware/errors.js";
-import { clientPromise } from "./db.js";
+import { db } from "./db.js";
 
 const app = express();
 const port = config.PORT;
@@ -39,14 +39,13 @@ app.get("/health", (req, res) => {
 // Centralized error handling middleware (MUST be mounted last)
 app.use(errorHandler);
 
-// Test MongoDB connection
-clientPromise
-  .then(async (client) => {
-    await client.db().admin().command({ ping: 1 });
-    console.log("mongodb is pined succesfully 🎉");
+// Test Firestore connection
+db.listCollections()
+  .then(() => {
+    console.log("Firestore is connected successfully 🎉");
   })
   .catch((err) => {
-    console.error("error it is not connected ❌", err);
+    console.error("Firestore connection failed ❌", err);
   });
 
 if (!process.env.VERCEL) {

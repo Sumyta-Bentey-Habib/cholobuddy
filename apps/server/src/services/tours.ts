@@ -1,42 +1,69 @@
 import { db } from "../db.js";
-import { ObjectId } from "mongodb";
 import { NotFoundError } from "../utils/errors.js";
+
+// Helper function to recursively convert Firestore Timestamps to JavaScript Date objects
+function convertTimestamps(obj: any): any {
+  if (!obj || typeof obj !== "object") return obj;
+  
+  if (typeof obj.toDate === "function") {
+    return obj.toDate();
+  }
+  
+  if (Array.isArray(obj)) {
+    return obj.map(convertTimestamps);
+  }
+  
+  const result: any = {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[key] = convertTimestamps(obj[key]);
+    }
+  }
+  return result;
+}
 
 export const toursService = {
   async getAll() {
-    return db.collection("tours").find({}).toArray();
+    const snapshot = await db.collection("tours").get();
+    return snapshot.docs.map((doc: any) =>
+      convertTimestamps({ _id: doc.id, ...doc.data() })
+    );
   },
 
   async getById(id: string) {
-    const tour = await db.collection("tours").findOne({ _id: new ObjectId(id) });
-    if (!tour) {
+    const doc = await db.collection("tours").doc(id).get();
+    if (!doc.exists) {
       throw new NotFoundError("Tour not found");
     }
-    return tour;
+    return convertTimestamps({ _id: doc.id, ...doc.data() });
   },
 
   async create(data: any) {
-    const result = await db.collection("tours").insertOne({
+    const result = await db.collection("tours").add({
       ...data,
       createdAt: new Date(),
     });
-    return result.insertedId;
+    return result.id;
   },
 
   async update(id: string, data: any) {
-    const result = await db.collection("tours").updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { ...data, updatedAt: new Date() } }
-    );
-    if (result.matchedCount === 0) {
+    const docRef = db.collection("tours").doc(id);
+    const doc = await docRef.get();
+    if (!doc.exists) {
       throw new NotFoundError("Tour not found");
     }
+    await docRef.update({
+      ...data,
+      updatedAt: new Date(),
+    });
   },
 
   async delete(id: string) {
-    const result = await db.collection("tours").deleteOne({ _id: new ObjectId(id) });
-    if (result.deletedCount === 0) {
+    const docRef = db.collection("tours").doc(id);
+    const doc = await docRef.get();
+    if (!doc.exists) {
       throw new NotFoundError("Tour not found");
     }
+    await docRef.delete();
   }
 };

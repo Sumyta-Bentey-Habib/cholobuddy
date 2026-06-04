@@ -25,6 +25,7 @@ export function useTours() {
       const res = await fetch("/api/tours", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(data)
       });
       if (res.ok) {
@@ -45,6 +46,7 @@ export function useTours() {
       const res = await fetch(`/api/tours/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(data)
       });
       if (res.ok) {
@@ -61,7 +63,7 @@ export function useTours() {
 
   const deleteTour = async (id: string) => {
     try {
-      const res = await fetch(`/api/tours/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/tours/${id}`, { method: "DELETE", credentials: "include" });
       if (res.ok) {
         setTours(prev => prev.filter(t => t._id !== id));
         toast.success("Tour deleted successfully!");

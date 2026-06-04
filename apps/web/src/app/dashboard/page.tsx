@@ -9,6 +9,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
 import { useBookings } from "@/hooks/useBookings";
 import { useTours } from "@/hooks/useTours";
+import { useWishlist } from "@/hooks/useWishlist";
 import { useToast } from "@/context/Toast";
 import {
   DashPage,
@@ -113,7 +114,16 @@ import {
   ContactGrid2,
   ContactOption,
   ContactOptionTitle,
-  ContactOptionDesc
+  ContactOptionDesc,
+  ModalBackdrop,
+  ModalCard,
+  ModalIconBox,
+  ModalTitle,
+  ModalDesc,
+  ModalActions,
+  TicketReceipt,
+  TicketReceiptRow,
+  TicketReceiptVal
 } from "./dashboard.styles";
 
 type ActiveTab = "dashboard" | "all-tours" | "my-trips" | "wishlist" | "help-desk";
@@ -129,9 +139,10 @@ const NAV_ITEMS: { id: ActiveTab; icon: string; label: string }[] = [
 export default function DashboardPage() {
   const { t } = useLanguage();
   const router = useRouter();
-  const { user, role, signOut } = useAuth();
+  const { user, role, points, signOut } = useAuth();
   const { bookings, deleteBooking } = useBookings();
   const { tours } = useTours();
+  const { savedTourIds, toggleWishlist } = useWishlist();
   const toast = useToast();
 
   const isAdmin = role === "admin";
@@ -146,6 +157,9 @@ export default function DashboardPage() {
   const [ticketMsg, setTicketMsg] = useState("");
   const [ticketSent, setTicketSent] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [cancelingBookingId, setCancelingBookingId] = useState<string | null>(null);
+  const [showTicketSuccess, setShowTicketSuccess] = useState(false);
+  const [submittedTicketId, setSubmittedTicketId] = useState("");
 
   const handleDashboardBook = (tourId: string, tourTitle: string, tourPrice: any) => {
     const priceVal = parseInt(tourPrice.toString().replace(/,/g, "")) || 12500;
@@ -166,16 +180,27 @@ export default function DashboardPage() {
     e.preventDefault();
     if (!ticketMsg.trim()) return;
     setTicketSent(true);
+    const mockTicketId = "TK-" + Math.floor(100000 + Math.random() * 900000);
+    setSubmittedTicketId(mockTicketId);
     setTimeout(() => {
-      setTicketMsg("");
       setTicketSent(false);
+      setShowTicketSuccess(true);
       toast.success("Priority concierge ticket successfully dispatched.");
-    }, 1500);
+    }, 1200);
   };
 
-  const savedTrips = savedTripsData;
   const activeBookingsCount = bookings.filter(b => b.status === "Pending").length;
   const completedBookingsCount = bookings.filter(b => b.status === "Completed").length;
+
+  const getLevel = (pts: number) => {
+    if (pts < 100) return 1;
+    if (pts < 300) return 2;
+    if (pts < 600) return 3;
+    return 4;
+  };
+  const userLevel = getLevel(points || 0);
+
+  const wishlistTours = tours.filter((t) => savedTourIds.includes(t._id));
 
   const initials = user?.name
     ? user.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
@@ -217,7 +242,7 @@ export default function DashboardPage() {
                 <UserStatusRow>
                   <StatusDot $color="#34d399" />
                   <UserRole>
-                    {isAdmin ? "Administrator" : "Level 3 Traveler"}
+                    {isAdmin ? "Administrator" : `Level ${userLevel} Traveler`}
                   </UserRole>
                 </UserStatusRow>
               </UserInfo>
@@ -232,7 +257,7 @@ export default function DashboardPage() {
                 onClick={() => { setActiveTab(item.id); setSidebarOpen(false); }}
                 $active={activeTab === item.id}
               >
-                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: activeTab === item.id ? "#705d00" : undefined }}>
+                <span className="material-symbols-outlined" style={{ fontSize: "18px", color: activeTab === item.id ? "#e8b84b" : "#8899b0" }}>
                   {item.icon}
                 </span>
                 {item.label}
@@ -323,7 +348,7 @@ export default function DashboardPage() {
                             <StatLabel>{t("dashboard.stats.active_trips")}</StatLabel>
                             <StatValue>{activeBookingsCount}</StatValue>
                           </div>
-                          <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>flight_takeoff</span>
+                          <span className="material-symbols-outlined" style={{ color: "#e8b84b", fontSize: "28px", opacity: 0.9 }}>flight_takeoff</span>
                         </StatCardHeader>
                       </StatCardBlue>
                       <StatCardGreen>
@@ -332,16 +357,16 @@ export default function DashboardPage() {
                             <StatLabel>{t("dashboard.stats.completed")}</StatLabel>
                             <StatValue>{completedBookingsCount}</StatValue>
                           </div>
-                          <span className="material-symbols-outlined" style={{ color: "#526069", fontSize: "28px", opacity: 0.8 }}>check_circle</span>
+                          <span className="material-symbols-outlined" style={{ color: "#34d399", fontSize: "28px", opacity: 0.9 }}>check_circle</span>
                         </StatCardHeader>
                       </StatCardGreen>
                       <StatCardAmber>
                         <StatCardHeader>
                           <div>
                             <StatLabel>{t("dashboard.stats.level")}</StatLabel>
-                            <StatValue style={{ fontSize: "28px" }}>Lvl 3</StatValue>
+                            <StatValue style={{ fontSize: "28px" }}>Lvl {userLevel}</StatValue>
                           </div>
-                          <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "28px", opacity: 0.8 }}>military_tech</span>
+                          <span className="material-symbols-outlined" style={{ color: "#8b5cf6", fontSize: "28px", opacity: 0.9 }}>military_tech</span>
                         </StatCardHeader>
                       </StatCardAmber>
                     </StatsGrid>
@@ -361,7 +386,7 @@ export default function DashboardPage() {
                           <BookingRow key={b._id}>
                             <BookingLeft>
                               <BookingIconBox>
-                                <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "15px" }}>luggage</span>
+                                <span className="material-symbols-outlined" style={{ color: "#e8b84b", fontSize: "15px" }}>luggage</span>
                               </BookingIconBox>
                               <BookingInfo>
                                 <BookingTitle>{b.tourTitle}</BookingTitle>
@@ -473,7 +498,7 @@ export default function DashboardPage() {
                             <StatusPill $status={b.status}>{b.status}</StatusPill>
                           </TableTdPad>
                           <TableTdPad>
-                            <CancelBtn onClick={() => deleteBooking(b._id)}>
+                            <CancelBtn onClick={() => setCancelingBookingId(b._id)}>
                               Cancel
                             </CancelBtn>
                           </TableTdPad>
@@ -508,12 +533,12 @@ export default function DashboardPage() {
                 <TabPaneGap20>
                   <SectionTopRow>
                     <SectionTitle>{t("dashboard.saved_trips")}</SectionTitle>
-                    <SectionCount>{savedTripsData.length} saved</SectionCount>
+                    <SectionCount>{wishlistTours.length} saved</SectionCount>
                   </SectionTopRow>
                   <TourGrid>
-                    {savedTripsData.map((trip, i) => (
+                    {wishlistTours.map((trip, i) => (
                       <ImageCard
-                        key={trip.id}
+                        key={trip._id}
                         $wishlist={true}
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -522,19 +547,22 @@ export default function DashboardPage() {
                         <CardImageWrapper>
                           <CardImg
                             alt={trip.title}
-                            src={trip.imgUrl}
+                            src={trip.imgUrl || "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?q=80&w=600&auto=format&fit=crop"}
                             onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                             onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                           />
                           <CardImgFade />
-                          <WishlistHeart>
+                          <WishlistHeart onClick={(e) => {
+                            e.stopPropagation();
+                            toggleWishlist(trip._id);
+                          }}>
                             <span className="material-symbols-outlined" style={{ color: "#f87171", fontSize: "14px", fontVariationSettings: "'FILL' 1" }}>favorite</span>
                           </WishlistHeart>
                           <CardPrice>{t("common.currency")}{trip.price}</CardPrice>
                         </CardImageWrapper>
                         <CardBody>
                           <CardName>{trip.title}</CardName>
-                          <PinkButton onClick={() => router.push(`/trips/${trip.id}`)}>
+                          <PinkButton onClick={() => router.push(`/trips/${trip._id}`)}>
                             {t("common.book_now")}
                           </PinkButton>
                         </CardBody>
@@ -560,12 +588,12 @@ export default function DashboardPage() {
                   {/* Info banner */}
                   <HelpInfoBanner>
                     <HelpInfoIconBox>
-                      <span className="material-symbols-outlined" style={{ color: "#705d00", fontSize: "20px" }}>support_agent</span>
+                      <span className="material-symbols-outlined" style={{ color: "#e8b84b", fontSize: "20px" }}>support_agent</span>
                     </HelpInfoIconBox>
                     <div>
                       <HelpInfoTitle>Priority Access</HelpInfoTitle>
                       <HelpInfoDesc>
-                        As a Level 3 Traveler, you have priority concierge access. Our team typically responds within 2–4 hours.
+                        As a Level {userLevel} Traveler, you have priority concierge access. Our team typically responds within 2–4 hours.
                       </HelpInfoDesc>
                     </div>
                   </HelpInfoBanner>
@@ -596,8 +624,8 @@ export default function DashboardPage() {
                   {/* Contact options */}
                   <ContactGrid2>
                     {[
-                      { icon: "chat_bubble", label: "Live Chat",     desc: "Avg wait: 5 min", color: "#705d00", bg: "rgba(201,169,0,.08)", border: "rgba(201,169,0,.15)" },
-                      { icon: "call",        label: "Phone Support", desc: "9am–9pm BDT",     color: "#526069", bg: "rgba(82,96,105,.08)", border: "rgba(82,96,105,.15)" },
+                      { icon: "chat_bubble", label: "Live Chat",     desc: "Avg wait: 5 min", color: "#e8b84b", bg: "rgba(232,184,75,.08)",  border: "rgba(232,184,75,.18)" },
+                      { icon: "call",        label: "Phone Support", desc: "9am–9pm BDT",     color: "#34d399", bg: "rgba(52,211,153,.08)", border: "rgba(52,211,153,.18)" },
                     ].map(opt => (
                       <ContactOption key={opt.label} $bg={opt.bg} $border={opt.border}>
                         <span className="material-symbols-outlined" style={{ color: opt.color, fontSize: "22px" }}>{opt.icon}</span>
@@ -615,6 +643,105 @@ export default function DashboardPage() {
           </AnimatePresence>
         </DashContent>
       </DashMain>
+      {/* CANCELLATION CONFIRMATION MODAL */}
+      <AnimatePresence>
+        {cancelingBookingId && (
+          <ModalBackdrop
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setCancelingBookingId(null)}
+          >
+            <ModalCard
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ModalIconBox>
+                <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>warning</span>
+              </ModalIconBox>
+              <ModalTitle>Cancel Booking Request</ModalTitle>
+              <ModalDesc>
+                Are you sure you want to cancel this booking? This action is irreversible and might be subject to our standard terms and conditions.
+              </ModalDesc>
+              <ModalActions>
+                <SecondaryBtn
+                  onClick={() => setCancelingBookingId(null)}
+                  style={{ minWidth: "90px" }}
+                >
+                  Go Back
+                </SecondaryBtn>
+                <CancelBtn
+                  onClick={async () => {
+                    if (cancelingBookingId) {
+                      await deleteBooking(cancelingBookingId);
+                      setCancelingBookingId(null);
+                    }
+                  }}
+                  style={{ minWidth: "90px", padding: "10px 16px", borderRadius: "12px", border: "1px solid #ef4444" }}
+                >
+                  Yes, Cancel
+                </CancelBtn>
+              </ModalActions>
+            </ModalCard>
+          </ModalBackdrop>
+        )}
+      </AnimatePresence>
+
+      {/* CONCIERGE TICKET DISPATCHED MODAL */}
+      <AnimatePresence>
+        {showTicketSuccess && (
+          <ModalBackdrop
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowTicketSuccess(false)}
+          >
+            <ModalCard
+              initial={{ scale: 0.95, y: 15, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ModalIconBox $color="rgba(34, 197, 94, 0.08)" style={{ color: "#22c55e" }}>
+                <span className="material-symbols-outlined" style={{ fontSize: "24px" }}>verified</span>
+              </ModalIconBox>
+              <ModalTitle>Concierge Dispatched</ModalTitle>
+              <ModalDesc>
+                Your priority travel ticket has been logged in our secure system. A concierge agent has been assigned to your query.
+              </ModalDesc>
+              <TicketReceipt>
+                <TicketReceiptRow>
+                  <span>Ticket Reference:</span>
+                  <TicketReceiptVal>{submittedTicketId}</TicketReceiptVal>
+                </TicketReceiptRow>
+                <TicketReceiptRow>
+                  <span>Priority Tier:</span>
+                  <TicketReceiptVal style={{ color: "#e8b84b" }}>Level 3 Concierge</TicketReceiptVal>
+                </TicketReceiptRow>
+                <TicketReceiptRow>
+                  <span>Est. Response:</span>
+                  <TicketReceiptVal>2 - 4 Hours</TicketReceiptVal>
+                </TicketReceiptRow>
+              </TicketReceipt>
+              <ModalActions>
+                <BlueButton
+                  onClick={() => {
+                    setShowTicketSuccess(false);
+                    setTicketMsg("");
+                  }}
+                  style={{ width: "100%", justifyContent: "center" }}
+                >
+                  Acknowledge & Close
+                </BlueButton>
+              </ModalActions>
+            </ModalCard>
+          </ModalBackdrop>
+        )}
+      </AnimatePresence>
     </DashPage>
   );
 }

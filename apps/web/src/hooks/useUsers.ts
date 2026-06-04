@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
+import { authClient } from "@/lib/auth-client";
 import { useToast } from "@/context/Toast";
 
 export function useUsers() {
+  const { data: session } = authClient.useSession();
   const [users, setUsers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
 
   useEffect(() => {
+    if (!session) {
+      setUsers([]);
+      setIsLoading(false);
+      return;
+    }
     const fetchUsers = async () => {
       try {
-        const res = await fetch("/api/users");
+        const res = await fetch("/api/users", { credentials: "include" });
         if (res.ok) setUsers(await res.json());
       } catch (error) {
         console.error(error);
@@ -18,13 +25,14 @@ export function useUsers() {
       }
     };
     fetchUsers();
-  }, []);
+  }, [session]);
 
   const updateUserRole = async (userId: string, role: string) => {
     try {
       const res = await fetch("/api/users", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ userId, role })
       });
       if (res.ok) {
