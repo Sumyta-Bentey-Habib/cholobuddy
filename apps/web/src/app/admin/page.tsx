@@ -108,7 +108,7 @@ const NAV_ITEMS: { id: AdminTab; icon: string; label: string }[] = [
 export default function AdminPage() {
   const { t, registerTranslations } = useLanguage();
   const router = useRouter();
-  const { user, signOut } = useAuth();
+  const { user, role, isLoading, signOut } = useAuth();
 
   const { analytics } = useAnalytics();
   const { bookings, updateBookingStatus, deleteBooking } = useAdminBookings();
@@ -121,6 +121,12 @@ export default function AdminPage() {
       registerTranslations(tours);
     }
   }, [tours, registerTranslations]);
+
+  useEffect(() => {
+    if (!isLoading && role !== "admin") {
+      router.push("/dashboard");
+    }
+  }, [isLoading, role, router]);
 
   const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);

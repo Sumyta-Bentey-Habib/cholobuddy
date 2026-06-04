@@ -17,7 +17,7 @@ export function useWishlist() {
 
     const fetchWishlist = async () => {
       try {
-        const res = await fetch("/api/wishlist");
+        const res = await fetch("/api/wishlist", { credentials: "include" });
         if (res.ok) {
           const data = await res.json();
           setSavedTourIds(data.tourIds || []);
@@ -49,6 +49,7 @@ export function useWishlist() {
       const res = await fetch("/api/wishlist", {
         method: isSaved ? "DELETE" : "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ tourId }),
       });
 

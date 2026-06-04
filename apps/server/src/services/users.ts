@@ -23,13 +23,13 @@ function convertTimestamps(obj: any): any {
 
 export const usersService = {
   async getAllUsers() {
-    const snapshot = await db.collection("user").orderBy("createdAt", "desc").get();
+    const snapshot = await db.collection("users").orderBy("createdAt", "desc").get();
     return snapshot.docs.map((doc: any) =>
       convertTimestamps({ _id: doc.id, ...doc.data() })
     );
   },
 
   async updateUserRole(userId: string, role: string) {
-    await db.collection("user").doc(userId).update({ role });
+    await db.collection("users").doc(userId).update({ role });
   }
 };

@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
+import { authClient } from "@/lib/auth-client";
 import { useToast } from "@/context/Toast";
 
 export function useAdminBookings() {
+  const { data: session } = authClient.useSession();
   const [bookings, setBookings] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
 
   useEffect(() => {
+    if (!session) {
+      setBookings([]);
+      setIsLoading(false);
+      return;
+    }
     const fetchBookings = async () => {
       try {
-        const res = await fetch("/api/bookings?all=true");
+        const res = await fetch("/api/bookings?all=true", { credentials: "include" });
         if (res.ok) {
           setBookings(await res.json());
         }
@@ -20,13 +27,14 @@ export function useAdminBookings() {
       }
     };
     fetchBookings();
-  }, []);
+  }, [session]);
 
   const updateBookingStatus = async (id: string, status: string) => {
     try {
       const res = await fetch(`/api/bookings/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ status })
       });
       if (res.ok) {
@@ -43,7 +51,7 @@ export function useAdminBookings() {
 
   const deleteBooking = async (id: string) => {
     try {
-      const res = await fetch(`/api/bookings/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/bookings/${id}`, { method: "DELETE", credentials: "include" });
       if (res.ok) {
         setBookings(prev => prev.filter(b => b._id !== id));
         toast.success("Booking deleted successfully!");

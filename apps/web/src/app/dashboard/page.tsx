@@ -9,6 +9,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useAuth } from "@/hooks/useAuth";
 import { useBookings } from "@/hooks/useBookings";
 import { useTours } from "@/hooks/useTours";
+import { useWishlist } from "@/hooks/useWishlist";
 import { useToast } from "@/context/Toast";
 import {
   DashPage,
@@ -138,9 +139,10 @@ const NAV_ITEMS: { id: ActiveTab; icon: string; label: string }[] = [
 export default function DashboardPage() {
   const { t } = useLanguage();
   const router = useRouter();
-  const { user, role, signOut } = useAuth();
+  const { user, role, points, signOut } = useAuth();
   const { bookings, deleteBooking } = useBookings();
   const { tours } = useTours();
+  const { savedTourIds, toggleWishlist } = useWishlist();
   const toast = useToast();
 
   const isAdmin = role === "admin";
@@ -187,9 +189,18 @@ export default function DashboardPage() {
     }, 1200);
   };
 
-  const savedTrips = savedTripsData;
   const activeBookingsCount = bookings.filter(b => b.status === "Pending").length;
   const completedBookingsCount = bookings.filter(b => b.status === "Completed").length;
+
+  const getLevel = (pts: number) => {
+    if (pts < 100) return 1;
+    if (pts < 300) return 2;
+    if (pts < 600) return 3;
+    return 4;
+  };
+  const userLevel = getLevel(points || 0);
+
+  const wishlistTours = tours.filter((t) => savedTourIds.includes(t._id));
 
   const initials = user?.name
     ? user.name.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
@@ -231,7 +242,7 @@ export default function DashboardPage() {
                 <UserStatusRow>
                   <StatusDot $color="#34d399" />
                   <UserRole>
-                    {isAdmin ? "Administrator" : "Level 3 Traveler"}
+                    {isAdmin ? "Administrator" : `Level ${userLevel} Traveler`}
                   </UserRole>
                 </UserStatusRow>
               </UserInfo>
@@ -353,7 +364,7 @@ export default function DashboardPage() {
                         <StatCardHeader>
                           <div>
                             <StatLabel>{t("dashboard.stats.level")}</StatLabel>
-                            <StatValue style={{ fontSize: "28px" }}>Lvl 3</StatValue>
+                            <StatValue style={{ fontSize: "28px" }}>Lvl {userLevel}</StatValue>
                           </div>
                           <span className="material-symbols-outlined" style={{ color: "#8b5cf6", fontSize: "28px", opacity: 0.9 }}>military_tech</span>
                         </StatCardHeader>
@@ -522,12 +533,12 @@ export default function DashboardPage() {
                 <TabPaneGap20>
                   <SectionTopRow>
                     <SectionTitle>{t("dashboard.saved_trips")}</SectionTitle>
-                    <SectionCount>{savedTripsData.length} saved</SectionCount>
+                    <SectionCount>{wishlistTours.length} saved</SectionCount>
                   </SectionTopRow>
                   <TourGrid>
-                    {savedTripsData.map((trip, i) => (
+                    {wishlistTours.map((trip, i) => (
                       <ImageCard
-                        key={trip.id}
+                        key={trip._id}
                         $wishlist={true}
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -536,19 +547,22 @@ export default function DashboardPage() {
                         <CardImageWrapper>
                           <CardImg
                             alt={trip.title}
-                            src={trip.imgUrl}
+                            src={trip.imgUrl || "https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?q=80&w=600&auto=format&fit=crop"}
                             onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                             onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                           />
                           <CardImgFade />
-                          <WishlistHeart>
+                          <WishlistHeart onClick={(e) => {
+                            e.stopPropagation();
+                            toggleWishlist(trip._id);
+                          }}>
                             <span className="material-symbols-outlined" style={{ color: "#f87171", fontSize: "14px", fontVariationSettings: "'FILL' 1" }}>favorite</span>
                           </WishlistHeart>
                           <CardPrice>{t("common.currency")}{trip.price}</CardPrice>
                         </CardImageWrapper>
                         <CardBody>
                           <CardName>{trip.title}</CardName>
-                          <PinkButton onClick={() => router.push(`/trips/${trip.id}`)}>
+                          <PinkButton onClick={() => router.push(`/trips/${trip._id}`)}>
                             {t("common.book_now")}
                           </PinkButton>
                         </CardBody>
@@ -579,7 +593,7 @@ export default function DashboardPage() {
                     <div>
                       <HelpInfoTitle>Priority Access</HelpInfoTitle>
                       <HelpInfoDesc>
-                        As a Level 3 Traveler, you have priority concierge access. Our team typically responds within 2–4 hours.
+                        As a Level {userLevel} Traveler, you have priority concierge access. Our team typically responds within 2–4 hours.
                       </HelpInfoDesc>
                     </div>
                   </HelpInfoBanner>
