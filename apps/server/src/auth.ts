@@ -9,6 +9,7 @@ export const auth = betterAuth({
   }),
   secret: config.BETTER_AUTH_SECRET,
   baseURL: config.BETTER_AUTH_URL,
+  trustedOrigins: [config.NEXT_PUBLIC_FRONTEND_URL],
   emailAndPassword: {
     enabled: true,
   },

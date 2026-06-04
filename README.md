@@ -1,130 +1,266 @@
-# ✈️ CholoBuddy
+<div align="center">
 
-[![Next.js](https://img.shields.io/badge/Next.js-15+-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-4.19+-404d59?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.2+-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Better Auth](https://img.shields.io/badge/Better--Auth-1.6+-orange?style=for-the-badge)](https://www.better-auth.com/)
-[![pnpm](https://img.shields.io/badge/pnpm-10.28-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](https://pnpm.io/)
-[![Turborepo](https://img.shields.io/badge/Turborepo-2.9-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build/)
+<br/>
 
-> **CholoBuddy** is a premium travel portal 🗺️ and editorial platform 📖 designed to explore and book curated tours across Bangladesh 🇧🇩.
+<img src="https://img.shields.io/badge/✈️-CholoBuddy-000000?style=for-the-badge&labelColor=000000&color=705d00" height="48" alt="CholoBuddy"/>
 
-✨ **Tech Highlights:**
-* 🖥️ **Frontend:** Next.js 15 + Styled-Components + Framer Motion (Bilingual Toggle 🇬🇧/🇧🇩)
-* ⚙️ **Backend:** Express.js + TS (Serverless-ready for Vercel ⚡)
-* 💾 **Database & Auth:** MongoDB 🍃 + Better Auth 🔒
+<br/><br/>
+
+**Premium Travel Portal & Tour Booking Platform for Bangladesh 🇧🇩**
+
+*চলো বন্ধু — Let's go, friend.*
+
+<br/>
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Express](https://img.shields.io/badge/Express.js-4.19-404d59?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Firestore-FFCA28?style=flat-square&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Better Auth](https://img.shields.io/badge/Better--Auth-1.6-E87A00?style=flat-square)](https://www.better-auth.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Turborepo](https://img.shields.io/badge/Turborepo-2.9-EF4444?style=flat-square&logo=turborepo&logoColor=white)](https://turbo.build/)
+[![pnpm](https://img.shields.io/badge/pnpm-Workspaces-F69220?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
+
+<br/>
+
+</div>
 
 ---
 
-## 🏗️ Repository Architecture
+## ✨ What is CholoBuddy?
 
-This project is organized as a high-performance monorepo using **pnpm workspaces** and coordinated by **Turborepo**:
+**CholoBuddy** is a full-stack, bilingual (🇬🇧 English / 🇧🇩 বাংলা) travel platform built for exploring and booking curated tours across Bangladesh. From the misty peaks of Sajek Valley to the world's longest natural beach at Cox's Bazar — CholoBuddy brings every journey to life.
 
-```mermaid
-graph TD
-  Root[Monorepo Root] --> Apps[apps/]
-  Apps --> Web["🖥️ apps/web (Next.js Frontend)"]
-  Apps --> Server["⚙️ apps/server (Express Backend)"]
-  
-  style Root fill:#f9f,stroke:#333,stroke-width:2px
-  style Web fill:#bbf,stroke:#333,stroke-width:1px
-  style Server fill:#bfb,stroke:#333,stroke-width:1px
+<br/>
+
+## 🎯 Features at a Glance
+
+| Feature | Description |
+|---------|-------------|
+| 🗺️ **Tour Browsing** | Curated tour listings with rich descriptions, itineraries, and ratings |
+| 🎫 **Booking & Payment** | Multi-step checkout with Card, Mobile Banking (bKash, Nagad, Rocket), and Net Banking |
+| 🌟 **Wishlists** | Save favourite tours for later, powered by real-time Firestore sync |
+| 🏅 **User Level System** | Earn points and level up from Explorer → Elite Traveler |
+| 🌐 **Bilingual UI** | Full toggle between English and Bengali — every page, every component |
+| 🛡️ **Role-Based Access** | Separate User Dashboard and Admin Control Panel with route protection |
+| 📊 **Admin Dashboard** | Manage tours, bookings, users, and revenue analytics |
+| 📱 **Responsive Design** | Pixel-perfect across mobile, tablet, and desktop |
+
+<br/>
+
+## 🏗️ Architecture
+
+```
+cholobuddy2.0/                  ← Turborepo Monorepo Root
+├── apps/
+│   ├── web/                    ← Next.js 15 Frontend (App Router)
+│   │   ├── src/app/            ← Pages: home, trips, payment, dashboard, admin…
+│   │   ├── src/components/     ← Navbar, TourCard, BookingWidget, Hero…
+│   │   ├── src/hooks/          ← useAuth, useBookings, useWishlist, useTours…
+│   │   └── src/context/        ← Toast notifications, Language provider
+│   │
+│   └── server/                 ← Express.js + TypeScript Backend
+│       └── src/
+│           ├── routes/         ← /api/tours, /api/bookings, /api/wishlist, /api/users
+│           ├── controllers/    ← Request handlers
+│           ├── services/       ← Firestore business logic
+│           ├── middleware/      ← Auth, validation, error handling
+│           └── auth.ts         ← Better Auth configuration
+│
+├── firebase.json               ← Firebase project config
+├── firestore.indexes.json      ← Composite index definitions
+└── firestore.rules             ← Security rules
 ```
 
-### 1. Frontend Web Application (`apps/web`)
-* **Framework**: Next.js 15+ (App Router).
-* **Styling**: Vanilla `styled-components` (`styles.ts`) encapsulated within individual component directories, completely bypassing Tailwind CSS for modular design control.
-* **Localization**: Full internationalization toggle system (English & Bengali) powered by `react-i18next`.
-* **Animations**: Fluid, staggered entries and micro-interactions powered by `framer-motion`.
-* **Client-Side State**: Dedicated state hooks for reservations, user profiles, search, wishlists, and support chat.
+<br/>
 
-### 2. Backend Server Application (`apps/server`)
-* **Framework**: Express.js with TypeScript (`NodeNext` module resolution).
-* **Database**: Native MongoDB drivers communicating with MongoDB Cloud Clusters.
-* **Authentication**: Better Auth integration for secure user sessions.
-* **Validation**: Request validation schemas powered by Zod.
-* **Deployment Ready**: Configured to run as a native server locally OR serverless on Vercel.
+## 🛠️ Tech Stack
 
----
+### Frontend
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (App Router) |
+| Styling | Styled-Components (no Tailwind — fully custom design system) |
+| Animations | Framer Motion — micro-interactions, page transitions |
+| Auth Client | Better Auth (session hooks) |
+| Localization | react-i18next (English + Bengali) |
+
+### Backend
+| Layer | Technology |
+|-------|-----------|
+| Framework | Express.js + TypeScript |
+| Database | Firebase Firestore |
+| Authentication | Better Auth + `better-auth-firestore` adapter |
+| Validation | Zod schemas |
+| Image Upload | ImgBB API |
+| Deployment | Vercel Serverless |
+
+<br/>
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-Ensure you have [Node.js](https://nodejs.org/) (v18+) and [pnpm](https://pnpm.io/) installed.
 
-### 1. Installation
-Run the following command from the monorepo root to install all dependencies:
+- [Node.js](https://nodejs.org/) v18+
+- [pnpm](https://pnpm.io/) v8+
+
+```bash
+npm install -g pnpm
+```
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sumyta-Bentey-Habib/cholobuddy.git
+cd cholobuddy
+```
+
+### 2. Install Dependencies
+
 ```bash
 pnpm install
 ```
 
-### 2. Environment Configuration
-Create `.env` files in both application directories.
+### 3. Configure Environment Variables
 
-#### **Frontend Configuration** (`apps/web/.env`)
+#### `apps/web/.env`
 ```env
 NEXT_PUBLIC_FRONTEND_URL="http://localhost:3000"
 NEXT_PUBLIC_BACKEND_URL="http://localhost:3001"
 ```
 
-#### **Backend Configuration** (`apps/server/.env`)
+#### `apps/server/.env`
 ```env
 PORT=3001
-MONGODB_URI="your-mongodb-connection-string"
-BETTER_AUTH_SECRET="your-better-auth-secret-key"
+FIREBASE_PROJECT_ID="your-firebase-project-id"
+GOOGLE_APPLICATION_CREDENTIALS="service-account.json"
+BETTER_AUTH_SECRET="your-super-secret-key"
 BETTER_AUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_FRONTEND_URL="http://localhost:3000"
 IMGBB_API_KEY="your-imgbb-api-key"
 ```
 
-### 3. Development
-Start the frontend (port `3000`) and the backend (port `3001`) simultaneously:
+> [!NOTE]
+> You need a Firebase project with Firestore enabled and a service account JSON file. Place it at `apps/server/service-account.json`.
+
+### 4. Seed the Database (Optional)
+
 ```bash
+cd apps/server
+pnpm tsx src/seed.ts
+```
+
+### 5. Start Development Servers
+
+```bash
+# From the repo root — starts both frontend (3000) and backend (3001)
 pnpm run dev
 ```
 
-### 4. Build
-Compile and bundle both applications for production:
-```bash
-pnpm run build
-```
+Open [http://localhost:3000](http://localhost:3000) 🎉
 
----
+<br/>
 
-## ⚡ Workspace Command Reference
+## 📋 Available Commands
 
-All monorepo actions are ran from the root using Turborepo or `pnpm` workspace filters:
+Run all commands from the **monorepo root**:
 
 | Command | Description |
-| :--- | :--- |
-| `pnpm run dev` | Start both development servers concurrently with hot-reloading |
-| `pnpm run build` | Compile and build both applications for production |
-| `pnpm run build:web` | Build only the Next.js frontend |
-| `pnpm run build:server` | Build only the Express backend |
-| `pnpm run start:web` | Run the Next.js production server |
-| `pnpm run start:server` | Run the Express backend production server |
+|---------|-------------|
+| `pnpm run dev` | Start both apps in development mode with hot-reload |
+| `pnpm run build` | Build both apps for production |
+| `pnpm --filter web dev` | Start only the Next.js frontend |
+| `pnpm --filter server dev` | Start only the Express backend |
+
+<br/>
+
+## ☁️ Deployment (Vercel)
+
+This project deploys as **two separate Vercel projects** from the same repository.
+
+| Vercel Project | Root Directory | Type |
+|----------------|---------------|------|
+| `cholobuddy-api` | `apps/server` | Serverless (Express via `@vercel/node`) |
+| `cholobuddy-web` | `apps/web` | Next.js |
+
+### Backend Environment Variables (Vercel)
+```
+FIREBASE_PROJECT_ID=cholobuddy
+GOOGLE_SERVICE_ACCOUNT_JSON={"type":"service_account",...}  ← paste full JSON
+BETTER_AUTH_SECRET=your-production-secret
+BETTER_AUTH_URL=https://cholobuddy-web.vercel.app
+NEXT_PUBLIC_FRONTEND_URL=https://cholobuddy-web.vercel.app
+IMGBB_API_KEY=your-key
+```
+
+### Frontend Environment Variables (Vercel)
+```
+NEXT_PUBLIC_BACKEND_URL=https://cholobuddy-api.vercel.app
+NEXT_PUBLIC_FRONTEND_URL=https://cholobuddy-web.vercel.app
+```
+
+> [!IMPORTANT]
+> Add your Vercel frontend domain to **Firebase Console → Authentication → Authorized domains**.
+
+<br/>
+
+## 🗂️ API Reference
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| `GET` | `/api/tours` | Public | List all tours |
+| `POST` | `/api/tours` | Admin | Create a new tour |
+| `PATCH` | `/api/tours/:id` | Admin | Update a tour |
+| `DELETE` | `/api/tours/:id` | Admin | Delete a tour |
+| `GET` | `/api/bookings` | User | Get current user's bookings |
+| `POST` | `/api/bookings` | User | Create a booking |
+| `DELETE` | `/api/bookings/:id` | User/Admin | Cancel a booking |
+| `GET` | `/api/wishlist` | User | Get wishlist tour IDs |
+| `POST` | `/api/wishlist` | User | Add tour to wishlist |
+| `DELETE` | `/api/wishlist` | User | Remove tour from wishlist |
+| `GET` | `/api/users` | Admin | List all users |
+| `PATCH` | `/api/users` | Admin | Update user role |
+| `ALL` | `/api/auth/*` | — | Better Auth session routes |
+
+<br/>
+
+## 🎨 Design System
+
+The UI is built on a hand-crafted design system — no utility-class frameworks:
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `#000000` | Onyx Black | Primary text, buttons |
+| `#705d00` | Golden Ochre | Accent, highlights |
+| `#526069` | Slate | Secondary text |
+| `#f8f9fa` | Off-White | Page backgrounds |
+| `#1a2332` | Deep Navy | Dashboard surfaces |
+
+Every component lives in its own `index.tsx` + `styles.ts` pair — zero global utilities, maximum design control.
+
+<br/>
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'feat: add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+<br/>
+
+## 📄 License
+
+This project is private. All rights reserved © 2026 CholoBuddy.
+
+<br/>
 
 ---
 
-## ☁️ Vercel Deployment
+<div align="center">
 
-Both applications are configured for deployment to **Vercel**. 
+Made with ❤️ for Bangladesh 🇧🇩
 
-> [!NOTE]
-> Since Vercel operates on serverless functions, the backend Express application has been adapted to skip port listening and export a serverless handler when deployed (`process.env.VERCEL` detected).
+*চলো বাংলাদেশ আবিষ্কার করি — Let's discover Bangladesh*
 
-### **Vercel Settings Matrix**
-
-| Project | Settings | Environment Variables |
-| :--- | :--- | :--- |
-| **Frontend (`apps/web`)** | **Root Directory**: `apps/web` | `NEXT_PUBLIC_FRONTEND_URL="https://your-frontend.vercel.app"`<br>`NEXT_PUBLIC_BACKEND_URL="https://your-backend.vercel.app"` |
-| **Backend (`apps/server`)** | **Root Directory**: `apps/server` | `MONGODB_URI="..."`<br>`BETTER_AUTH_SECRET="..."`<br>`BETTER_AUTH_URL="https://your-frontend.vercel.app"`<br>`NEXT_PUBLIC_FRONTEND_URL="https://your-frontend.vercel.app"`<br>`IMGBB_API_KEY="..."`<br>`NODE_ENV="production"` |
-
----
-
-## 🎨 Premium Styling & Component Design
-
-To keep the platform's visual identity feeling highly premium:
-1. **Design Tokens**: Reuses harmonious, tailored hex values (primary: `#000000`, secondary: `#526069`, tertiary: `#705d00`, surface: `#f8f9fa`) to build high-end editorial experiences.
-2. **Modular Style Isolation**: Each component contains an `index.tsx` for layout and a `styles.ts` for styled-components. No global utility classes are used.
-3. **Smooth Micro-Animations**: Smooth scale transforms, opacity transitions, and glassmorphic backdrops create modern interactive depth.
+</div>
