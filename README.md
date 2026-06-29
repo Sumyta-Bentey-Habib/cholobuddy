@@ -152,7 +152,7 @@ pnpm tsx src/seed.ts
 ### 5. Start Development Servers
 
 ```bash
-# From the repo root — starts both frontend (3000) and backend (3001)
+# From the repo root — starts both frontend (3000) and backend (3001) 
 pnpm run dev
 ```
 
