@@ -24,10 +24,10 @@ const footerLinks = {
     { label: "About Us", href: "/about" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Sustainability", href: "#" },
-    { label: "Press", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Sustainability", href: "/sustainability" },
+    { label: "Press", href: "/press" },
   ],
 };
 

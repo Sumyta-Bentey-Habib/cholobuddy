@@ -564,5 +564,45 @@
   "Welcome feast with local organic produce": "Welcome feast with local organic produce",
   "Sunset cruise through Harbaria channel": "Sunset cruise through Harbaria channel",
   "6:00 AM Jungle Walk with Expert Naturalist": "6:00 AM Jungle Walk with Expert Naturalist",
-  "Relaxation at Jamtola secluded beach": "Relaxation at Jamtola secluded beach"
+  "Relaxation at Jamtola secluded beach": "Relaxation at Jamtola secluded beach",
+  "privacy_page": {
+    "title": "Privacy Policy",
+    "subtitle": "How we safeguard your luxury travel data",
+    "sec1_title": "1. Data Collection",
+    "sec1_text": "We collect personal information necessary to curate and secure your travel experiences, including name, contact details, payment information, and dietary or travel preferences. All data is processed using modern encryption protocols.",
+    "sec2_title": "2. How We Use Data",
+    "sec2_text": "Your information is used strictly to coordinate with verified hotel and guide partners, process payments, and personalize your journey. We do not sell or share your data with unauthorized third parties.",
+    "sec3_title": "3. Security Protocols",
+    "sec3_text": "We implement rigid physical and electronic security systems. Access to user profiles and transaction history is restricted only to authorized CholoBuddy personnel on a strictly need-to-know basis."
+  },
+  "terms_page": {
+    "title": "Terms of Service",
+    "subtitle": "Agreement governing your bespoke bookings",
+    "sec1_title": "1. Bookings & Confirmations",
+    "sec1_text": "A booking is only confirmed once full payment or an approved deposit has been processed. All reservation details, traveler coordinates, and itineraries are finalized via our secure Traveler Dashboard.",
+    "sec2_title": "2. Cancellations & Fees",
+    "sec2_text": "Tours can be cancelled up to 7 days before departure for a full refund. Cancellations made within 7 days of departure incur a 50% fee. Bookings cancelled within 48 hours are strictly non-refundable.",
+    "sec3_title": "3. Liability & Security",
+    "sec3_text": "CholoBuddy works only with verified transport and lodging partners. We do not assume direct liability for external acts of nature, weather delays, or independent vendor actions, but we guarantee full concierge intervention."
+  },
+  "sustainability_page": {
+    "title": "Sustainability",
+    "subtitle": "Preserving the wild beauty of Bangladesh",
+    "sec1_title": "1. Carbon Offset & Eco-Tax",
+    "sec1_text": "We offset the footprint of our luxury cruises and transport. Each booking contributes directly to our local ecosystem fund, helping preserve the delicate environments of Sajek Valley and the Sundarbans.",
+    "sec2_title": "2. Community Empowerment",
+    "sec2_text": "We employ local guides, naturalists, and boats, ensuring that 70% of tour expenditure directly benefits host communities in rural delta regions. We support local organic farmers for our curated dining.",
+    "sec3_title": "3. Zero Single-Use Plastics",
+    "sec3_text": "All CholoBuddy signature tours operate under strict zero-waste guidelines. We supply travelers with reusable glass water bottles and biodegradable amenity kits to minimize pollution."
+  },
+  "press_page": {
+    "title": "Press Room",
+    "subtitle": "Latest announcements and media kits",
+    "sec1_title": "1. Corporate Statements",
+    "sec1_text": "Read our official updates, press releases, and announcements. CholoBuddy remains the fastest-growing luxury eco-tourism provider in the Bengal region, trusted by thousands of travelers annually.",
+    "sec2_title": "2. Media Resources",
+    "sec2_text": "High-resolution photos, brand guidelines, and logos are available for media publications. Please contact our corporate communications office at press@cholobuddy.com.bd for official media kits.",
+    "sec3_title": "3. Inquiries & Interview Requests",
+    "sec3_text": "For journalist inquiries or interview requests with our founders and design architects, please submit a request via our support concierge with your editorial details."
+  }
 }
