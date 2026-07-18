@@ -1,22 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Deep forest green background (representing Bangladesh's delta and nature) -->
-  <rect width="32" height="32" rx="8" fill="#0A1C15"/>
+  <!-- Premium dark background matching the header background -->
+  <rect width="32" height="32" rx="8" fill="#111111"/>
   
-  <!-- Subtle circular border for a premium emblem feel -->
-  <circle cx="16" cy="16" r="14" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+  <!-- Outer gold frame circle -->
+  <circle cx="16" cy="16" r="13" stroke="#705d00" stroke-width="1.2"/>
   
-  <!-- Waves at the bottom -->
-  <path d="M8 22 C11 20.5, 13 23.5, 16 22 C19 20.5, 21 22, 24 22" stroke="#C5A85C" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Stylized Letter C (Champagne) -->
+  <path d="M15 11 C12 11, 10 13, 10 16 C10 19, 12 21, 15 21" stroke="#F1E6D2" stroke-width="2" stroke-linecap="round" fill="none"/>
   
-  <!-- Stylized Sailboat Hull -->
-  <path d="M10 20 L22 20 C20.5 22, 18.5 22.5, 16 22.5 C13.5 22.5, 11.5 22, 10 20 Z" fill="#C5A85C"/>
-  
-  <!-- Left Sail (wind-blown, luxury champagne/off-white color) -->
-  <path d="M15.2 8 C15.2 8, 11.5 13.5, 11.5 19.8 C13.5 19.8, 15.2 19.5, 15.2 19.5 L15.2 8 Z" fill="#F1E6D2"/>
-  
-  <!-- Right Sail (luxury gold color) -->
-  <path d="M16.2 10 C16.2 10, 19.5 14.5, 19.5 19.8 C18 19.8, 16.2 19.5, 16.2 19.5 L16.2 10 Z" fill="#C5A85C"/>
-  
-  <!-- Guiding Star / Compass Star (representing travel, adventure, and guidance) -->
-  <path d="M22 6 L22.5 8.5 L25 9 L22.5 9.5 L22 12 L21.5 9.5 L19 9 L21.5 8.5 Z" fill="#F1E6D2"/>
+  <!-- Stylized Letter B (Gold) -->
+  <path d="M17 21 V11 H20 C21.5 11, 22 12, 22 13.5 C22 15, 21.5 15.5, 20 15.5 H17 H20 C21.8 15.5, 22.5 16.5, 22.5 18.25 C22.5 20, 21.8 21, 20 21 H17" stroke="#C5A85C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </svg>
