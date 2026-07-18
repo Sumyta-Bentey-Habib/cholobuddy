@@ -3,14 +3,6 @@ import { initReactI18next } from "react-i18next";
 import enTranslations from "./locales/en.json";
 import bnTranslations from "./locales/bn.json";
 
-const getInitialLanguage = () => {
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("language");
-    if (saved === "bn" || saved === "en") return saved;
-  }
-  return "en";
-};
-
 if (!i18n.isInitialized) {
   i18n
     .use(initReactI18next)
@@ -19,7 +11,7 @@ if (!i18n.isInitialized) {
         en: { translation: enTranslations },
         bn: { translation: bnTranslations }
       },
-      lng: getInitialLanguage(),
+      lng: "en",
       fallbackLng: "en",
       interpolation: {
         escapeValue: false

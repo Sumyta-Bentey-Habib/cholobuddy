@@ -199,12 +199,16 @@ export default function TripDetailPage() {
               <InclusionsBox>
                 <InclusionTitle>{t("Key Facilities & Inclusions")}</InclusionTitle>
                 <InclusionGrid>
-                  {tour.inclusions.map((inc: any, index: number) => (
-                    <InclusionCard key={index}>
-                      <span className="material-symbols-outlined">{inc.icon || "check_circle"}</span>
-                      <span className="label">{t(inc.name)}</span>
-                    </InclusionCard>
-                  ))}
+                  {tour.inclusions.map((inc: any, index: number) => {
+                    const text = typeof inc === "string" ? inc : (inc.name || "");
+                    const icon = typeof inc === "string" ? "check_circle" : (inc.icon || "check_circle");
+                    return (
+                      <InclusionCard key={index}>
+                        <span className="material-symbols-outlined">{icon}</span>
+                        <span className="label">{t(text)}</span>
+                      </InclusionCard>
+                    );
+                  })}
                 </InclusionGrid>
               </InclusionsBox>
             )}
