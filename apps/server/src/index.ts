@@ -36,6 +36,15 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", time: new Date() });
 });
 
+// Root route handler
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to the CholoBuddy API Server 🚀",
+    health: "/health",
+    version: "1.0.0",
+  });
+});
+
 // Centralized error handling middleware (MUST be mounted last)
 app.use(errorHandler);
 

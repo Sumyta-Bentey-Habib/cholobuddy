@@ -27,6 +27,8 @@ import {
   AlponaCenterMotif
 } from "./page.styles";
 
+const MotionLink = motion(Link);
+
 interface ExplorePageClientProps {
   initialTours: any[];
 }
@@ -58,7 +60,7 @@ export default function ExplorePageClient({ initialTours }: ExplorePageClientPro
                 </SectionHeading>
               </div>
               <ViewAllBtn
-                as={Link}
+                as={MotionLink}
                 href="/trips"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

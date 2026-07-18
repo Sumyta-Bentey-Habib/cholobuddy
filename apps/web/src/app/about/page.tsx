@@ -97,7 +97,7 @@ export default function AboutPage() {
             <CategoryTag>
               {t("Editorial")}
             </CategoryTag>
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -106,7 +106,7 @@ export default function AboutPage() {
               <BannerTitle style={{ whiteSpace: "pre-line" }}>
                 {t("Curating the Untamed")}
               </BannerTitle>
-            </motion.h1>
+            </motion.div>
           </HeroBannerContent>
         </HeroBanner>
 

@@ -88,13 +88,13 @@ export default function ContactPage() {
           <HeroFade />
           <HeroContent>
             <HeroSub>{t("Reach Out")}</HeroSub>
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
               <HeroTitle>{t("Let's Begin.")}</HeroTitle>
-            </motion.h1>
+            </motion.div>
           </HeroContent>
         </ContactHero>
 
